@@ -29,6 +29,7 @@ SOURCES += \
 HEADERS += \
     battery.h \
     button.h \
+    definitions.h \
     device.h \
     historymanager.h \
     mainwindow.h \
