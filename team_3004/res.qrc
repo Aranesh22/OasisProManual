@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/buttons/checkMark_Btn.png</file>
+        <file>res/buttons/downArrow_Btn.png</file>
+        <file>res/buttons/powerBtn.png</file>
+        <file>res/buttons/upArrow_Btn.png</file>
+        <file>res/icons/Lit/colNumber/icon_1.png</file>
+        <file>res/icons/Lit/colNumber/icon_2.png</file>
+        <file>res/icons/Lit/colNumber/icon_3.png</file>
+        <file>res/icons/Lit/colNumber/icon_4.png</file>
+        <file>res/icons/Lit/colNumber/icon_5.png</file>
+        <file>res/icons/Lit/colNumber/icon_6.png</file>
+        <file>res/icons/Lit/colNumber/icon_7.png</file>
+        <file>res/icons/Lit/colNumber/icon_8.png</file>
+        <file>res/icons/Lit/sessionTimes/icon_25Min.png</file>
+        <file>res/icons/Lit/sessionTimes/icon_3Hour.png</file>
+        <file>res/icons/Lit/sessionTimes/icon_45Min.png</file>
+        <file>res/icons/Lit/sessionTimes/icon_customTime.png</file>
+        <file>res/icons/Lit/icon_dutyCycle_CESsession.png</file>
+        <file>res/icons/Lit/icon_LeftCESchannel.png</file>
+        <file>res/icons/Lit/icon_RightCESchannel.png</file>
+        <file>res/icons/Lit/icon_shortPulse_CESsession.png</file>
+        <file>res/icons/unLit/colNumbers/icon_1.png</file>
+        <file>res/icons/unLit/colNumbers/icon_2.png</file>
+        <file>res/icons/unLit/colNumbers/icon_3.png</file>
+        <file>res/icons/unLit/colNumbers/icon_4.png</file>
+        <file>res/icons/unLit/colNumbers/icon_5.png</file>
+        <file>res/icons/unLit/colNumbers/icon_6.png</file>
+        <file>res/icons/unLit/colNumbers/icon_7.png</file>
+        <file>res/icons/unLit/colNumbers/icon_8.png</file>
+        <file>res/icons/unLit/session_times/icon_25Min.png</file>
+        <file>res/icons/unLit/session_times/icon_3Hour.png</file>
+        <file>res/icons/unLit/session_times/icon_45Min.png</file>
+        <file>res/icons/unLit/session_times/icon_customTime.png</file>
+        <file>res/icons/unLit/icon_dutyCycle_CESsession.png</file>
+        <file>res/icons/unLit/icon_LeftCESchannel.png</file>
+        <file>res/icons/unLit/icon_RightCESchannel.png</file>
+        <file>res/icons/unLit/icon_shortPulse_CESsession.png</file>
+        <file>res/icons/graph-icon.png</file>
+        <file>res/icons/icon_audioInput.png</file>
+        <file>res/icons/INT logo.png</file>
+        <file>res/logos/Logo_oasisPro.png</file>
+        <file>res/buttons/powerBtn_lit.png</file>
+        <file>res/buttons/power_Btn_unLit.png</file>
+        <file>res/buttons/save_Btn.png</file>
+    </qresource>
+</RCC>
