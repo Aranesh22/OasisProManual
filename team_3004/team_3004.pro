@@ -25,6 +25,7 @@ SOURCES += \
     session.cpp \
     sessionlength.cpp \
     sessiontype.cpp \
+    shady.cpp \
     test.cpp
 
 HEADERS += \
@@ -37,6 +38,7 @@ HEADERS += \
     session.h \
     sessionlength.h \
     sessiontype.h \
+    shady.h \
     test.h
 
 FORMS += \
