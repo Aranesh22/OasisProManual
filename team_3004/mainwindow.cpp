@@ -95,6 +95,20 @@ void MainWindow::lit(){
     QPixmap icon_col_num_1 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_1.png" : ":/res/icons/unLit/colNumbers/icon_1.png");
     ui->col_num_1->setPixmap(icon_col_num_1);
 
+
+    QPixmap icon_session_alpha  = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_alpha.png" : ":/res/icons/unLit/sessions/icon_alpha.png");
+    ui->session_alpha->setPixmap(icon_session_alpha);
+
+    QPixmap icon_session_SMR  = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_SMR.png" : ":/res/icons/unLit/sessions/icon_SMR.png");
+    ui->session_SMR->setPixmap(icon_session_SMR);
+
+    QPixmap icon_session_Beta = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_Beta.png" : ":/res/icons/unLit/sessions/icon_Beta.png");
+    ui->session_Beta ->setPixmap(icon_session_Beta);
+
+    QPixmap icon_session_100Hz  = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_100Hz.png" : ":/res/icons/unLit/sessions/icon_100Hz.png");
+    ui->session_100Hz->setPixmap(icon_session_100Hz);
+
+
     dutyCycle_CESsession_icon_lit = !dutyCycle_CESsession_icon_lit;
     icon_ALL_Lit = !icon_ALL_Lit;
 
