@@ -24,7 +24,8 @@ SOURCES += \
     mainwindow.cpp \
     session.cpp \
     sessionlength.cpp \
-    sessiontype.cpp
+    sessiontype.cpp \
+    test.cpp
 
 HEADERS += \
     battery.h \
@@ -35,7 +36,8 @@ HEADERS += \
     mainwindow.h \
     session.h \
     sessionlength.h \
-    sessiontype.h
+    sessiontype.h \
+    test.h
 
 FORMS += \
     mainwindow.ui
