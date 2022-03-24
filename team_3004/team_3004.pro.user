@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.11.0, 2022-03-24T18:55:17. -->
+=======
+<!-- Written by QtCreator 4.11.0, 2022-03-24T17:26:02. -->
+>>>>>>> f85d6d1359d403264642f198e06e5aedc5614fac
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -54,7 +58,10 @@
  </data>
  <data>
   <variable>ProjectExplorer.Project.PluginSettings</variable>
-  <valuemap type="QVariantMap"/>
+  <valuemap type="QVariantMap">
+   <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey"/>
+   <value type="bool" key="ClangCodeModel.UseGlobalConfig">true</value>
+  </valuemap>
  </data>
  <data>
   <variable>ProjectExplorer.Project.Target.0</variable>
@@ -283,8 +290,13 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">team_30042</value>
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/media/sf_comp3004_GIT/comp3004Project/team_3004/team_3004.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/media/sf_comp3004_GIT/comp3004Project/team_3004/team_3004.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/student/Desktop/comp3004/comp3004Project/team_3004/team_3004.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/student/Desktop/comp3004/comp3004Project/team_3004/team_3004.pro</value>
+>>>>>>> f85d6d1359d403264642f198e06e5aedc5614fac
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
