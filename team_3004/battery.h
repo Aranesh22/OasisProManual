@@ -2,6 +2,7 @@
 #define BATTERY_H
 
 //hello
+//hi bitch
 
 class Battery
 {
