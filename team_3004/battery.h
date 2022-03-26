@@ -2,7 +2,7 @@
 #define BATTERY_H
 
 //hello
-//hi bitch
+//hi female dog (shady)
 
 class Battery
 {
