@@ -1,8 +1,7 @@
 #ifndef BATTERY_H
 #define BATTERY_H
 
-//hello
-//hi female dog (shady)
+//this is a push INCLUDING the pro file
 
 class Battery
 {
