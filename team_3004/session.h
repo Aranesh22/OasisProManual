@@ -8,6 +8,7 @@ class Session
 {
 public:
     Session(SessionLength*, SessionType*, bool, bool);
+    ~Session();
 
 private:
     SessionLength* length;
