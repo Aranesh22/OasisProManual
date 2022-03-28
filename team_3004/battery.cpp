@@ -12,6 +12,10 @@ int Battery::getBatteryPercent() { return batteryPercent; }
 int Battery::getBatteryLevel()   { determineBatteryLevel();
                                    return batteryLevel; }
 
+
+void Battery::drainBattery(){}
+void Battery::chargeBattery(){}
+
 //decremented by 12
 void Battery::determineBatteryLevel() {
 
