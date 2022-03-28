@@ -2,5 +2,5 @@
 
 HistoryManager::HistoryManager()
 {
-
+    isLit = false;
 }
