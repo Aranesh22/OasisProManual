@@ -7,10 +7,11 @@
 class SessionType
 {
 public:
-    SessionType(float, CEStype);
+    SessionType(float, float, CEStype);
 
 private:
-    float hz;
+    float minHz;
+    float maxHz;
     CEStype csMode;
 
 };

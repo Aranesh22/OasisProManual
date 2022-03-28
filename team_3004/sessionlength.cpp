@@ -1,6 +1,9 @@
 #include "sessionlength.h"
 
-SessionLength::SessionLength()
+SessionLength::SessionLength(int durPass, bool isCustomPass)
 {
+
+    duration = durPass;
+    isCustom = isCustomPass;
 
 }
