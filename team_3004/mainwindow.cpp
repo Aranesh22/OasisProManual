@@ -18,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     dutyCycle_CESsession_icon_lit = false;
     shortPulse_CESsession_icon_lit = false;
 //    bool
-
+    battery = new Battery();
+    show_battery();
+//    qInfo("%d", battery->getBattery_percent());
 
 }
 
@@ -33,7 +35,49 @@ void MainWindow::show_power(){
     powerisOn = !powerisOn;
 }
 
+void MainWindow::show_battery(){
+    qInfo("displaying battery");
+    qInfo("battery level: %d", battery->getBatteryLevel());
+    for(int i = 1; i <= battery->getBatteryLevel(); i++){
+        qInfo("%d", i);
+        if(i == 1){
+            QPixmap icon_col_num_1 = QPixmap(":/res/icons/Lit/colNumber/icon_1.png");
+            ui->col_num_1->setPixmap(icon_col_num_1);
+        }
 
+        if(i == 2){
+            QPixmap icon_col_num_2 = QPixmap(":/res/icons/Lit/colNumber/icon_2.png");
+            ui->col_num_2->setPixmap(icon_col_num_2);
+        }
+
+        if(i == 3){
+            QPixmap icon_col_num_3 = QPixmap(":/res/icons/Lit/colNumber/icon_3.png");
+            ui->col_num_3->setPixmap(icon_col_num_3);
+        }
+        if(i == 4){
+            QPixmap icon_col_num_4 = QPixmap(":/res/icons/Lit/colNumber/icon_4.png");
+            ui->col_num_4->setPixmap(icon_col_num_4);
+        }
+        if(i == 5){
+            QPixmap icon_col_num_5 = QPixmap(":/res/icons/Lit/colNumber/icon_5.png");
+            ui->col_num_5->setPixmap(icon_col_num_5);
+        }
+        if(i == 6){
+            QPixmap icon_col_num_6 = QPixmap(":/res/icons/Lit/colNumber/icon_6.png");
+            ui->col_num_6->setPixmap(icon_col_num_6);
+        }
+        if(i == 7){
+            QPixmap icon_col_num_7 = QPixmap(":/res/icons/Lit/colNumber/icon_7.png");
+            ui->col_num_7->setPixmap(icon_col_num_7);
+        }
+        if(i == 8){
+            QPixmap icon_col_num_8 = QPixmap(":/res/icons/Lit/colNumber/icon_8.png");
+            ui->col_num_8->setPixmap(icon_col_num_8);
+        }
+
+    }
+
+}
 
 
 
