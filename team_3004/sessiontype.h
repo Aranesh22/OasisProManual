@@ -6,6 +6,12 @@ class SessionType
 {
 public:
     SessionType();
+    enum CEStype { };
+    float hz;
+
+
+private:
+
 };
 
 #endif // SESSIONTYPE_H
