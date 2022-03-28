@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QLabel>
 
+#include "battery.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -19,9 +21,11 @@ public:
     void unLit();
     ~MainWindow();
 
+    void show_battery();
     bool icon_ALL_Lit;
     bool dutyCycle_CESsession_icon_lit;
     bool shortPulse_CESsession_icon_lit;
+    Battery* battery;
 
 private slots:
 
