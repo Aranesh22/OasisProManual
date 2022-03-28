@@ -38,6 +38,8 @@ void MainWindow::show_power(){
 void MainWindow::show_battery(){
     qInfo("displaying battery");
     qInfo("battery level: %d", battery->getBatteryLevel());
+
+//Prob find a cleaner way to do this
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
         qInfo("%d", i);
         if(i == 1){
