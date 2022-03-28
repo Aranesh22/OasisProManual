@@ -13,7 +13,8 @@ class Battery
 {
 public:
     Battery();
-    //    battery_drain();
+    void drainBattery();
+    void chargeBattery();
 
     int getBatteryPercent();
     int getBatteryLevel();
