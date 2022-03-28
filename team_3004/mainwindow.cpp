@@ -29,12 +29,12 @@ void MainWindow::show_power(){
     qInfo("changing power display");
     QIcon x = QIcon(powerisOn ? ":/res/buttons/powerBtn_lit.png" : ":/res/buttons/power_Btn_unLit.png");
 
-    if(powerisOn){
-        show_battery();
-    }
 
     ui->pushButton_8->setIcon(x);
-    delay();
+    if(powerisOn){
+        show_battery();
+        delayBy(2);
+    }
     lit();
     powerisOn = !powerisOn;
 }
@@ -42,9 +42,9 @@ void MainWindow::show_power(){
 
 //Found on stack overflow - look more into this function and prob modify it
 //https://stackoverflow.com/questions/3752742/how-do-i-create-a-pause-wait-function-using-qt
-void MainWindow::delay()
+void MainWindow::delayBy(int n)
 {
-    QTime dieTime= QTime::currentTime().addSecs(2);
+    QTime dieTime= QTime::currentTime().addSecs(n);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
@@ -57,8 +57,10 @@ void MainWindow::show_battery(){
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
         qInfo("%d", i);
         if(i == 1){
-            QPixmap icon_col_num_1 = QPixmap(":/res/icons/Lit/colNumber/icon_1.png");
-            ui->col_num_1->setPixmap(icon_col_num_1);
+//            QPixmap icon_col_num_1 = QPixmap(":/res/icons/Lit/colNumber/icon_1.png");
+//            ui->col_num_1->setPixmap(icon_col_num_1);
+
+            changePixmap(":/res/icons/Lit/colNumber/icon_1.png", ui->col_num_1);
         }
 
         if(i == 2){
@@ -174,6 +176,13 @@ void MainWindow::lit(){
 
 }
 
+
+void MainWindow::changePixmap(QString iconPath, QLabel* uiLabel){
+    qInfo("changing pixmap");
+    QPixmap newIcon= QPixmap(iconPath);
+    uiLabel->setPixmap(newIcon);
+
+}
 
 
 void MainWindow::unLit(){
