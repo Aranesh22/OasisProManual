@@ -1,16 +1,17 @@
 #ifndef SESSIONTYPE_H
 #define SESSIONTYPE_H
+#include "definitions.h"
+
 
 
 class SessionType
 {
 public:
     SessionType();
-    enum CEStype { };
-    float hz;
-
 
 private:
+    float hz;
+    CEStype csMode;
 
 };
 
