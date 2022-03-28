@@ -7,7 +7,7 @@
 class Session
 {
 public:
-    Session(SessionLength*, SessionType*, bool, bool, int);
+    Session(SessionLength*, SessionType*, int);
 
 private:
     SessionLength* length;
