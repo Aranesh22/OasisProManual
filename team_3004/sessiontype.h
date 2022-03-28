@@ -7,7 +7,7 @@
 class SessionType
 {
 public:
-    SessionType();
+    SessionType(float, CEStype);
 
 private:
     float hz;

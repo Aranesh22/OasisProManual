@@ -12,7 +12,7 @@ private:
 
 public:
     
-    SessionLength();
+    SessionLength(int, bool);
 
 };
 
