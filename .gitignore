@@ -1,7 +1,8 @@
-
+build-team_3004-Desktop-Debug
 *.o
 *.stash
 build-team_3004-Desktop-Profile/Makefile
 *.debug
 *.lxXKMI
 team_3004/team_3004.pro.user
+*.autosave
