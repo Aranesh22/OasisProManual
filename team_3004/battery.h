@@ -12,10 +12,10 @@ class Battery
 {
 public:
     Battery();
-    battery_drain();
+    void battery_drain();
 
 
-    getBattery_level();
+    void getBattery_level();
 
 private:
     int battery_level;
