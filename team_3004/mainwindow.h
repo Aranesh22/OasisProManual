@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
-
+#include <unistd.h>
 #include "battery.h"
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +22,7 @@ public:
     ~MainWindow();
 
     void show_battery();
+    void delay();
     bool icon_ALL_Lit;
     bool dutyCycle_CESsession_icon_lit;
     bool shortPulse_CESsession_icon_lit;
