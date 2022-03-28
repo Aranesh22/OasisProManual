@@ -5,13 +5,14 @@
 class SessionLength
 {  
 
-private: 
+private:
+
+    int duration;
+    bool isCustom;
 
 public:
     
     SessionLength();
-    int duration;
-    bool isCustom;
 
 };
 
