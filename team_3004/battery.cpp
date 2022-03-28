@@ -2,5 +2,5 @@
 
 Battery::Battery()
 {
-
+    battery_level = 100;
 }
