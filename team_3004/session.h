@@ -7,7 +7,7 @@
 class Session
 {
 public:
-    Session(SessionLength*, SessionType*, int);
+    Session(SessionLength*, SessionType*);
 
 private:
     SessionLength* length;
@@ -15,6 +15,11 @@ private:
     int intensity;
     bool leftActive;
     bool rightActive;
+
+    void increaseIntensity();
+    void decreaseIntensity();
+    void changeSessionType(SessionType*);
+    void changeSessionLength(SessionLength*);
 };
 
 #endif // SESSION_H
