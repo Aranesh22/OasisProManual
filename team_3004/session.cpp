@@ -2,11 +2,11 @@
 #include "sessionlength.h"
 #include "sessiontype.h"
 
-Session::Session(SessionLength* sl, SessionType* st, bool l, bool r, int i)
+Session::Session(SessionLength* sl, SessionType* st, int i)
 {
-    l = false;
-    r = false;
+    leftActive = false;
+    rightActive = false;
     intensity = i;
-    sl = new SessionLength();
-    st = new SessionType();
+    length = sl;
+    type = st;
 }
