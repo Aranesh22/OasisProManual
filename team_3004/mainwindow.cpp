@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     shortPulse_CESsession_icon_lit = false;
 //    bool
     battery = new Battery();
-    show_battery();
+//    show_battery();
 //    qInfo("%d", battery->getBattery_percent());
 
 }
@@ -29,11 +29,15 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::show_power(){
     qInfo("changing power display ");
     QIcon x = QIcon(powerisOn ? ":/res/buttons/powerBtn_lit.png" : ":/res/buttons/power_Btn_unLit.png");
-//    QIcon x = QIcon(powerisOn ? ":/res/buttons/power_Btn_unLit.png" : ":/res/buttons/powerBtn_lit.png");
+    if(powerisOn){
+        show_battery();
+    }
     ui->pushButton_8->setIcon(x);
     lit();
     powerisOn = !powerisOn;
 }
+
+
 
 void MainWindow::show_battery(){
     qInfo("displaying battery");
