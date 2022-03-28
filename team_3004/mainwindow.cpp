@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,25 +19,35 @@ MainWindow::MainWindow(QWidget *parent)
     shortPulse_CESsession_icon_lit = false;
 //    bool
     battery = new Battery();
-//    show_battery();
-//    qInfo("%d", battery->getBattery_percent());
 
 }
 
 
 //cahnges power display button between it's on and off state
 void MainWindow::show_power(){
-    qInfo("changing power display ");
+
+    qInfo("changing power display");
     QIcon x = QIcon(powerisOn ? ":/res/buttons/powerBtn_lit.png" : ":/res/buttons/power_Btn_unLit.png");
+
     if(powerisOn){
         show_battery();
     }
+
     ui->pushButton_8->setIcon(x);
+    delay();
     lit();
     powerisOn = !powerisOn;
 }
 
 
+//Found on stack overflow - look more into this function and prob modify it
+//https://stackoverflow.com/questions/3752742/how-do-i-create-a-pause-wait-function-using-qt
+void MainWindow::delay()
+{
+    QTime dieTime= QTime::currentTime().addSecs(2);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 
 void MainWindow::show_battery(){
     qInfo("displaying battery");
