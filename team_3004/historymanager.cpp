@@ -3,4 +3,5 @@
 HistoryManager::HistoryManager()
 {
     isLit = false;
+    curSessionIndex = 0;
 }
