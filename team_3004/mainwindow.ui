@@ -41,7 +41,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pushButton_5">
+    <widget class="QPushButton" name="pushButton_Select">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -78,7 +78,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="pushButton_Up">
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
@@ -101,7 +101,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="pushButton_Down">
         <property name="styleSheet">
          <string notr="true">border: none;</string>
         </property>
@@ -465,7 +465,7 @@
       <pixmap resource="res.qrc">:/res/icons/INT logo.png</pixmap>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_9">
+    <widget class="QPushButton" name="pushButton_Save">
      <property name="geometry">
       <rect>
        <x>30</x>
