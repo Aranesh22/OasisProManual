@@ -12,12 +12,11 @@ private:
     int durationMins;
     bool isCustom;
     int getDurationMins();
-
+    bool getIsCustom();
 
 public:
     
     SessionLength(int, bool);
-    bool getIsCustom();
 
 };
 
