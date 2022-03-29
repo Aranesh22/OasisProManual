@@ -15,3 +15,14 @@ SessionLength::SessionLength(int durPass, bool isCustomPass)
     isCustom = isCustomPass;
 
 }
+
+
+int SessionLength::getDurationMins() {
+
+    return durationMins;
+}
+
+bool SessionLength::getIsCustom() {
+
+    return  isCustom;
+}

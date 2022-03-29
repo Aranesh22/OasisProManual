@@ -8,6 +8,12 @@ class SessionType
 {
 public:
     SessionType(float, float, CEStype);
+    float getMaxHz();
+    float getMinHz();
+    CEStype getCESType();
+
+
+
 
 private:
     float minHz;

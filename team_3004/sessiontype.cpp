@@ -18,10 +18,23 @@ SessionType::SessionType(float minHzPass, float maxHzPass, CEStype csModePass )
     }
 
     maxHz = maxHzPass;
-
     csMode = csModePass;
 
+}
 
+float SessionType::getMaxHz() {
 
+    return maxHz;
 
 }
+
+float SessionType::getMinHz() {
+
+    return minHz;
+}
+
+CEStype SessionType:: getCESType() {
+
+    return csMode;
+}
+

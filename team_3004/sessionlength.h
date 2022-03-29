@@ -11,10 +11,13 @@ private:
 
     int durationMins;
     bool isCustom;
+    int getDurationMins();
+
 
 public:
     
     SessionLength(int, bool);
+    bool getIsCustom();
 
 };
 
