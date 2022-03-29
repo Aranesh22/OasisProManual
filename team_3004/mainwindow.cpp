@@ -53,8 +53,14 @@ void MainWindow::show_battery(){
     qInfo("displaying battery");
     qInfo("battery level: %d", battery->getBatteryLevel());
 
+
+// Icon map
+
+
 //Prob find a cleaner way to do this
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
+
+
         qInfo("%d", i);
         if(i == 1)
             changePixmap(":/res/icons/Lit/colNumber/icon_1.png", ui->col_num_1);
