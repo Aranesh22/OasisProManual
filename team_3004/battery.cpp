@@ -11,7 +11,6 @@ Battery::Battery()
 int Battery::getBatteryPercent() { return batteryPercent; }
 int Battery::getBatteryLevel()   { determineBatteryLevel();
                                    return batteryLevel; }
-void Battery::setBatteryLevel(int level)  {batteryLevel = level;}
 
 void Battery::drainBattery(){}
 void Battery::chargeBattery(){}
