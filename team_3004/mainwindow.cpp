@@ -11,15 +11,32 @@ MainWindow::MainWindow(QWidget *parent)
     powerisOn = false;
 
     connect(ui->pushButton_8, &QPushButton::pressed, this, &MainWindow::show_power);
-
+    connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveNext);
+    connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveBack);
+    connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
 
     // flags (prob will need to discuss what to do with these )
     icon_ALL_Lit = false;
-    dutyCycle_CESsession_icon_lit = false;
-    shortPulse_CESsession_icon_lit = false;
-//    bool
+
+//Initalize battery
     battery = new Battery();
 
+}
+//have a check to ensure that the battery is infact ON before executing
+
+//move the selection forward
+void MainWindow::moveNext(){
+    qInfo("moving Next");
+}
+
+
+//moves the selection to the previous
+void MainWindow::moveBack(){
+    qInfo("moving Back");
+}
+
+void MainWindow::makeSelection() {
+    qInfo("Select");
 }
 
 
@@ -49,19 +66,13 @@ void MainWindow::delayBy(int n)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
+
 void MainWindow::show_battery(){
-    qInfo("displaying battery");
     qInfo("battery level: %d", battery->getBatteryLevel());
-
-
 // Icon map
-
-
 //Prob find a cleaner way to do this
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
 
-
-        qInfo("%d", i);
         if(i == 1)
             changePixmap(":/res/icons/Lit/colNumber/icon_1.png", ui->col_num_1);
 
@@ -86,7 +97,6 @@ void MainWindow::show_battery(){
         if(i == 8)
             changePixmap(":/res/icons/Lit/colNumber/icon_8.png", ui->col_num_8);
     }
-
 }
 
 // <QLabel* Key> < List value > containing if the icon is lit or not + it's state
