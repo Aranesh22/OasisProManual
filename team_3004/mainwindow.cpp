@@ -29,8 +29,8 @@ void MainWindow::show_power(){
     qInfo("changing power display");
     QIcon x = QIcon(powerisOn ? ":/res/buttons/powerBtn_lit.png" : ":/res/buttons/power_Btn_unLit.png");
 
-
     ui->pushButton_8->setIcon(x);
+
     if(powerisOn){
         show_battery();
         delayBy(2);
@@ -56,133 +56,80 @@ void MainWindow::show_battery(){
 //Prob find a cleaner way to do this
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
         qInfo("%d", i);
-        if(i == 1){
-//            QPixmap icon_col_num_1 = QPixmap(":/res/icons/Lit/colNumber/icon_1.png");
-//            ui->col_num_1->setPixmap(icon_col_num_1);
-
+        if(i == 1)
             changePixmap(":/res/icons/Lit/colNumber/icon_1.png", ui->col_num_1);
-        }
 
-        if(i == 2){
-            QPixmap icon_col_num_2 = QPixmap(":/res/icons/Lit/colNumber/icon_2.png");
-            ui->col_num_2->setPixmap(icon_col_num_2);
-        }
+        if(i == 2)
+            changePixmap(":/res/icons/Lit/colNumber/icon_2.png", ui->col_num_2);
 
-        if(i == 3){
-            QPixmap icon_col_num_3 = QPixmap(":/res/icons/Lit/colNumber/icon_3.png");
-            ui->col_num_3->setPixmap(icon_col_num_3);
-        }
-        if(i == 4){
-            QPixmap icon_col_num_4 = QPixmap(":/res/icons/Lit/colNumber/icon_4.png");
-            ui->col_num_4->setPixmap(icon_col_num_4);
-        }
-        if(i == 5){
-            QPixmap icon_col_num_5 = QPixmap(":/res/icons/Lit/colNumber/icon_5.png");
-            ui->col_num_5->setPixmap(icon_col_num_5);
-        }
-        if(i == 6){
-            QPixmap icon_col_num_6 = QPixmap(":/res/icons/Lit/colNumber/icon_6.png");
-            ui->col_num_6->setPixmap(icon_col_num_6);
-        }
-        if(i == 7){
-            QPixmap icon_col_num_7 = QPixmap(":/res/icons/Lit/colNumber/icon_7.png");
-            ui->col_num_7->setPixmap(icon_col_num_7);
-        }
-        if(i == 8){
-            QPixmap icon_col_num_8 = QPixmap(":/res/icons/Lit/colNumber/icon_8.png");
-            ui->col_num_8->setPixmap(icon_col_num_8);
-        }
+        if(i == 3)
+            changePixmap(":/res/icons/Lit/colNumber/icon_3.png", ui->col_num_3);
 
+        if(i == 4)
+            changePixmap(":/res/icons/Lit/colNumber/icon_4.png", ui->col_num_4);
+
+        if(i == 5)
+            changePixmap(":/res/icons/Lit/colNumber/icon_5.png", ui->col_num_5);
+
+        if(i == 6)
+            changePixmap(":/res/icons/Lit/colNumber/icon_6.png", ui->col_num_6);
+
+        if(i == 7)
+            changePixmap(":/res/icons/Lit/colNumber/icon_7.png", ui->col_num_7);
+
+        if(i == 8)
+            changePixmap(":/res/icons/Lit/colNumber/icon_8.png", ui->col_num_8);
     }
 
 }
 
-
+// <QLabel* Key> < List value > containing if the icon is lit or not + it's state
 
 
 // lights up all the icons to their powered on state
 //Might need flags to show if an icon is lit or not
 void MainWindow::lit(){
     qInfo("Lit");
-    QPixmap icon_dutyCycle_CESsession  = QPixmap(dutyCycle_CESsession_icon_lit ? ":/res/icons/Lit/icon_dutyCycle_CESsession.png" : ":/res/icons/unLit/icon_dutyCycle_CESsession.png");
-    ui->dutyCycle_CESsession->setPixmap(icon_dutyCycle_CESsession);
+//store in a key value pair??
 
-    QPixmap icon_shortPulse_CESsession = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_shortPulse_CESsession.png" : ":/res/icons/unLit/icon_shortPulse_CESsession.png");
-    ui->shortPulse_CESsession->setPixmap(icon_shortPulse_CESsession);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_dutyCycle_CESsession.png" : ":/res/icons/unLit/icon_dutyCycle_CESsession.png", ui->dutyCycle_CESsession);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_shortPulse_CESsession.png" : ":/res/icons/unLit/icon_shortPulse_CESsession.png", ui->shortPulse_CESsession );
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_LeftCESchannel.png" : ":/res/icons/unLit/icon_LeftCESchannel.png", ui->left_CESchannel);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_RightCESchannel.png" : ":/res/icons/unLit/icon_RightCESchannel.png",  ui->right_CESchannel);
 
-    QPixmap icon_LeftCESchannel = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_LeftCESchannel.png" : ":/res/icons/unLit/icon_LeftCESchannel.png");
-    ui->left_CESchannel->setPixmap(icon_LeftCESchannel);
+ //session times
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_25Min.png" : ":/res/icons/unLit/session_times/icon_25Min.png", ui->session_25min);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_45Min.png" : ":/res/icons/unLit/session_times/icon_45Min.png", ui->session_45min);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_3Hour.png" : ":/res/icons/unLit/session_times/icon_3Hour.png", ui->session_3hr);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_customTime.png" :  ":/res/icons/unLit/session_times/icon_customTime.png",  ui->session_custom);
 
-    QPixmap icon_RightCESchannel = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_RightCESchannel.png" : ":/res/icons/unLit/icon_RightCESchannel.png");
-    ui->right_CESchannel->setPixmap(icon_RightCESchannel);
+//column numbers
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_8.png" : ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_7.png" : ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_6.png" : ":/res/icons/unLit/colNumbers/icon_6.png",  ui->col_num_6);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_5.png" : ":/res/icons/unLit/colNumbers/icon_5.png",  ui->col_num_5);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_4.png" : ":/res/icons/unLit/colNumbers/icon_4.png",  ui->col_num_4);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_3.png" : ":/res/icons/unLit/colNumbers/icon_3.png",  ui->col_num_3);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_2.png" : ":/res/icons/unLit/colNumbers/icon_2.png",  ui->col_num_2);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_1.png" : ":/res/icons/unLit/colNumbers/icon_1.png",  ui->col_num_1);
 
+//session types
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_alpha.png" : ":/res/icons/unLit/sessions/icon_alpha.png", ui->session_alpha );
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_SMR.png" : ":/res/icons/unLit/sessions/icon_SMR.png", ui->session_SMR);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_Beta.png" : ":/res/icons/unLit/sessions/icon_Beta.png", ui->session_Beta);
+    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_100Hz.png" : ":/res/icons/unLit/sessions/icon_100Hz.png", ui->session_100Hz);
 
-
-    QPixmap icon_25Min = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_25Min.png" : ":/res/icons/unLit/session_times/icon_25Min.png");
-    ui->session_25min->setPixmap(icon_25Min);
-
-    QPixmap icon_45Min = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_45Min.png" : ":/res/icons/unLit/session_times/icon_45Min.png");
-    ui->session_45min->setPixmap(icon_45Min);
-
-    QPixmap icon_3hr = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_3Hour.png" : ":/res/icons/unLit/session_times/icon_3Hour.png");
-    ui->session_3hr->setPixmap(icon_3hr);
-
-    QPixmap icon_customTime = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_customTime.png" :  ":/res/icons/unLit/session_times/icon_customTime.png");
-    ui->session_custom->setPixmap(icon_customTime);
-
-
-
-
-    QPixmap icon_col_num_8 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_8.png" : ":/res/icons/unLit/colNumbers/icon_8.png");
-    ui->col_num_8->setPixmap(icon_col_num_8);
-
-    QPixmap icon_col_num_7 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_7.png" : ":/res/icons/unLit/colNumbers/icon_7.png");
-    ui->col_num_7->setPixmap(icon_col_num_7);
-
-    QPixmap icon_col_num_6 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_6.png" : ":/res/icons/unLit/colNumbers/icon_6.png");
-    ui->col_num_6->setPixmap(icon_col_num_6);
-
-    QPixmap icon_col_num_5 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_5.png" : ":/res/icons/unLit/colNumbers/icon_5.png");
-    ui->col_num_5->setPixmap(icon_col_num_5);
-
-    QPixmap icon_col_num_4 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_4.png" : ":/res/icons/unLit/colNumbers/icon_4.png");
-    ui->col_num_4->setPixmap(icon_col_num_4);
-
-    QPixmap icon_col_num_3 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_3.png" : ":/res/icons/unLit/colNumbers/icon_3.png");
-    ui->col_num_3->setPixmap(icon_col_num_3);
-
-    QPixmap icon_col_num_2 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_2.png" : ":/res/icons/unLit/colNumbers/icon_2.png");
-    ui->col_num_2->setPixmap(icon_col_num_2);
-
-    QPixmap icon_col_num_1 = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_1.png" : ":/res/icons/unLit/colNumbers/icon_1.png");
-    ui->col_num_1->setPixmap(icon_col_num_1);
-
-
-    QPixmap icon_session_alpha  = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_alpha.png" : ":/res/icons/unLit/sessions/icon_alpha.png");
-    ui->session_alpha->setPixmap(icon_session_alpha);
-
-    QPixmap icon_session_SMR  = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_SMR.png" : ":/res/icons/unLit/sessions/icon_SMR.png");
-    ui->session_SMR->setPixmap(icon_session_SMR);
-
-    QPixmap icon_session_Beta = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_Beta.png" : ":/res/icons/unLit/sessions/icon_Beta.png");
-    ui->session_Beta ->setPixmap(icon_session_Beta);
-
-    QPixmap icon_session_100Hz  = QPixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_100Hz.png" : ":/res/icons/unLit/sessions/icon_100Hz.png");
-    ui->session_100Hz->setPixmap(icon_session_100Hz);
-
-
-    dutyCycle_CESsession_icon_lit = !dutyCycle_CESsession_icon_lit;
     icon_ALL_Lit = !icon_ALL_Lit;
 
 }
 
-
+//changes the pixmap image for a QLabel
 void MainWindow::changePixmap(QString iconPath, QLabel* uiLabel){
-    qInfo("changing pixmap");
-    QPixmap newIcon= QPixmap(iconPath);
+    QPixmap newIcon = QPixmap(iconPath);
     uiLabel->setPixmap(newIcon);
-
 }
+
+
 
 
 void MainWindow::unLit(){
