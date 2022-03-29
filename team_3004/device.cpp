@@ -18,7 +18,7 @@ Device::Device(Battery* b)
     //buttons = ???
     battery = b;
     connection = none;
-    power = false;
+    power = off;
     curOutputtingAudio = false;
 
     history = new HistoryManager();
@@ -27,3 +27,12 @@ Device::Device(Battery* b)
     //allTypes = ???
 
 }
+
+void Device::turnOn(){
+    power = on;
+}
+
+void Device::turnOff(){
+    power = off;
+}
+

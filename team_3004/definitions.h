@@ -6,5 +6,6 @@
 
 enum CEStype {pulse, cycle};
 enum ConnectionState {max, high, medium, adequate, low, critically_low, none};
+enum PowerState {on, off};
 
 #endif // DEFINITIONS_H

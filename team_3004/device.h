@@ -18,12 +18,14 @@ class Device
 public:
     Device(Battery*);
 
+    void turnOn();
+    void turnOff();
 
 private:
     vector<Button*> buttons;
     Battery* battery;
     ConnectionState connection;
-    bool power;
+    PowerState power;
     bool curOutputtingAudio;
 
     HistoryManager* history;
