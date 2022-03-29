@@ -1,3 +1,4 @@
+using namespace std;
 #include "sessionlength.h"
 #include <stdexcept>
 
@@ -5,16 +6,12 @@
 SessionLength::SessionLength(int durPass, bool isCustomPass)
 {
 
-    if (durPass > MAX_duration || durPass <= 0) {
-        throw std::invalid_argument("duration invalid");
-
-        durationMins = 1;
+    if (durPass > MAX_DURATION|| durPass <= 0) {
+        throw ::invalid_argument("duration invalid");
     }
-    else {
 
-        durationMins = durPass;
 
-    }
+    durationMins = durPass;
     isCustom = isCustomPass;
 
 }
