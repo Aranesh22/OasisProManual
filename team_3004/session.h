@@ -9,6 +9,13 @@ class Session
 public:
     Session(SessionLength*, SessionType*, int);
 
+    //getters
+    SessionLength* getLength();
+    SessionType* getType();
+    int getCurIntensity();
+    bool isLeftActive();
+    bool isRightActive();
+
 private:
     SessionLength* length;
     SessionType* type;

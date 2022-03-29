@@ -14,3 +14,10 @@ Session::Session(SessionLength* sl, SessionType* st, int i)
     length = sl;
     type = st;
 }
+
+//getters
+SessionLength* Session::getLength(){return length;}
+SessionType* Session::getType(){return type;}
+int Session::getCurIntensity(){return curIntensity;}
+bool Session::isLeftActive(){return leftActive;}
+bool Session::isRightActive(){return rightActive;}
