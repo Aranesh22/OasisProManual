@@ -12,7 +12,7 @@ public:
 private:
     SessionLength* length;
     SessionType* type;
-    int intensity;
+    int curIntensity;
     bool leftActive;
     bool rightActive;
 };

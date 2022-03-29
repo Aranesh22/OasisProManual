@@ -3,6 +3,7 @@
 
 #define MAX_HZ 500
 #define MAX_DURATION 1500
+#define MAX_INTENSITY 8
 
 enum CEStype {pulse, cycle};
 enum ConnectionState {max, high, medium, adequate, low, critically_low, none};
