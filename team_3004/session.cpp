@@ -4,11 +4,9 @@
 #include <stdexcept>
 
 
-Session::Session(SessionLength* sl, SessionType* st, int i)
+Session::Session(SessionLength* sl, SessionType* st)
 {
-    if(i < 1 || i > MAX_INTENSITY) throw std::invalid_argument( "received invalid interval value" );
-
-    curIntensity = i;
+    curIntensity = MIN_INTENSITY;
     leftActive = false;
     rightActive = false;
     length = sl;
@@ -21,3 +19,11 @@ SessionType* Session::getType(){return type;}
 int Session::getCurIntensity(){return curIntensity;}
 bool Session::isLeftActive(){return leftActive;}
 bool Session::isRightActive(){return rightActive;}
+
+void Session::incInten(){
+    curIntensity == MAX_INTENSITY ? curIntensity = MIN_INTENSITY : curIntensity++;
+}
+
+void Session::decInten(){
+    curIntensity == MIN_INTENSITY ? curIntensity = MAX_INTENSITY : curIntensity--;
+}

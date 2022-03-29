@@ -7,7 +7,7 @@
 class Session
 {
 public:
-    Session(SessionLength*, SessionType*, int);
+    Session(SessionLength*, SessionType*);
 
     //getters
     SessionLength* getLength();
@@ -15,6 +15,9 @@ public:
     int getCurIntensity();
     bool isLeftActive();
     bool isRightActive();
+
+    void incInten();
+    void decInten();
 
 private:
     SessionLength* length;
