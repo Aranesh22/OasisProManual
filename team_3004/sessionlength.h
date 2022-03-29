@@ -15,7 +15,6 @@ private:
 
     int getDurationMins();
     bool getIsCustom();
-
 };
 
 #endif // SESSIONLENGTH_H
