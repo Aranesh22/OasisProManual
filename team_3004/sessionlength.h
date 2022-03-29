@@ -1,5 +1,7 @@
 #ifndef SESSIONLENGTH_H
 #define SESSIONLENGTH_H
+#include "definitions.h"
+
 
 
 class SessionLength
@@ -7,7 +9,7 @@ class SessionLength
 
 private:
 
-    int duration;
+    int durationMins;
     bool isCustom;
 
 public:
