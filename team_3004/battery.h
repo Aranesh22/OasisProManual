@@ -15,8 +15,7 @@ public:
     Battery();
     void drainBattery();
     void chargeBattery();
-    // for testing only -
-    void setBatteryLevel(int);
+
 
     int getBatteryPercent();
     int getBatteryLevel();
