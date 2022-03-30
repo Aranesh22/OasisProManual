@@ -18,15 +18,23 @@ class Device
 public:
     Device();
 
+    PowerState getPower();
+    Battery* getBattery();
+    bool isOutputtingAudio();
+    HistoryManager* getHistory();
+    Session* getCurSession();
+
     void turnOn();
     void turnOff();
+
+    ConnectionState testForConnection();
 
 private:
     vector<Button*> buttons;
     Battery* battery;
     ConnectionState connection;
     PowerState power;
-    bool curOutputtingAudio;
+    bool outputtingAudio;
 
     HistoryManager* history;
     Session* curSession;
