@@ -23,7 +23,7 @@ Device::Device()
     battery = new Battery();
     connection = none;
     power = off;
-    curOutputtingAudio = false;
+    outputtingAudio = false;
 
     history = new HistoryManager();
     curSession = nullptr;
@@ -35,6 +35,9 @@ Device::Device()
 //getters
 PowerState Device::getPower(){return power;}
 Battery* Device::getBattery(){return battery;}
+bool Device::isOutputtingAudio(){return outputtingAudio;}
+HistoryManager* Device::getHistory(){return history;}
+Session* Device::getCurSession(){return curSession;}
 
 void Device::turnOn(){
     power = on;
