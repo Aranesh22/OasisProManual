@@ -41,6 +41,8 @@ private:
     vector<SessionLength*> allLengths;
     vector<SessionType*> allTypes;
 
+    UseCase curUseCase;
+
 };
 
 #endif // DEVICE_H
