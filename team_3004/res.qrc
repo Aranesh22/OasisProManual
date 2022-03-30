@@ -51,5 +51,6 @@
         <file>res/icons/unLit/sessions/icon_alpha.png</file>
         <file>res/icons/unLit/sessions/icon_Beta.png</file>
         <file>res/icons/unLit/sessions/icon_SMR.png</file>
+        <file>res/battery.txt</file>
     </qresource>
 </RCC>
