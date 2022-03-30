@@ -1,0 +1,7 @@
+
+*.stash
+*.o
+build-team_3004-Desktop-Debug/Makefile
+*.h
+build-team_3004-Desktop-Profile/Makefile
+*.vmVHRV
