@@ -16,7 +16,7 @@ using namespace std;
 class Device
 {
 public:
-    Device(Battery*);
+    Device();
 
     void turnOn();
     void turnOff();
