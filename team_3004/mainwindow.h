@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <unistd.h>
+#include "battery.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,14 +20,20 @@ public:
     void lit();
     void unLit();
     ~MainWindow();
+    void changePixmap(QString, QLabel*);
+    void show_battery();
+    void delayBy(int);
 
     bool icon_ALL_Lit;
-    bool dutyCycle_CESsession_icon_lit;
-    bool shortPulse_CESsession_icon_lit;
+
+    Battery* battery;
 
 private slots:
 
     void show_power();
+    void moveNext();
+    void moveBack();
+    void makeSelection();
 
 
 private:

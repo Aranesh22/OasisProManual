@@ -41,7 +41,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pushButton_5">
+    <widget class="QPushButton" name="pushButton_Select">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -78,7 +78,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="pushButton_Up">
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
@@ -101,7 +101,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="pushButton_Down">
         <property name="styleSheet">
          <string notr="true">border: none;</string>
         </property>
@@ -139,6 +139,9 @@
         </property>
         <property name="pixmap">
          <pixmap resource="res.qrc">:/res/icons/unLit/session_times/icon_25Min.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -179,36 +182,48 @@
       <rect>
        <x>140</x>
        <y>110</y>
-       <width>206</width>
-       <height>80</height>
+       <width>211</width>
+       <height>41</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QLabel" name="label_7">
+       <widget class="QLabel" name="session_alpha">
         <property name="text">
-         <string>IMG</string>
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="res.qrc">:/res/icons/unLit/sessions/icon_alpha.png</pixmap>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="session_SMR">
         <property name="text">
-         <string>IMG</string>
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="res.qrc">:/res/icons/unLit/sessions/icon_SMR.png</pixmap>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="session_Beta">
         <property name="text">
-         <string>IMG</string>
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="res.qrc">:/res/icons/unLit/sessions/icon_Beta.png</pixmap>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_10">
+       <widget class="QLabel" name="session_100Hz">
         <property name="text">
-         <string>IMG</string>
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="res.qrc">:/res/icons/unLit/sessions/icon_100Hz.png</pixmap>
         </property>
        </widget>
       </item>
@@ -450,7 +465,7 @@
       <pixmap resource="res.qrc">:/res/icons/INT logo.png</pixmap>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_9">
+    <widget class="QPushButton" name="pushButton_Save">
      <property name="geometry">
       <rect>
        <x>30</x>

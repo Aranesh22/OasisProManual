@@ -3,22 +3,63 @@
 
 //this is a push INCLUDING the pro file
 #define MAX_BATTERY 100
+#define MIN_BATTERY 0
 
-//Assume that there will be a seperate screen that can set the inital battery level when the device turns on
-// For now, whenever the device turns on it will be set to 100% battery
+
+
+#include <QFile>
+#include <QTextStream>
+#include <QDebug>
+
+#include <QObject>
+#include <QMap>
+
+/*
+
+Data Members:
+
+    int batteryPercent : the devices battery state out of 100
+    int batteryLevel : the level of battery the device has as shown on the UI
+    QMap <int, int> batteryLevelMap : links the batteryPercent to the batteryLevel where the key is the batteryPercent and the value is the batteryLevel
+
+Class Functions:
+
+    void drainBattery() : will drain an appropriate amount of battery based on the therapy type, session length, and connection
+    void chargeBattery() : will charge the battery up to MAX_BATTERY over a period of time
+    void powerOff() : controls the process of shutting down the device
+    void determineBatteryLevel() : determines and returns which level the current battery percentage corresponds with
+
+    void initMap() : reads from a text file in resources that initalizes the batteryLevelMap
+    void initBatteryPercent() : reads from a text file to initalize batteryPercent
+    void saveBatteryPercent() : writes to a text file to save the batteryPercent variable for the devices next use
+
+*/
+
+
+
 
 
 class Battery
 {
 public:
     Battery();
-    void battery_drain();
+    QMap <int, int> batteryLevelMap;
 
+    void drainBattery();
+    void chargeBattery();
+    void powerOff();
 
-    void getBattery_level();
+    int getBatteryPercent();
+    int getBatteryLevel();
 
 private:
-    int battery_level;
+    int batteryPercent;
+    int batteryLevel;
+    void determineBatteryLevel();
+    void initMap();
+    bool saveBatteryPercent();
+    bool initBatteryPercent();
+
 
 };
 

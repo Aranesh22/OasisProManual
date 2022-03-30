@@ -43,5 +43,13 @@
         <file>res/buttons/powerBtn_lit.png</file>
         <file>res/buttons/power_Btn_unLit.png</file>
         <file>res/buttons/save_Btn.png</file>
+        <file>res/icons/Lit/sessions/icon_100Hz.png</file>
+        <file>res/icons/Lit/sessions/icon_alpha.png</file>
+        <file>res/icons/Lit/sessions/icon_Beta.png</file>
+        <file>res/icons/Lit/sessions/icon_SMR.png</file>
+        <file>res/icons/unLit/sessions/icon_100Hz.png</file>
+        <file>res/icons/unLit/sessions/icon_alpha.png</file>
+        <file>res/icons/unLit/sessions/icon_Beta.png</file>
+        <file>res/icons/unLit/sessions/icon_SMR.png</file>
     </qresource>
 </RCC>
