@@ -1,0 +1,10 @@
+
+*.o
+*.stash
+build-team_3004-Desktop-Profile/Makefile
+build-team_3004-Desktop-Profile/moc_mainwindow.cpp
+build-team_3004-Desktop-Profile/moc_predefs.h
+build-team_3004-Desktop-Profile/qrc_res.cpp
+build-team_3004-Desktop-Profile/team_3004
+build-team_3004-Desktop-Profile/team_3004.debug
+build-team_3004-Desktop-Profile/ui_mainwindow.h
