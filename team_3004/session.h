@@ -15,6 +15,7 @@ public:
     int getCurIntensity();
     bool isLeftActive();
     bool isRightActive();
+    int getMinsPassed();
 
     void incInten();
     void decInten();
@@ -25,6 +26,7 @@ private:
     int curIntensity;
     bool leftActive;
     bool rightActive;
+    int minsPassed;
 };
 
 #endif // SESSION_H

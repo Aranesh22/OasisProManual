@@ -11,6 +11,7 @@ Session::Session(SessionLength* sl, SessionType* st)
     rightActive = false;
     length = sl;
     type = st;
+    minsPassed = 0;
 }
 
 //getters
@@ -19,6 +20,7 @@ SessionType* Session::getType(){return type;}
 int Session::getCurIntensity(){return curIntensity;}
 bool Session::isLeftActive(){return leftActive;}
 bool Session::isRightActive(){return rightActive;}
+int Session::getMinsPAssed(){return minsPassed;}
 
 void Session::incInten(){
     curIntensity == MAX_INTENSITY ? curIntensity = MIN_INTENSITY : curIntensity++;
