@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    powerisOn = false;
 
     connect(ui->pushButton_8, &QPushButton::pressed, this, &MainWindow::show_power);
     connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveNext);
@@ -18,8 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     // flags (prob will need to discuss what to do with these )
     icon_ALL_Lit = false;
 
-//Initalize battery
-    battery = new Battery();
+    device = new Device();
 
 }
 //have a check to ensure that the battery is infact ON before executing
@@ -43,17 +41,18 @@ void MainWindow::makeSelection() {
 //cahnges power display button between it's on and off state
 void MainWindow::show_power(){
 
-    qInfo("changing power display");
-    QIcon x = QIcon(powerisOn ? ":/res/buttons/powerBtn_lit.png" : ":/res/buttons/power_Btn_unLit.png");
+    device->getPower() ? device->turnOn() : device->turnOff();
+
+    QIcon x = QIcon(!device->getPower() ? ":/res/buttons/powerBtn_lit.png" : ":/res/buttons/power_Btn_unLit.png");
 
     ui->pushButton_8->setIcon(x);
 
-    if(powerisOn){
+    if(!device->getPower()){
         show_battery();
-        delayBy(2);
+        delayBy(1);
     }
     lit();
-    powerisOn = !powerisOn;
+
 }
 
 
@@ -68,10 +67,8 @@ void MainWindow::delayBy(int n)
 
 
 void MainWindow::show_battery(){
-    qInfo("battery level: %d", battery->getBatteryLevel());
-// Icon map
 //Prob find a cleaner way to do this
-    for(int i = 1; i <= battery->getBatteryLevel(); i++){
+    for(int i = 1; i <= device->getBattery()->getBatteryLevel(); i++){
 
         if(i == 1)
             changePixmap(":/res/icons/Lit/colNumber/icon_1.png", ui->col_num_1);
@@ -105,9 +102,9 @@ void MainWindow::show_battery(){
 // lights up all the icons to their powered on state
 //Might need flags to show if an icon is lit or not
 void MainWindow::lit(){
-    qInfo("Lit");
-//store in a key value pair??
 
+//store in a key value pair??
+    icon_ALL_Lit = !icon_ALL_Lit;
     changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_dutyCycle_CESsession.png" : ":/res/icons/unLit/icon_dutyCycle_CESsession.png", ui->dutyCycle_CESsession);
     changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_shortPulse_CESsession.png" : ":/res/icons/unLit/icon_shortPulse_CESsession.png", ui->shortPulse_CESsession );
     changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_LeftCESchannel.png" : ":/res/icons/unLit/icon_LeftCESchannel.png", ui->left_CESchannel);
@@ -135,7 +132,7 @@ void MainWindow::lit(){
     changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_Beta.png" : ":/res/icons/unLit/sessions/icon_Beta.png", ui->session_Beta);
     changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_100Hz.png" : ":/res/icons/unLit/sessions/icon_100Hz.png", ui->session_100Hz);
 
-    icon_ALL_Lit = !icon_ALL_Lit;
+
 
 }
 
