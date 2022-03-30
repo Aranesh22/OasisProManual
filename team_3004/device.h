@@ -18,8 +18,13 @@ class Device
 public:
     Device();
 
+    PowerState getPower();
+    Battery* getBattery();
+
     void turnOn();
     void turnOff();
+
+    ConnectionState testForConnection();
 
 private:
     vector<Button*> buttons;
