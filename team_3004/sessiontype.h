@@ -6,6 +6,7 @@ class SessionType
 {
 public:
     SessionType(float, float, CEStype);
+    friend class Session;
 
 private:
     float minHz;
