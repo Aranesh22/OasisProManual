@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <unistd.h>
 #include "battery.h"
+#include "device.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,7 +27,8 @@ public:
 
     bool icon_ALL_Lit;
 
-    Battery* battery;
+
+    Device* device;
 
 private slots:
 
@@ -39,6 +41,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    bool powerisOn;
+
 };
 #endif // MAINWINDOW_H
