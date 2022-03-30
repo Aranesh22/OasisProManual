@@ -26,8 +26,9 @@ public:
     void delayBy(int);
 
     bool icon_ALL_Lit;
+
+
     Device* device;
-    Battery* battery;
 
 private slots:
 
@@ -40,6 +41,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    bool powerisOn;
+
 };
 #endif // MAINWINDOW_H

@@ -21,7 +21,7 @@ Device::Device()
 
     //buttons = ???
     battery = new Battery();
-    connection = none;
+    connection = disconnected;
     power = off;
     outputtingAudio = false;
 
