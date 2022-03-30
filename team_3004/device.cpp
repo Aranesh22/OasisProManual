@@ -1,6 +1,6 @@
 #include "device.h"
 
-Device::Device(Battery* b)
+Device::Device()
 {
     /*
     vector<Button*> buttons;
@@ -16,7 +16,7 @@ Device::Device(Battery* b)
      */
 
     //buttons = ???
-    battery = b;
+    battery = new Battery();
     connection = none;
     power = off;
     curOutputtingAudio = false;
