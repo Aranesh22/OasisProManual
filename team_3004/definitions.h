@@ -7,7 +7,8 @@
 #define MIN_INTENSITY 1
 
 enum CEStype {pulse, cycle};
-enum ConnectionState {max, high, medium, adequate, low, critically_low, none};
+enum ConnectionState {connected, disconnected};
 enum PowerState {on, off};
+enum UseCase {blank, selectSession, selectSessionLength, runSession, loadingConnection, lowBattery, deadBattery, loadingSession, endingSession};
 
 #endif // DEFINITIONS_H

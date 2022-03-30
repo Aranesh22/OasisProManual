@@ -27,6 +27,7 @@ Device::Device()
 
     history = new HistoryManager();
     curSession = nullptr;
+    curUseCase = blank;
     //allLengths = ???
     //allTypes = ???
 
@@ -48,5 +49,5 @@ void Device::turnOff(){
 }
 
 ConnectionState Device::testForConnection(){
-
+    connection = connected;
 }
