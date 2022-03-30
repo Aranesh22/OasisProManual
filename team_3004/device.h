@@ -20,6 +20,9 @@ public:
 
     PowerState getPower();
     Battery* getBattery();
+    bool isOutputtingAudio();
+    HistoryManager* getHistory();
+    Session* getCurSession();
 
     void turnOn();
     void turnOff();
@@ -31,7 +34,7 @@ private:
     Battery* battery;
     ConnectionState connection;
     PowerState power;
-    bool curOutputtingAudio;
+    bool outputtingAudio;
 
     HistoryManager* history;
     Session* curSession;
