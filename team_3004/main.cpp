@@ -9,6 +9,8 @@
 #include "sessionlength.h"
 #include "sessiontype.h"
 #include "session.h"
+#include <iostream>
+#include <string>
 
 //int divide(int a, int b){
 //    if(b == 0) throw std::invalid_argument( "can not divide by 0" );
@@ -27,9 +29,8 @@ int main(int argc, char *argv[])
 //    divide(7,2);
 //    qInfo("ASDFAS");
 
+    SessionLength* sl;
+    SessionType* st;
 
-     //Session* s);
-     //sl.getDurationMins();
-
-     return 0;
+    return 0;
 }

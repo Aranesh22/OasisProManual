@@ -6,6 +6,7 @@ class SessionLength
 {  
 public:
     SessionLength(int, bool);
+    friend class Session;
 
 private:
     int durationMins;

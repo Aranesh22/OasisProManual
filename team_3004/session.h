@@ -8,8 +8,6 @@ class Session
 {
 public:
     Session(SessionLength*, SessionType*);
-    friend class SessionLength;
-    friend class SessionType;
 
     //getters
     SessionLength* getLength();
