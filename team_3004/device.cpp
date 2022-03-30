@@ -1,5 +1,9 @@
 #include "device.h"
 
+//used to test connection
+//#include <wininet.h>
+//#pragma comment(lib,"Wininet.lib")
+
 Device::Device()
 {
     /*
@@ -19,14 +23,22 @@ Device::Device()
     battery = new Battery();
     connection = none;
     power = off;
-    curOutputtingAudio = false;
+    outputtingAudio = false;
 
     history = new HistoryManager();
     curSession = nullptr;
+    curUseCase = blank;
     //allLengths = ???
     //allTypes = ???
 
 }
+
+//getters
+PowerState Device::getPower(){return power;}
+Battery* Device::getBattery(){return battery;}
+bool Device::isOutputtingAudio(){return outputtingAudio;}
+HistoryManager* Device::getHistory(){return history;}
+Session* Device::getCurSession(){return curSession;}
 
 void Device::turnOn(){
     power = on;
@@ -36,3 +48,6 @@ void Device::turnOff(){
     power = off;
 }
 
+ConnectionState Device::testForConnection(){
+    connection = connected;
+}
