@@ -1,5 +1,9 @@
 #include "device.h"
 
+//used to test connection
+//#include <wininet.h>
+//#pragma comment(lib,"Wininet.lib")
+
 Device::Device()
 {
     /*
@@ -28,6 +32,10 @@ Device::Device()
 
 }
 
+//getters
+PowerState Device::getPower(){return power;}
+Battery* Device::getBattery(){return battery;}
+
 void Device::turnOn(){
     power = on;
 }
@@ -36,3 +44,6 @@ void Device::turnOff(){
     power = off;
 }
 
+ConnectionState Device::testForConnection(){
+
+}
