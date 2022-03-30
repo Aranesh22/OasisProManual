@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <unistd.h>
 #include "battery.h"
+#include "device.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,7 +26,7 @@ public:
     void delayBy(int);
 
     bool icon_ALL_Lit;
-
+    Device* device;
     Battery* battery;
 
 private slots:
