@@ -2,8 +2,6 @@
 #define SESSIONLENGTH_H
 #include "definitions.h"
 
-
-
 class SessionLength
 {  
 public:

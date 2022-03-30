@@ -6,6 +6,9 @@
 
 #include <stdexcept>
 #include <QDebug>
+#include "sessionlength.h"
+#include "sessiontype.h"
+#include "session.h"
 
 //int divide(int a, int b){
 //    if(b == 0) throw std::invalid_argument( "can not divide by 0" );
@@ -14,10 +17,10 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+    //QApplication a(argc, argv);
+    //MainWindow w;
+    //w.show();
+    //return a.exec();
 //    Battery* b = new Battery();
 //    Device d(b);
 
@@ -25,5 +28,8 @@ int main(int argc, char *argv[])
 //    qInfo("ASDFAS");
 
 
+     //Session* s);
+     //sl.getDurationMins();
 
+     return 0;
 }

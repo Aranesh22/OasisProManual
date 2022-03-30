@@ -7,10 +7,9 @@
 class Session
 {
 public:
-    friend class SessionType;
-    friend class SessionLength;
-
     Session(SessionLength*, SessionType*);
+    friend class SessionLength;
+    friend class SessionType;
 
     //getters
     SessionLength* getLength();
