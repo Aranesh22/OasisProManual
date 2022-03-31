@@ -18,16 +18,19 @@ class Device
 public:
     Device();
 
+    //getters
     PowerState getPower();
     Battery* getBattery();
     bool isOutputtingAudio();
     HistoryManager* getHistory();
     Session* getCurSession();
 
+    //setters or equivalent
     void turnOn();
     void turnOff();
-
     ConnectionState testForConnection();
+
+    void handleLowBattery();
 
 private:
     vector<Button*> buttons;

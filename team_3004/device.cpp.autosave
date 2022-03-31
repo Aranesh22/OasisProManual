@@ -54,3 +54,7 @@ ConnectionState Device::testForConnection(){
     curUseCase = loadingConnection;
     connection = connected;
 }
+
+void Device::handleLowBattery(){
+    
+}
