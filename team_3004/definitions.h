@@ -9,6 +9,6 @@
 enum CEStype {pulse, cycle};
 enum ConnectionState {connected, disconnected};
 enum PowerState {on, off};
-enum UseCase {blank, selectSession, selectSessionLength, runSession, loadingConnection, lowBattery, deadBattery, loadingSession, endingSession, displayingBattery};
+enum UseCase {blank, selectSession, selectSessionLength, runningSession, loadingConnection, lowBattery, deadBattery, loadingSession, endingSession, displayingBattery};
 
 #endif // DEFINITIONS_H
