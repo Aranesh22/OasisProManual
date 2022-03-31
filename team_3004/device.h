@@ -28,7 +28,8 @@ public:
     //setters or equivalent
     void turnOn();
     void turnOff();
-    ConnectionState testForConnection();
+    void setSession(Session*);
+    ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
 
     void handleLowBattery();
 
@@ -45,6 +46,9 @@ private:
     vector<SessionType*> allTypes;
 
     UseCase curUseCase;
+
+    SessionLength* curSesLength; //list of the currently highlighted / running session length
+    SessionType* curSesType; //list of currently highlighted / running session type
 
 };
 

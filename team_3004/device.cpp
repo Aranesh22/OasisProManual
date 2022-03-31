@@ -30,6 +30,8 @@ Device::Device()
     curUseCase = blank;
     //allLengths = ???
     //allTypes = ???
+    curSesLength = nullptr;
+    curSesType = nullptr;
 
 }
 
@@ -53,10 +55,15 @@ void Device::turnOff(){
 ConnectionState Device::testForConnection(){
     curUseCase = loadingConnection;
     connection = connected;
+    return connection;
 }
 
 void Device::handleLowBattery(){
 //    if(curUseCase == runningSession) curSession->end();
     curUseCase = lowBattery;
 
+}
+
+void Device::setSession(Session* s){
+    curSession = s;
 }
