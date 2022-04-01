@@ -37,6 +37,9 @@ Battery* Device::getBattery(){return battery;}
 bool Device::isOutputtingAudio(){return outputtingAudio;}
 HistoryManager* Device::getHistory(){return history;}
 Session* Device::getCurSession(){return curSession;}
+
+UseCase Device::getCurUseCase() {return curUseCase;}
+
 //vector<SessionLength*> Device::getAllLengths{return allLengths;}
 //vector<SessionType*> Device::getAllTypes{return allTypes;}
 

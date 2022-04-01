@@ -40,6 +40,7 @@ public:
     void nextSesLen();
     void prevSesLen();
 
+    UseCase getCurUseCase();
 private:
     vector<Button*> buttons;
     Battery* battery;
