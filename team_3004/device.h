@@ -18,16 +18,20 @@ class Device
 public:
     Device();
 
+    //getters
     PowerState getPower();
     Battery* getBattery();
     bool isOutputtingAudio();
     HistoryManager* getHistory();
     Session* getCurSession();
 
+    //setters or equivalent
     void turnOn();
     void turnOff();
+    void setSession(Session*);
+    ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
 
-    ConnectionState testForConnection();
+    void handleLowBattery();
 
 private:
     vector<Button*> buttons;
@@ -42,6 +46,9 @@ private:
     vector<SessionType*> allTypes;
 
     UseCase curUseCase;
+
+    SessionLength* curSesLength; //list of the currently highlighted / running session length
+    SessionType* curSesType; //list of currently highlighted / running session type
 
 };
 
