@@ -6,7 +6,8 @@
 #include <unistd.h>
 #include "battery.h"
 #include "device.h"
-
+#include "button.h"
+#include <QVector>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,11 +25,22 @@ public:
     void changePixmap(QString, QLabel*);
     void show_battery();
     void delayBy(int);
+    void initalizeVectors();
 
-    bool icon_ALL_Lit;
-
-
+    int indexSessionTimeIcon;
+    int indexSessionIcon;
+    int indexIntensityIcon;
     Device* device;
+
+    QVector<Button*> graphIconVector;
+    QVector<Button*> sessionTimeIconVector;
+    QVector<Button*> sessionIconVector;
+    QVector<Button*> connectionIconVector;
+
+
+   void incrementSessionTime();
+
+    void decrementSessionTime();
 
 private slots:
 

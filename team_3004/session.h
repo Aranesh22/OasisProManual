@@ -20,6 +20,9 @@ public:
     void incInten();
     void decInten();
 
+    int adjustIntensity(bool,bool,bool,bool);
+    bool endSession(bool);
+
 private:
     SessionLength* length;
     SessionType* type;
@@ -27,6 +30,7 @@ private:
     bool leftActive;
     bool rightActive;
     int minsPassed;
+    bool softOffState;
 };
 
 #endif // SESSION_H

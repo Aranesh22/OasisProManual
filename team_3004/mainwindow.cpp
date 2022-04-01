@@ -15,18 +15,84 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
 
     // flags (prob will need to discuss what to do with these )
-    icon_ALL_Lit = false;
+
 
     device = new Device();
+    indexSessionTimeIcon = 0;
+    indexSessionIcon = 0;
+    indexIntensityIcon = 0;
+
+    initalizeVectors();
 
 }
-//have a check to ensure that the battery is infact ON before executing
 
+
+
+void MainWindow::initalizeVectors(){
+
+    //graph
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_6.png" , ":/res/icons/unLit/colNumbers/icon_6.png",  ui->col_num_6));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_5.png" , ":/res/icons/unLit/colNumbers/icon_5.png",  ui->col_num_5));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_4.png" , ":/res/icons/unLit/colNumbers/icon_4.png",  ui->col_num_4));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_3.png" , ":/res/icons/unLit/colNumbers/icon_3.png",  ui->col_num_3));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_2.png" , ":/res/icons/unLit/colNumbers/icon_2.png",  ui->col_num_2));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_1.png" , ":/res/icons/unLit/colNumbers/icon_1.png",  ui->col_num_1));
+
+    //Session times
+    sessionTimeIconVector.push_back(new Button( ":/res/icons/Lit/sessionTimes/icon_25Min.png" , ":/res/icons/unLit/session_times/icon_25Min.png", ui->session_25min));
+    sessionTimeIconVector.push_back(new Button(":/res/icons/Lit/sessionTimes/icon_45Min.png" , ":/res/icons/unLit/session_times/icon_45Min.png", ui->session_45min));
+    sessionTimeIconVector.push_back(new Button( ":/res/icons/Lit/sessionTimes/icon_3Hour.png" , ":/res/icons/unLit/session_times/icon_3Hour.png", ui->session_3hr));
+    sessionTimeIconVector.push_back(new Button( ":/res/icons/Lit/sessionTimes/icon_customTime.png" ,  ":/res/icons/unLit/session_times/icon_customTime.png",  ui->session_custom));
+
+    //sessions
+    sessionIconVector.push_back(new Button(":/res/icons/Lit/sessions/icon_alpha.png" , ":/res/icons/unLit/sessions/icon_alpha.png", ui->session_alpha));
+    sessionIconVector.push_back(new Button(":/res/icons/Lit/sessions/icon_SMR.png" , ":/res/icons/unLit/sessions/icon_SMR.png", ui->session_SMR));
+    sessionIconVector.push_back(new Button(":/res/icons/Lit/sessions/icon_Beta.png" , ":/res/icons/unLit/sessions/icon_Beta.png", ui->session_Beta));
+    sessionIconVector.push_back(new Button(":/res/icons/Lit/sessions/icon_100Hz.png" , ":/res/icons/unLit/sessions/icon_100Hz.png", ui->session_100Hz));
+
+    // connection icon
+    connectionIconVector.push_back(new Button(":/res/icons/Lit/icon_dutyCycle_CESsession.png" , ":/res/icons/unLit/icon_dutyCycle_CESsession.png", ui->dutyCycle_CESsession));
+    connectionIconVector.push_back(new Button(":/res/icons/Lit/icon_shortPulse_CESsession.png" , ":/res/icons/unLit/icon_shortPulse_CESsession.png", ui->shortPulse_CESsession));
+    connectionIconVector.push_back(new Button(":/res/icons/Lit/icon_LeftCESchannel.png" , ":/res/icons/unLit/icon_LeftCESchannel.png", ui->left_CESchannel));
+    connectionIconVector.push_back(new Button(":/res/icons/Lit/icon_RightCESchannel.png" , ":/res/icons/unLit/icon_RightCESchannel.png",  ui->right_CESchannel));
+
+}
+
+//have a check to ensure that the battery is infact ON before executing
+//uses enumeration
 //move the selection forward
 void MainWindow::moveNext(){
     qInfo("moving Next");
+
+//    if(device->curUseCase()==selectSession)
+
+    incrementSessionTime();
+
+
 }
 
+
+
+void MainWindow::incrementSessionTime(){
+   qInfo() << "Increment !";
+//   int index = 0;
+    //turn off previous highlighting
+
+   indexSessionTimeIcon == sessionTimeIconVector.length()-1 ? indexSessionTimeIcon = 0 : indexSessionTimeIcon++;
+   sessionTimeIconVector[indexSessionTimeIcon];
+   qInfo() << indexSessionTimeIcon;
+
+//highlight new icon
+   changePixmap(sessionTimeIconVector[indexSessionTimeIcon]->state ? sessionTimeIconVector[indexSessionTimeIcon]->inactivePath : sessionTimeIconVector[indexSessionTimeIcon]->activePath, sessionTimeIconVector[indexSessionTimeIcon]->uiElement);
+   sessionTimeIconVector[indexSessionTimeIcon]->state = !sessionTimeIconVector[indexSessionTimeIcon]->state;
+
+}
+
+void MainWindow::decrementSessionTime(){
+
+}
 
 //moves the selection to the previous
 void MainWindow::moveBack(){
@@ -104,36 +170,30 @@ void MainWindow::show_battery(){
 void MainWindow::lit(){
 
 //store in a key value pair??
-    icon_ALL_Lit = !icon_ALL_Lit;
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_dutyCycle_CESsession.png" : ":/res/icons/unLit/icon_dutyCycle_CESsession.png", ui->dutyCycle_CESsession);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_shortPulse_CESsession.png" : ":/res/icons/unLit/icon_shortPulse_CESsession.png", ui->shortPulse_CESsession );
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_LeftCESchannel.png" : ":/res/icons/unLit/icon_LeftCESchannel.png", ui->left_CESchannel);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/icon_RightCESchannel.png" : ":/res/icons/unLit/icon_RightCESchannel.png",  ui->right_CESchannel);
+//    icon_ALL_Lit = !icon_ALL_Lit;
+
+    for (int i = 0; i < connectionIconVector.length(); i++) {
+        changePixmap(connectionIconVector[i]->state ? connectionIconVector[i]->inactivePath : connectionIconVector[i]->activePath, connectionIconVector[i]->uiElement);
+        connectionIconVector[i]->state = !connectionIconVector[i]->state;
+    }
 
  //session times
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_25Min.png" : ":/res/icons/unLit/session_times/icon_25Min.png", ui->session_25min);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_45Min.png" : ":/res/icons/unLit/session_times/icon_45Min.png", ui->session_45min);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_3Hour.png" : ":/res/icons/unLit/session_times/icon_3Hour.png", ui->session_3hr);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessionTimes/icon_customTime.png" :  ":/res/icons/unLit/session_times/icon_customTime.png",  ui->session_custom);
+    for (int i = 0; i < sessionTimeIconVector.length(); i++){
+        changePixmap(sessionTimeIconVector[i]->state ? sessionTimeIconVector[i]->inactivePath : sessionTimeIconVector[i]->activePath, sessionTimeIconVector[i]->uiElement);
+        sessionTimeIconVector[i]->state = !sessionTimeIconVector[i]->state;
+    }
+
+    //session types
+    for (int i = 0; i < sessionIconVector.length(); i++){
+        changePixmap(sessionIconVector[i]->state ? sessionIconVector[i]->inactivePath : sessionIconVector[i]->activePath, sessionIconVector[i]->uiElement);
+        sessionIconVector[i]->state = !sessionIconVector[i]->state;
+    }
 
 //column numbers
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_8.png" : ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_7.png" : ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_6.png" : ":/res/icons/unLit/colNumbers/icon_6.png",  ui->col_num_6);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_5.png" : ":/res/icons/unLit/colNumbers/icon_5.png",  ui->col_num_5);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_4.png" : ":/res/icons/unLit/colNumbers/icon_4.png",  ui->col_num_4);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_3.png" : ":/res/icons/unLit/colNumbers/icon_3.png",  ui->col_num_3);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_2.png" : ":/res/icons/unLit/colNumbers/icon_2.png",  ui->col_num_2);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/colNumber/icon_1.png" : ":/res/icons/unLit/colNumbers/icon_1.png",  ui->col_num_1);
-
-//session types
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_alpha.png" : ":/res/icons/unLit/sessions/icon_alpha.png", ui->session_alpha );
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_SMR.png" : ":/res/icons/unLit/sessions/icon_SMR.png", ui->session_SMR);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_Beta.png" : ":/res/icons/unLit/sessions/icon_Beta.png", ui->session_Beta);
-    changePixmap(icon_ALL_Lit ? ":/res/icons/Lit/sessions/icon_100Hz.png" : ":/res/icons/unLit/sessions/icon_100Hz.png", ui->session_100Hz);
-
-
-
+    for (int i = 0; i < graphIconVector.length(); i++){
+        changePixmap(graphIconVector[i]->state ? graphIconVector[i]->inactivePath : graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
+        graphIconVector[i]->state = !graphIconVector[i]->state;
+    }
 }
 
 //changes the pixmap image for a QLabel
@@ -141,8 +201,6 @@ void MainWindow::changePixmap(QString iconPath, QLabel* uiLabel){
     QPixmap newIcon = QPixmap(iconPath);
     uiLabel->setPixmap(newIcon);
 }
-
-
 
 
 void MainWindow::unLit(){

@@ -10,11 +10,13 @@ class HistoryManager
 {
 public:
     HistoryManager();
+    void SaveSession(Session* );
 
 private:
     bool isLit;
     vector<Session*> sessions;
     int curSessionIndex;
+
 
 };
 
