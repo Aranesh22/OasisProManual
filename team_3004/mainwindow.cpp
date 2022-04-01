@@ -8,9 +8,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
-
-
     device = new Device();
 
     indexSessionTimeIcon = 0;
@@ -23,8 +20,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveBack);
     connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
 
+    sessionTimer = new QTimer(this);
+
+    sessionTimer->setSingleShot(true);
+    connect(sessionTimer, &QTimer::timeout, this, &MainWindow::sessionTimeout);
+
 
 }
+
+
+
 
 //cahnges power display button between it's on and off state
 void MainWindow::show_power(){
@@ -45,6 +50,8 @@ void MainWindow::show_power(){
         uniformUiChange(false);
 
 
+
+
     //sets the session times to white
 //    if(!device->getPower())
 //        initForSelection(sessionTimeIconVector);
@@ -57,6 +64,8 @@ void MainWindow::show_power(){
 //uses enumeration
 //move the selection forward
 void MainWindow::moveNext(){
+    if(device->getPower() != on)
+        return;
     qInfo("up arrow");
     if(device->getCurUseCase() == selectSessionLength)
         incrementUiSelection(sessionTimeIconVector, indexSessionTimeIcon);
@@ -77,6 +86,8 @@ void MainWindow::moveNext(){
 
 //moves the selection to the previous
 void MainWindow::moveBack(){
+    if(device->getPower() != on)
+        return;
     qInfo("down arrow");
     if(device->getCurUseCase() == selectSessionLength)
         decrementUiSelection(sessionTimeIconVector, indexSessionTimeIcon);
@@ -94,7 +105,14 @@ void MainWindow::moveBack(){
 }
 
 void MainWindow::makeSelection() {
+    if(device->getPower() != on)
+        return;
     qInfo("Select");
+
+
+    //will be called only once the connection test is verified
+    sessionTimer->start(5000);
+
 
 //advance to next use case
     /* i.e.
@@ -104,6 +122,25 @@ void MainWindow::makeSelection() {
 */
     //would then call initForSelection()
 }
+
+
+void MainWindow::sessionTimeout(){
+    qInfo() << "Session completed! - shutting down";
+    show_power();
+
+}
+
+void MainWindow::deadBatteryUI(){
+    qInfo() << "LOW BATTERY";
+//fix this lol
+    changePixmap(graphIconVector[0]->state ? graphIconVector[0]->activePath : graphIconVector[0]->inactivePath, graphIconVector[0]->uiElement);
+    graphIconVector[0]->state = !graphIconVector[0]->state;
+
+
+
+}
+
+
 
 void MainWindow::incrementUiSelection(QVector<Button*> iconArray, int& index){
 //    if(!device->getCurUseCase()== runningSession)
@@ -145,6 +182,7 @@ void MainWindow::delayBy(int n)
 }
 
 
+
 void MainWindow::graphDisplay(int curLevel){
     qInfo() << "graph display";
     int i=0;
@@ -175,7 +213,8 @@ void MainWindow::show_battery(){
     }
     if(device->getCurUseCase() == deadBattery){
         qInfo() << "dead battery";
-        //do something
+        //graph blinks a single red bar and the device turns off
+
         device->turnOff();
         uniformUiChange(false);
     }
