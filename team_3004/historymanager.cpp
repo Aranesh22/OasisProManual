@@ -9,6 +9,5 @@ HistoryManager::HistoryManager()
 void HistoryManager::SaveSession(Session *saveSess) {
 
     sessions.push_back(saveSess);
-    curSessionIndex = curSessionIndex++;
-
 }
+
