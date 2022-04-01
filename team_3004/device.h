@@ -24,6 +24,10 @@ public:
     bool isOutputtingAudio();
     HistoryManager* getHistory();
     Session* getCurSession();
+    vector<SessionLength*> getAllLengths;
+    vector<SessionType*> getAllTypes;
+
+
 
     //setters or equivalent
     void turnOn();
@@ -32,6 +36,9 @@ public:
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
 
     void handleLowBattery();
+    void editSesLen();
+    void nextSesLen();
+    void prevSesLen();
 
 private:
     vector<Button*> buttons;
@@ -49,6 +56,12 @@ private:
 
     SessionLength* curSesLength; //list of the currently highlighted / running session length
     SessionType* curSesType; //list of currently highlighted / running session type
+
+    void initAllLength();
+    void initAllTypes();
+    int indexOf(SessionLength*);
+    int indexOf(SessionType*);
+
 
 };
 

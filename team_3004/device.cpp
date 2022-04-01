@@ -1,9 +1,5 @@
 #include "device.h"
 
-//used to test connection
-//#include <wininet.h>
-//#pragma comment(lib,"Wininet.lib")
-
 Device::Device()
 {
     /*
@@ -28,8 +24,8 @@ Device::Device()
     history = new HistoryManager();
     curSession = nullptr;
     curUseCase = blank;
-    //allLengths = ???
-    //allTypes = ???
+//    allLengths = initAllLengths();
+//    allTypes = initAllTypes();
     curSesLength = nullptr;
     curSesType = nullptr;
 
@@ -41,6 +37,8 @@ Battery* Device::getBattery(){return battery;}
 bool Device::isOutputtingAudio(){return outputtingAudio;}
 HistoryManager* Device::getHistory(){return history;}
 Session* Device::getCurSession(){return curSession;}
+//vector<SessionLength*> Device::getAllLengths{return allLengths;}
+//vector<SessionType*> Device::getAllTypes{return allTypes;}
 
 void Device::turnOn(){
     curUseCase = displayingBattery;
@@ -66,4 +64,30 @@ void Device::handleLowBattery(){
 
 void Device::setSession(Session* s){
     curSession = s;
+}
+
+void Device::nextSesLen(){
+    int i = indexOf(curSesLength)+1;
+    if( i == allLengths.size() ) i = 0;
+    curSesLength = allLengths[i];
+}
+
+void Device::prevSesLen(){
+    int i = indexOf(curSesLength)-1;
+    if( i < 0 ) i = allLengths.size() - 1;
+    curSesLength = allLengths[i];
+}
+
+int Device::indexOf(SessionLength* sl){
+    for(int i=0; i<allLengths.size(); i++){
+        if(allLengths[i] == sl) return i;
+    }
+    return -1;
+}
+
+int Device::indexOf(SessionType* st){
+    for(int i=0; i<allTypes.size(); i++){
+        if(allTypes[i] == st) return i;
+    }
+    return -1;
 }
