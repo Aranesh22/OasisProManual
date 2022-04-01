@@ -9,36 +9,233 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
-    connect(ui->pushButton_8, &QPushButton::pressed, this, &MainWindow::show_power);
-    connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveNext);
-    connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveBack);
-    connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
-
-    // flags (prob will need to discuss what to do with these )
 
 
     device = new Device();
+
     indexSessionTimeIcon = 0;
     indexSessionIcon = 0;
     indexIntensityIcon = 0;
 
     initalizeVectors();
+    connect(ui->pushButton_8, &QPushButton::pressed, this, &MainWindow::show_power);
+    connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveNext);
+    connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveBack);
+    connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
+
 
 }
 
+//cahnges power display button between it's on and off state
+void MainWindow::show_power(){
+
+    device->getPower() ? device->turnOn() : device->turnOff();
+
+    QIcon x = QIcon(!device->getPower() ? ":/res/buttons/powerBtn_lit.png" : ":/res/buttons/power_Btn_unLit.png");
+
+    ui->pushButton_8->setIcon(x);
+
+    if(device->getPower() == on){
+        show_battery();
+        delayBy(1);
+        uniformUiChange(true);
+        delayBy(1);
+    }
+    if(device->getPower() == off)
+        uniformUiChange(false);
+
+
+    //sets the session times to white
+//    if(!device->getPower())
+//        initForSelection(sessionTimeIconVector);
+//initForSelection(graphIconVector);
+
+
+}
+
+//have a check to ensure that the battery is infact ON before executing
+//uses enumeration
+//move the selection forward
+void MainWindow::moveNext(){
+    qInfo("up arrow");
+    if(device->getCurUseCase() == selectSessionLength)
+        incrementUiSelection(sessionTimeIconVector, indexSessionTimeIcon);
+         //call function from device to increment the session time selection
+
+    if(device->getCurUseCase() == selectSession)
+        incrementUiSelection(sessionIconVector, indexSessionIcon);
+        //call function from device to increment the session selection
+
+    if(device->getCurUseCase() == runningSession){
+        incrementUiSelection(graphIconVector, indexIntensityIcon);
+        device->getCurSession()->incInten();
+    }
+
+// incrementUiSelection(graphIconVector, indexIntensityIcon);
+}
+
+
+//moves the selection to the previous
+void MainWindow::moveBack(){
+    qInfo("down arrow");
+    if(device->getCurUseCase() == selectSessionLength)
+        decrementUiSelection(sessionTimeIconVector, indexSessionTimeIcon);
+        //call function from device to decrement the session time selection
+
+    if(device->getCurUseCase() == selectSession)
+        decrementUiSelection(sessionIconVector, indexSessionIcon);
+        //call function from device to decrement the session selection
+
+    if(device->getCurUseCase() == runningSession){
+        decrementUiSelection(graphIconVector, indexIntensityIcon);
+        device->getCurSession()->decInten();
+    }
+//         decrementUiSelection(graphIconVector, indexIntensityIcon);/
+}
+
+void MainWindow::makeSelection() {
+    qInfo("Select");
+
+//advance to next use case
+    /* i.e.
+     * selectSessionLength > selectSession
+     * selectSession > runningSession
+
+*/
+    //would then call initForSelection()
+}
+
+void MainWindow::incrementUiSelection(QVector<Button*> iconArray, int& index){
+//    if(!device->getCurUseCase()== runningSession)
+//        graphDisplay( index == iconArray.length()-1 ? index = 0 : index++);
+//        return;
+    changePixmap(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
+    iconArray[index]->state = !iconArray[index]->state;
+
+    index == iconArray.length()-1 ? index = 0 : index++;
+
+    changePixmap(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
+    iconArray[index]->state = !iconArray[index]->state;
+}
+
+void MainWindow::decrementUiSelection(QVector<Button*> iconArray, int& index){
+   //fix this
+//    graphDisplay(index == 0 ? index = iconArray.length()-1 : index--);
+//    return;
+
+    changePixmap(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
+    iconArray[index]->state = !iconArray[index]->state;
+
+    index == 0 ? index = iconArray.length()-1 : index--;
+
+    changePixmap(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
+    iconArray[index]->state = !iconArray[index]->state;
+}
+
+
+
+
+//Found on stack overflow - look more into this function and prob modify it
+//https://stackoverflow.com/questions/3752742/how-do-i-create-a-pause-wait-function-using-qt
+void MainWindow::delayBy(int n)
+{
+    QTime dieTime= QTime::currentTime().addSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
+
+void MainWindow::graphDisplay(int curLevel){
+    qInfo() << "graph display";
+    int i=0;
+//    for(int i = 0; i <= curLevel; i++){
+//        changePixmap(graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
+//       graphIconVector[i]->state = true;
+//    }
+    while(i< graphIconVector.length()){
+        if(i < curLevel){
+            changePixmap(graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
+           graphIconVector[i]->state = true;
+        }else{
+            changePixmap(graphIconVector[i]->inactivePath, graphIconVector[i]->uiElement);
+           graphIconVector[i]->state = false;
+        }
+        i++;
+    }
+
+}
+
+void MainWindow::show_battery(){
+    for(int i = 0; i <= device->getBattery()->getBatteryLevel()-1; i++){
+        changePixmap(graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
+    }
+    if(device->getCurUseCase() == lowBattery){
+        qInfo() << "low battery";
+        //do something
+    }
+    if(device->getCurUseCase() == deadBattery){
+        qInfo() << "dead battery";
+        //do something
+        device->turnOff();
+        uniformUiChange(false);
+    }
+}
+
+
+//changes the pixmap image for a QLabel
+void MainWindow::changePixmap(QString iconPath, QLabel* uiLabel){
+    QPixmap newIcon = QPixmap(iconPath);
+    uiLabel->setPixmap(newIcon);
+}
+
+
+void MainWindow::initForSelection(QVector<Button*> iconArray){
+    for (int i = 1; i < iconArray.length(); i++){
+        changePixmap(iconArray[i]->inactivePath, iconArray[i]->uiElement);
+        iconArray[i]->state = false;
+    }
+}
+
+
+void MainWindow::uniformUiChange(bool newState){
+
+//Connection state
+    for (int i = 0; i < connectionIconVector.length(); i++) {
+        connectionIconVector[i]->state = newState;
+        changePixmap(connectionIconVector[i]->state ? connectionIconVector[i]->activePath : connectionIconVector[i]->inactivePath, connectionIconVector[i]->uiElement);
+    }
+
+//session times
+    for (int i = 0; i < sessionTimeIconVector.length(); i++){
+        sessionTimeIconVector[i]->state = newState;
+        changePixmap(newState ? sessionTimeIconVector[i]->activePath : sessionTimeIconVector[i]->inactivePath, sessionTimeIconVector[i]->uiElement);
+    }
+
+//session types
+    for (int i = 0; i < sessionIconVector.length(); i++){
+        sessionIconVector[i]->state = newState;
+        changePixmap(sessionIconVector[i]->state ? sessionIconVector[i]->activePath : sessionIconVector[i]->inactivePath, sessionIconVector[i]->uiElement);
+    }
+
+//column numbers
+    for (int i = 0; i < graphIconVector.length(); i++){
+        graphIconVector[i]->state = newState;
+        changePixmap(graphIconVector[i]->state ? graphIconVector[i]->activePath : graphIconVector[i]->inactivePath, graphIconVector[i]->uiElement);
+    }
+}
 
 
 void MainWindow::initalizeVectors(){
 
     //graph
-    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
-    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
-    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_6.png" , ":/res/icons/unLit/colNumbers/icon_6.png",  ui->col_num_6));
-    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_5.png" , ":/res/icons/unLit/colNumbers/icon_5.png",  ui->col_num_5));
-    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_4.png" , ":/res/icons/unLit/colNumbers/icon_4.png",  ui->col_num_4));
-    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_3.png" , ":/res/icons/unLit/colNumbers/icon_3.png",  ui->col_num_3));
-    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_2.png" , ":/res/icons/unLit/colNumbers/icon_2.png",  ui->col_num_2));
     graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_1.png" , ":/res/icons/unLit/colNumbers/icon_1.png",  ui->col_num_1));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_2.png" , ":/res/icons/unLit/colNumbers/icon_2.png",  ui->col_num_2));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_3.png" , ":/res/icons/unLit/colNumbers/icon_3.png",  ui->col_num_3));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_4.png" , ":/res/icons/unLit/colNumbers/icon_4.png",  ui->col_num_4));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_5.png" , ":/res/icons/unLit/colNumbers/icon_5.png",  ui->col_num_5));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_6.png" , ":/res/icons/unLit/colNumbers/icon_6.png",  ui->col_num_6));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
+    graphIconVector.push_back(new Button(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
 
     //Session times
     sessionTimeIconVector.push_back(new Button( ":/res/icons/Lit/sessionTimes/icon_25Min.png" , ":/res/icons/unLit/session_times/icon_25Min.png", ui->session_25min));
@@ -59,155 +256,6 @@ void MainWindow::initalizeVectors(){
     connectionIconVector.push_back(new Button(":/res/icons/Lit/icon_RightCESchannel.png" , ":/res/icons/unLit/icon_RightCESchannel.png",  ui->right_CESchannel));
 
 }
-
-//have a check to ensure that the battery is infact ON before executing
-//uses enumeration
-//move the selection forward
-void MainWindow::moveNext(){
-    qInfo("moving Next");
-
-//    if(device->curUseCase()==selectSession)
-
-    incrementSessionTime();
-
-
-}
-
-
-
-void MainWindow::incrementSessionTime(){
-   qInfo() << "Increment !";
-//   int index = 0;
-    //turn off previous highlighting
-
-   indexSessionTimeIcon == sessionTimeIconVector.length()-1 ? indexSessionTimeIcon = 0 : indexSessionTimeIcon++;
-   sessionTimeIconVector[indexSessionTimeIcon];
-   qInfo() << indexSessionTimeIcon;
-
-//highlight new icon
-   changePixmap(sessionTimeIconVector[indexSessionTimeIcon]->state ? sessionTimeIconVector[indexSessionTimeIcon]->inactivePath : sessionTimeIconVector[indexSessionTimeIcon]->activePath, sessionTimeIconVector[indexSessionTimeIcon]->uiElement);
-   sessionTimeIconVector[indexSessionTimeIcon]->state = !sessionTimeIconVector[indexSessionTimeIcon]->state;
-
-}
-
-void MainWindow::decrementSessionTime(){
-
-}
-
-//moves the selection to the previous
-void MainWindow::moveBack(){
-    qInfo("moving Back");
-}
-
-void MainWindow::makeSelection() {
-    qInfo("Select");
-}
-
-
-//cahnges power display button between it's on and off state
-void MainWindow::show_power(){
-
-    device->getPower() ? device->turnOn() : device->turnOff();
-
-    QIcon x = QIcon(!device->getPower() ? ":/res/buttons/powerBtn_lit.png" : ":/res/buttons/power_Btn_unLit.png");
-
-    ui->pushButton_8->setIcon(x);
-
-    if(!device->getPower()){
-        show_battery();
-        delayBy(1);
-    }
-    lit();
-
-}
-
-
-//Found on stack overflow - look more into this function and prob modify it
-//https://stackoverflow.com/questions/3752742/how-do-i-create-a-pause-wait-function-using-qt
-void MainWindow::delayBy(int n)
-{
-    QTime dieTime= QTime::currentTime().addSecs(n);
-    while (QTime::currentTime() < dieTime)
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-}
-
-
-void MainWindow::show_battery(){
-//Prob find a cleaner way to do this
-    for(int i = 1; i <= device->getBattery()->getBatteryLevel(); i++){
-
-        if(i == 1)
-            changePixmap(":/res/icons/Lit/colNumber/icon_1.png", ui->col_num_1);
-
-        if(i == 2)
-            changePixmap(":/res/icons/Lit/colNumber/icon_2.png", ui->col_num_2);
-
-        if(i == 3)
-            changePixmap(":/res/icons/Lit/colNumber/icon_3.png", ui->col_num_3);
-
-        if(i == 4)
-            changePixmap(":/res/icons/Lit/colNumber/icon_4.png", ui->col_num_4);
-
-        if(i == 5)
-            changePixmap(":/res/icons/Lit/colNumber/icon_5.png", ui->col_num_5);
-
-        if(i == 6)
-            changePixmap(":/res/icons/Lit/colNumber/icon_6.png", ui->col_num_6);
-
-        if(i == 7)
-            changePixmap(":/res/icons/Lit/colNumber/icon_7.png", ui->col_num_7);
-
-        if(i == 8)
-            changePixmap(":/res/icons/Lit/colNumber/icon_8.png", ui->col_num_8);
-    }
-}
-
-// <QLabel* Key> < List value > containing if the icon is lit or not + it's state
-
-
-// lights up all the icons to their powered on state
-//Might need flags to show if an icon is lit or not
-void MainWindow::lit(){
-
-//store in a key value pair??
-//    icon_ALL_Lit = !icon_ALL_Lit;
-
-    for (int i = 0; i < connectionIconVector.length(); i++) {
-        changePixmap(connectionIconVector[i]->state ? connectionIconVector[i]->inactivePath : connectionIconVector[i]->activePath, connectionIconVector[i]->uiElement);
-        connectionIconVector[i]->state = !connectionIconVector[i]->state;
-    }
-
- //session times
-    for (int i = 0; i < sessionTimeIconVector.length(); i++){
-        changePixmap(sessionTimeIconVector[i]->state ? sessionTimeIconVector[i]->inactivePath : sessionTimeIconVector[i]->activePath, sessionTimeIconVector[i]->uiElement);
-        sessionTimeIconVector[i]->state = !sessionTimeIconVector[i]->state;
-    }
-
-    //session types
-    for (int i = 0; i < sessionIconVector.length(); i++){
-        changePixmap(sessionIconVector[i]->state ? sessionIconVector[i]->inactivePath : sessionIconVector[i]->activePath, sessionIconVector[i]->uiElement);
-        sessionIconVector[i]->state = !sessionIconVector[i]->state;
-    }
-
-//column numbers
-    for (int i = 0; i < graphIconVector.length(); i++){
-        changePixmap(graphIconVector[i]->state ? graphIconVector[i]->inactivePath : graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
-        graphIconVector[i]->state = !graphIconVector[i]->state;
-    }
-}
-
-//changes the pixmap image for a QLabel
-void MainWindow::changePixmap(QString iconPath, QLabel* uiLabel){
-    QPixmap newIcon = QPixmap(iconPath);
-    uiLabel->setPixmap(newIcon);
-}
-
-
-void MainWindow::unLit(){
-
-}
-
-
 
 MainWindow::~MainWindow()
 {

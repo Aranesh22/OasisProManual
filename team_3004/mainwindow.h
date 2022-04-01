@@ -20,12 +20,14 @@ public:
 
     MainWindow(QWidget *parent = nullptr);
     void lit();
-    void unLit();
+    void uniformUiChange(bool);
+    void initForSelection(QVector<Button*>);
     ~MainWindow();
     void changePixmap(QString, QLabel*);
     void show_battery();
     void delayBy(int);
     void initalizeVectors();
+    void graphDisplay(int);
 
     int indexSessionTimeIcon;
     int indexSessionIcon;
@@ -36,11 +38,11 @@ public:
     QVector<Button*> sessionTimeIconVector;
     QVector<Button*> sessionIconVector;
     QVector<Button*> connectionIconVector;
+    void incrementUiSelection(QVector<Button*>, int&);
 
 
-   void incrementSessionTime();
+    void decrementUiSelection(QVector<Button*>, int&);
 
-    void decrementSessionTime();
 
 private slots:
 
