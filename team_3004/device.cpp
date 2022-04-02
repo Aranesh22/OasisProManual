@@ -1,20 +1,13 @@
 #include "device.h"
 
+#include <fstream>
+#include <sstream>
+#include <string>
+
+using namespace std;
+
 Device::Device()
 {
-    /*
-    vector<Button*> buttons;
-    Battery* battery;
-    ConnectionState connection;
-    bool power;
-    bool curOutputtingAudio;
-
-    HistoryManager* history;
-    Session* curSession;
-    vector<SessionLength*> allLengths;
-    vector<SessionType*> allTypes;
-     */
-
     //buttons = ???
     battery = new Battery();
     connection = disconnected;
@@ -24,8 +17,8 @@ Device::Device()
     history = new HistoryManager();
     curSession = nullptr;
     curUseCase = blank;
-//    allLengths = initAllLengths();
-//    allTypes = initAllTypes();
+    initAllLength();
+    initAllTypes();
     curSesLength = nullptr;
     curSesType = nullptr;
 
@@ -93,4 +86,41 @@ int Device::indexOf(SessionType* st){
         if(allTypes[i] == st) return i;
     }
     return -1;
+}
+
+void Device::initAllLength(){
+    //Opens the file called allLengths
+    QFile file(":/res/data/allLengths.txt");
+
+    //checks if the file exists and loads it. Handles errors.
+    if(!file.exists()) qFatal("Device::initAllLength - ERROR: Specified file not found");
+    if(!file.open(QIODevice::ReadOnly)) qFatal("Device::initAllLength - ERROR: Specified file can not be opened");
+
+    QTextStream stream(&file);
+    while (!stream.atEnd()){
+        int len = stream.readLine().toInt();
+        allLengths.push_back(new SessionLength(len, false));
+    }
+
+    file.close();
+}
+
+void Device::initAllTypes(){
+    //Opens the file
+    QFile file(":/res/data/allTypes.txt");
+
+    //checks if the file exists and loads it. Handles errors.
+    if(!file.exists()) qFatal("Device::initAllLength - ERROR: Specified file not found");
+    if(!file.open(QIODevice::ReadOnly)) qFatal("Device::initAllLength - ERROR: Specified file can not be opened");
+
+    QTextStream stream(&file);
+    while (!stream.atEnd()){
+        QStringList line = stream.readLine().split(" ");
+        float minHz = line[0].toFloat();
+        float maxHz = line.size() == 1 ? MAX_HZ : line[1].toFloat();
+        CEStype t = line.size() == 2 ? pulse : cycle;
+        allTypes.push_back(new SessionType(minHz, maxHz, t));
+    }
+
+    file.close();
 }
