@@ -52,5 +52,7 @@
         <file>res/icons/unLit/sessions/icon_Beta.png</file>
         <file>res/icons/unLit/sessions/icon_SMR.png</file>
         <file>res/battery.txt</file>
+        <file>res/data/allLengths.txt</file>
+        <file>res/data/allTypes.txt</file>
     </qresource>
 </RCC>

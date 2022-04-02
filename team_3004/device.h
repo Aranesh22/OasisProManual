@@ -36,9 +36,13 @@ public:
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
 
     void handleLowBattery();
-    void editSesLen();
+
+//    void editSesLen();
     void nextSesLen();
     void prevSesLen();
+    void nextSesType();
+    void prevSesType();
+
 
     UseCase getCurUseCase();
 private:

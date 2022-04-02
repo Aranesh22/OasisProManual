@@ -4,7 +4,7 @@
 Battery::Battery()
 {
     batteryLevel=0;
-    qInfo("battery init");
+//    qInfo("battery init");
     initMap();
     if(!initBatteryPercent())
         batteryPercent = MAX_BATTERY;
@@ -28,7 +28,7 @@ bool Battery::initBatteryPercent(){
     QFile file("battery.txt");
 
     if(!file.exists()){
-        qCritical() << "file not found";
+//        qCritical() << "file not found";
         return false;
     }
     if(!file.open(QIODevice::ReadOnly)){

@@ -23,17 +23,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     return a.exec();
-    Battery* b = new Battery();
-//    divide(7,2);
-//    qInfo("ASDFAS");
 
-/*
-    SessionLength* psl = new SessionLength(30,true);
-    SessionType* pst = new SessionType(3,4.7,pulse);
-    Session s(psl,pst);
-
-    qInfo("Current intensity: %d",s.getCurIntensity());
-
-*/
     return 0;
 }

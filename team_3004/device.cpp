@@ -19,8 +19,8 @@ Device::Device()
     curUseCase = blank;
     initAllLength();
     initAllTypes();
-    curSesLength = nullptr;
-    curSesType = nullptr;
+    curSesLength = allLengths[0];
+    curSesType = allTypes[0];
 
 }
 
@@ -30,7 +30,6 @@ Battery* Device::getBattery(){return battery;}
 bool Device::isOutputtingAudio(){return outputtingAudio;}
 HistoryManager* Device::getHistory(){return history;}
 Session* Device::getCurSession(){return curSession;}
-
 UseCase Device::getCurUseCase() {return curUseCase;}
 
 //vector<SessionLength*> Device::getAllLengths{return allLengths;}
@@ -72,6 +71,16 @@ void Device::prevSesLen(){
     int i = indexOf(curSesLength)-1;
     if( i < 0 ) i = allLengths.size() - 1;
     curSesLength = allLengths[i];
+}
+
+void Device::prevSesType(){
+    int i = indexOf(curSesType)-1;
+    if( i < 0 ) i = allTypes.size() - 1;
+    curSesType = allTypes[i];
+}
+
+void Device::nextSesType() {
+
 }
 
 int Device::indexOf(SessionLength* sl){
