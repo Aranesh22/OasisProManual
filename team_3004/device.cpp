@@ -8,7 +8,7 @@ using namespace std;
 
 Device::Device()
 {
-    //buttons = ???
+    initButtons(); //still needs to be implemented
     battery = new Battery();
     connection = disconnected;
     power = off;
@@ -80,7 +80,11 @@ void Device::prevSesType(){
 }
 
 void Device::nextSesType() {
+    int i = indexOf(curSesType)+1;
 
+    if( i == allTypes.size()) i = allTypes.size() + 1;
+
+    curSesType = allTypes[i];
 }
 
 int Device::indexOf(SessionLength* sl){
@@ -133,3 +137,24 @@ void Device::initAllTypes(){
 
     file.close();
 }
+
+void Device::initButtons(){
+/*  for file in /res/icons/Lit: initIcon(file)
+ *  for file in /res/icons: initIcon(file)
+ *  for file in /res/buttons/: initButton(file);
+ *  NOTE: this seems like a good instance of a STRATEGY DESIGN PATTERN
+ */
+
+}
+
+/*
+void Device::initIcon(litPath){
+    // let dim = find same file but unlit
+        // if not found, display error
+    allButtons.push_back(new DisplayIcon(lit, dim, findUiComponent(litPath) ));
+}
+
+void Device::findUiComponent(path){
+    return ui->path;
+}
+*/

@@ -19,6 +19,7 @@ SOURCES += \
     battery.cpp \
     button.cpp \
     device.cpp \
+    displayicon.cpp \
     historymanager.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     button.h \
     definitions.h \
     device.h \
+    displayicon.h \
     historymanager.h \
     mainwindow.h \
     session.h \

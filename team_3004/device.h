@@ -62,6 +62,7 @@ private:
     SessionLength* curSesLength; //list of the currently highlighted / running session length
     SessionType* curSesType; //list of currently highlighted / running session type
 
+    void initButtons();
     void initAllLength();
     void initAllTypes();
     int indexOf(SessionLength*);

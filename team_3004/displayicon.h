@@ -10,6 +10,7 @@ class DisplayIcon
 {
 public:
     DisplayIcon(QString, QString, QLabel*);
+    DisplayIcon(QString, QString);
 
 private:
     IllumState illum;
