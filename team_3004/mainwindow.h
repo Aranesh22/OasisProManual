@@ -25,7 +25,7 @@ public:
     void uniformUiChange(bool);
     void initForSelection(QVector<Button*>);
     ~MainWindow();
-    void changePixmap(QString, QLabel*);
+    void swapIcon(QString, QLabel*);
     void show_battery();
     void delayBy(int);
     void initalizeVectors();

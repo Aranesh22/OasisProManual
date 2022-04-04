@@ -29,8 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-
-
 //cahnges power display button between it's on and off state
 void MainWindow::show_power(){
 
@@ -133,7 +131,7 @@ void MainWindow::sessionTimeout(){
 void MainWindow::deadBatteryUI(){
     qInfo() << "LOW BATTERY";
 //fix this lol
-    changePixmap(graphIconVector[0]->state ? graphIconVector[0]->activePath : graphIconVector[0]->inactivePath, graphIconVector[0]->uiElement);
+    swapIcon(graphIconVector[0]->state ? graphIconVector[0]->activePath : graphIconVector[0]->inactivePath, graphIconVector[0]->uiElement);
     graphIconVector[0]->state = !graphIconVector[0]->state;
 
 
@@ -146,12 +144,12 @@ void MainWindow::incrementUiSelection(QVector<Button*> iconArray, int& index){
 //    if(!device->getCurUseCase()== runningSession)
 //        graphDisplay( index == iconArray.length()-1 ? index = 0 : index++);
 //        return;
-    changePixmap(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
+    swapIcon(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
     iconArray[index]->state = !iconArray[index]->state;
 
     index == iconArray.length()-1 ? index = 0 : index++;
 
-    changePixmap(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
+    swapIcon(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
     iconArray[index]->state = !iconArray[index]->state;
 }
 
@@ -160,12 +158,12 @@ void MainWindow::decrementUiSelection(QVector<Button*> iconArray, int& index){
 //    graphDisplay(index == 0 ? index = iconArray.length()-1 : index--);
 //    return;
 
-    changePixmap(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
+    swapIcon(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
     iconArray[index]->state = !iconArray[index]->state;
 
     index == 0 ? index = iconArray.length()-1 : index--;
 
-    changePixmap(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
+    swapIcon(iconArray[index]->state ? iconArray[index]->inactivePath : iconArray[index]->activePath, iconArray[index]->uiElement);
     iconArray[index]->state = !iconArray[index]->state;
 }
 
@@ -192,10 +190,10 @@ void MainWindow::graphDisplay(int curLevel){
 //    }
     while(i< graphIconVector.length()){
         if(i < curLevel){
-            changePixmap(graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
+            swapIcon(graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
            graphIconVector[i]->state = true;
         }else{
-            changePixmap(graphIconVector[i]->inactivePath, graphIconVector[i]->uiElement);
+            swapIcon(graphIconVector[i]->inactivePath, graphIconVector[i]->uiElement);
            graphIconVector[i]->state = false;
         }
         i++;
@@ -205,7 +203,7 @@ void MainWindow::graphDisplay(int curLevel){
 
 void MainWindow::show_battery(){
     for(int i = 0; i <= device->getBattery()->getBatteryLevel()-1; i++){
-        changePixmap(graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
+        swapIcon(graphIconVector[i]->activePath, graphIconVector[i]->uiElement);
     }
     if(device->getCurUseCase() == lowBattery){
         qInfo() << "low battery";
@@ -221,16 +219,18 @@ void MainWindow::show_battery(){
 }
 
 
+
 //changes the pixmap image for a QLabel
-void MainWindow::changePixmap(QString iconPath, QLabel* uiLabel){
+void MainWindow::swapIcon(QString iconPath, QLabel* uiLabel){
     QPixmap newIcon = QPixmap(iconPath);
     uiLabel->setPixmap(newIcon);
 }
 
 
+
 void MainWindow::initForSelection(QVector<Button*> iconArray){
     for (int i = 1; i < iconArray.length(); i++){
-        changePixmap(iconArray[i]->inactivePath, iconArray[i]->uiElement);
+        swapIcon(iconArray[i]->inactivePath, iconArray[i]->uiElement);
         iconArray[i]->state = false;
     }
 }
@@ -241,25 +241,25 @@ void MainWindow::uniformUiChange(bool newState){
 //Connection state
     for (int i = 0; i < connectionIconVector.length(); i++) {
         connectionIconVector[i]->state = newState;
-        changePixmap(connectionIconVector[i]->state ? connectionIconVector[i]->activePath : connectionIconVector[i]->inactivePath, connectionIconVector[i]->uiElement);
+        swapIcon(connectionIconVector[i]->state ? connectionIconVector[i]->activePath : connectionIconVector[i]->inactivePath, connectionIconVector[i]->uiElement);
     }
 
 //session times
     for (int i = 0; i < sessionTimeIconVector.length(); i++){
         sessionTimeIconVector[i]->state = newState;
-        changePixmap(newState ? sessionTimeIconVector[i]->activePath : sessionTimeIconVector[i]->inactivePath, sessionTimeIconVector[i]->uiElement);
+        swapIcon(newState ? sessionTimeIconVector[i]->activePath : sessionTimeIconVector[i]->inactivePath, sessionTimeIconVector[i]->uiElement);
     }
 
 //session types
     for (int i = 0; i < sessionIconVector.length(); i++){
         sessionIconVector[i]->state = newState;
-        changePixmap(sessionIconVector[i]->state ? sessionIconVector[i]->activePath : sessionIconVector[i]->inactivePath, sessionIconVector[i]->uiElement);
+        swapIcon(sessionIconVector[i]->state ? sessionIconVector[i]->activePath : sessionIconVector[i]->inactivePath, sessionIconVector[i]->uiElement);
     }
 
 //column numbers
     for (int i = 0; i < graphIconVector.length(); i++){
         graphIconVector[i]->state = newState;
-        changePixmap(graphIconVector[i]->state ? graphIconVector[i]->activePath : graphIconVector[i]->inactivePath, graphIconVector[i]->uiElement);
+        swapIcon(graphIconVector[i]->state ? graphIconVector[i]->activePath : graphIconVector[i]->inactivePath, graphIconVector[i]->uiElement);
     }
 }
 
