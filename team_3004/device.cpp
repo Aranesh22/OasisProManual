@@ -4,11 +4,18 @@
 #include <sstream>
 #include <string>
 
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 using namespace std;
 
-Device::Device()
+
+Device::Device(Ui::MainWindow* ui) : ui(ui)
 {
+<<<<<<< Updated upstream
     initButtons(); //still needs to be implemented
+=======
+
+>>>>>>> Stashed changes
     battery = new Battery();
     connection = disconnected;
     power = off;
@@ -22,7 +29,19 @@ Device::Device()
     curSesLength = allLengths[0];
     curSesType = allTypes[0];
 
+
 }
+
+Device::Device(){
+    qInfo() << "boring";
+}
+
+//Ui::MainWindow Device::testing(){
+
+//    QIcon x = QIcon(":/res/buttons/powerBtn_lit.png" );
+
+////    ui->pushButton_8->setIcon(x);
+//}
 
 //getters
 PowerState Device::getPower(){return power;}
