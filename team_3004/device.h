@@ -10,14 +10,18 @@
 #include "session.h"
 #include "sessionlength.h"
 #include "sessiontype.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
-using namespace std;
 
-class Device
+
+class Device : public QObject
 {
-public:
-    Device();
+   Q_OBJECT
 
+public:
+    Device(Ui::MainWindow*);
+    Device();
     //getters
     PowerState getPower();
     Battery* getBattery();
@@ -27,8 +31,7 @@ public:
     vector<SessionLength*> getAllLengths;
     vector<SessionType*> getAllTypes;
 
-
-
+    Ui::MainWindow* ui;
     //setters or equivalent
     void turnOn();
     void turnOff();

@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    device = new Device();
+    device = new Device(ui);
 
     indexSessionTimeIcon = 0;
     indexSessionIcon = 0;
@@ -25,8 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     sessionTimer->setSingleShot(true);
     connect(sessionTimer, &QTimer::timeout, this, &MainWindow::sessionTimeout);
 
-
 }
+
 
 
 

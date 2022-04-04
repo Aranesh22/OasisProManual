@@ -4,15 +4,16 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <unistd.h>
-#include "battery.h"
+
 #include "device.h"
 #include "button.h"
 #include <QVector>
 #include <QTimer>
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class MainWindow;}
 QT_END_NAMESPACE
 
+class Device;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -30,7 +31,6 @@ public:
     void initalizeVectors();
     void graphDisplay(int);
 
-
     int indexSessionTimeIcon;
     int indexSessionIcon;
     int indexIntensityIcon;
@@ -43,9 +43,6 @@ public:
     void incrementUiSelection(QVector<Button*>, int&);
 
     QTimer *sessionTimer;
-
-
-
 
     void decrementUiSelection(QVector<Button*>, int&);
 
