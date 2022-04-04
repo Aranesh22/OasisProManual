@@ -1,13 +1,11 @@
 #include "displayicon.h"
 
-DisplayIcon::DisplayIcon(QString l, QString d, QLabel* ui)
+DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QLabel* ui)
 {
-    iconMap.insert(lit, l);
-    iconMap.insert(dim, d);
+    iconMap[lit] = litPath;
+    iconMap[dim] = dimPath;
     uiElement = ui;
     illum = dim;
-
-
 }
 
 DisplayIcon::DisplayIcon(QString l, QString d)

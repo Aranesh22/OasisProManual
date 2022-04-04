@@ -18,7 +18,7 @@ public:
 
 private:
     IllumState illum;
-    QMap <IllumState, QString> iconMap;
+    QString iconMap[2];
     QLabel* uiElement;
 
 };
