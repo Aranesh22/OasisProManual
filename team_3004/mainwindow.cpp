@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QTime>
 
+#include "displayicon.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -301,3 +303,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::update(){
+    icon = device->getIcons()[0];
+    swapIcon(icon->getPath() , icon->getUiElement() );
+}

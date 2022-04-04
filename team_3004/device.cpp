@@ -11,11 +11,7 @@ using namespace std;
 
 Device::Device(Ui::MainWindow* ui) : ui(ui)
 {
-<<<<<<< Updated upstream
     initButtons(); //still needs to be implemented
-=======
-
->>>>>>> Stashed changes
     battery = new Battery();
     connection = disconnected;
     power = off;
@@ -50,6 +46,7 @@ bool Device::isOutputtingAudio(){return outputtingAudio;}
 HistoryManager* Device::getHistory(){return history;}
 Session* Device::getCurSession(){return curSession;}
 UseCase Device::getCurUseCase() {return curUseCase;}
+vector<DisplayIcon*> Device::getIcons(){return icons;}
 
 //vector<SessionLength*> Device::getAllLengths{return allLengths;}
 //vector<SessionType*> Device::getAllTypes{return allTypes;}
@@ -163,6 +160,8 @@ void Device::initButtons(){
  *  for file in /res/buttons/: initButton(file);
  *  NOTE: this seems like a good instance of a STRATEGY DESIGN PATTERN
  */
+
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_1.png" , ":/res/icons/unLit/colNumbers/icon_1.png",  ui->col_num_1));
 
 }
 

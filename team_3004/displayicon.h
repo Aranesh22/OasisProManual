@@ -12,6 +12,10 @@ public:
     DisplayIcon(QString, QString, QLabel*);
     DisplayIcon(QString, QString);
 
+    //getters
+    QString getPath();
+    QLabel* getUiElement();
+
 private:
     IllumState illum;
     QMap <IllumState, QString> iconMap;

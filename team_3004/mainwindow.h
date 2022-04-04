@@ -9,6 +9,8 @@
 #include "button.h"
 #include <QVector>
 #include <QTimer>
+#include "displayicon.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow;}
 QT_END_NAMESPACE
@@ -30,6 +32,7 @@ public:
     void delayBy(int);
     void initalizeVectors();
     void graphDisplay(int);
+    void update();
 
     int indexSessionTimeIcon;
     int indexSessionIcon;
@@ -45,6 +48,8 @@ public:
     QTimer *sessionTimer;
 
     void decrementUiSelection(QVector<Button*>, int&);
+
+    DisplayIcon* icon;
 
 
 private slots:

@@ -12,6 +12,7 @@
 #include "sessiontype.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "displayicon.h"
 
 
 
@@ -32,11 +33,17 @@ public:
     vector<SessionType*> getAllTypes;
 
     Ui::MainWindow* ui;
+
     //setters or equivalent
     void turnOn();
     void turnOff();
     void setSession(Session*);
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
+
+    //getters
+    UseCase getCurUseCase();
+    vector<DisplayIcon*> getIcons();
+
 
     void handleLowBattery();
 
@@ -47,9 +54,8 @@ public:
     void prevSesType();
 
 
-    UseCase getCurUseCase();
 private:
-    vector<Button*> buttons;
+    vector<DisplayIcon*> icons;
     Battery* battery;
     ConnectionState connection;
     PowerState power;
