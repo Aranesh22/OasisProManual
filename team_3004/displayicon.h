@@ -3,22 +3,21 @@
 
 #include "definitions.h"
 
-#include <QMap>
-#include <QLabel>
+#include <QPushButton>
 
 class DisplayIcon
 {
 public:
-    DisplayIcon(QString, QString, QLabel*);
+    DisplayIcon(QString, QString, QPushButton*);
 
     //getters
     QString getPath();
-    QLabel* getUiElement();
+    QPushButton* getUiElement();
 
 private:
     IllumState illum;
     QString iconMap[2];
-    QLabel* uiElement;
+    QPushButton* uiElement;
 
 };
 

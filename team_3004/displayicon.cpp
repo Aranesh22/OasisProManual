@@ -1,6 +1,6 @@
 #include "displayicon.h"
 
-DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QLabel* ui)
+DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QPushButton* ui)
 {
     iconMap[lit] = litPath;
     iconMap[dim] = dimPath;
@@ -10,4 +10,4 @@ DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QLabel* ui)
 
 //getters
 QString DisplayIcon::getPath(){return iconMap[illum];}
-QLabel* DisplayIcon::getUiElement(){return uiElement;}
+QPushButton* DisplayIcon::getUiElement(){return uiElement;}
