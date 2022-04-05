@@ -18,19 +18,21 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     outputtingAudio = false;
 
     history = new HistoryManager();
-    curSession = nullptr;
-    curUseCase = blank;
     initAllLength();
     initAllTypes();
+
     curSesLength = allLengths[0];
     curSesType = allTypes[0];
+    curSession = nullptr;
+    curUseCase = blank;
 
 
 }
 
 Device::Device(){
-    qInfo() << "boring";
+    qInfo() << "need to update this";
 }
+
 
 
 
@@ -84,6 +86,29 @@ ConnectionState Device::testForConnection(){
 
 
 //user inputs
+void Device::handleUpArrow(){
+    //check current use case
+    //call the right function
+    //is there a better approach that avoids if-else spam / switch?
+    //yes; declare maps to function pointers (might be too complicated, so for the scope of this project, if-else spam might be fine)
+}
+
+void Device::handleDownArrow(){
+
+}
+
+void Device::handlePowerButton(){
+
+}
+
+void Device::handleSave(){
+
+}
+
+void Device::handleCheck(){
+
+}
+
 void Device::nextSesLen(){
     int i = indexOf(curSesLength)+1;
     if( i == allLengths.size() ) i = 0;
@@ -174,12 +199,23 @@ void Device::initAllTypes(){
 }
 
 void Device::initIcons(){
-/*  for file in /res/icons/Lit: initIcon(file)
- *  for file in /res/icons: initIcon(file)
- *  for file in /res/buttons/: initButton(file);
- *  NOTE: this seems like a good instance of a STRATEGY DESIGN PATTERN
- */
+    initClickableIcons();
+    initSessionLengthIcons();
+    initSessionTypeIcons();
+}
 
-    icons.push_back(new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_unLit.png",  ui->pushButton_8));
+void Device::initClickableIcons(){
+
+}
+
+void Device::initSessionLengthIcons(){
+
+}
+
+void Device::initSessionTypeIcons(){
+
+}
+
+void Device::initOtherIcons(){
 
 }

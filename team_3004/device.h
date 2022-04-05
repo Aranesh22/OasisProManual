@@ -44,16 +44,11 @@ public:
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
 
     //user inputs
-    //void handleUpArrow();
-    //void handleDownArrow();
-    //void handlePowerButton();
-    //void handleSave();
-    //void handleCheck();
-    void nextSesLen();
-    void prevSesLen();
-    void nextSesType();
-    void prevSesType();
-
+    void handleUpArrow();
+    void handleDownArrow();
+    void handlePowerButton();
+    void handleSave();
+    void handleCheck();
 
 private:
     Ui::MainWindow* ui;
@@ -63,28 +58,35 @@ private:
     ConnectionState connection;
     PowerState power;
     bool outputtingAudio;
-
     HistoryManager* history;
-    Session* curSession;
     vector<SessionLength*> allLengths;
     vector<SessionType*> allTypes;
 
-    UseCase curUseCase;
-
+    UseCase curUseCase; //the current "use case" of the device; see definitions.h for more detail
+    Session* curSession; //if a session is running, this pointer points to its current instance
     SessionLength* curSesLength; //list of the currently highlighted / running session length
     SessionType* curSesType; //list of currently highlighted / running session type
 
 
 
     //initializers
-    void initIcons();
     void initAllLength();
     void initAllTypes();
+    void initIcons();
+    void initClickableIcons();
+    void initSessionLengthIcons();
+    void initSessionTypeIcons();
+    void initOtherIcons();
+
+    //user inputs
+    void nextSesLen();
+    void prevSesLen();
+    void nextSesType();
+    void prevSesType();
 
     //helpers
     int indexOf(SessionLength*);
     int indexOf(SessionType*);
-
 
 };
 
