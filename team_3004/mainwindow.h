@@ -24,47 +24,56 @@ class MainWindow : public QMainWindow
 public:
 
     MainWindow(QWidget *parent = nullptr);
-    void lit();
-    void uniformUiChange(bool);
-    void initForSelection(QVector<Button*>);
     ~MainWindow();
-    void swapIcon(QString, QLabel*);
+
+    Device* device;
+    DisplayIcon* icon;
+
     void swapIcon(QString, QPushButton*);
-    void show_battery();
-    void delayBy(int);
-    void initalizeVectors();
-    void graphDisplay(int);
     void update();
 
-    int indexSessionTimeIcon;
-    int indexSessionIcon;
-    int indexIntensityIcon;
-    Device* device;
+
+    void delayBy(int);
+    void show_battery();
+
+private slots:
+
+    void show_power();
+    void moveNext();
+    void moveBack();
+    void makeSelection();
+
+
+
+    void sessionTimeout();
+    void deadBatteryUI();
+
+private:
+    Ui::MainWindow *ui;
+
+//UNUSED  __________________________________________________________________________________
 
     QVector<Button*> graphIconVector;
     QVector<Button*> sessionTimeIconVector;
     QVector<Button*> sessionIconVector;
     QVector<Button*> connectionIconVector;
-    void incrementUiSelection(QVector<Button*>, int&);
-
     QTimer *sessionTimer;
+    int indexSessionTimeIcon;
+    int indexSessionIcon;
+    int indexIntensityIcon;
 
+    void swapIcon(QString, QLabel*);
+    void incrementUiSelection(QVector<Button*>, int&);
+    void lit();
+    void uniformUiChange(bool);
+    void initForSelection(QVector<Button*>);
+    void initalizeVectors();
+    void graphDisplay(int);
     void decrementUiSelection(QVector<Button*>, int&);
 
-    DisplayIcon* icon;
 
 
-private slots:
-    void deadBatteryUI();
-    void show_power();
-    void moveNext();
-    void moveBack();
-    void makeSelection();
-    void sessionTimeout();
 
-
-private:
-    Ui::MainWindow *ui;
 
 
 };
