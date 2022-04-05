@@ -9,6 +9,7 @@
 #include "button.h"
 #include <QVector>
 #include <QTimer>
+#include <QPushButton>
 #include "displayicon.h"
 
 QT_BEGIN_NAMESPACE
@@ -28,6 +29,7 @@ public:
     void initForSelection(QVector<Button*>);
     ~MainWindow();
     void swapIcon(QString, QLabel*);
+    void swapIcon(QString, QPushButton*);
     void show_battery();
     void delayBy(int);
     void initalizeVectors();

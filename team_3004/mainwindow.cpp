@@ -228,6 +228,11 @@ void MainWindow::swapIcon(QString iconPath, QLabel* uiLabel){
     uiLabel->setPixmap(newIcon);
 }
 
+void MainWindow::swapIcon(QString iconPath, QPushButton* uiIcon){
+    QIcon newIcon = QIcon(iconPath);
+    uiIcon->setIcon(newIcon);
+}
+
 
 
 void MainWindow::initForSelection(QVector<Button*> iconArray){

@@ -161,7 +161,7 @@ void Device::initButtons(){
  *  NOTE: this seems like a good instance of a STRATEGY DESIGN PATTERN
  */
 
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_1.png" , ":/res/icons/unLit/colNumbers/icon_1.png",  ui->pushButton_8));
+    icons.push_back(new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_unLit.png",  ui->pushButton_8));
 
 }
 
