@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "definitions.h"
-#include "button.h"
 #include "historymanager.h"
 #include "battery.h"
 #include "session.h"
@@ -23,6 +22,7 @@ class Device : public QObject
 public:
     Device(Ui::MainWindow*);
     Device();
+
     //getters
     PowerState getPower();
     Battery* getBattery();
@@ -31,23 +31,24 @@ public:
     Session* getCurSession();
     vector<SessionLength*> getAllLengths;
     vector<SessionType*> getAllTypes;
-
-    Ui::MainWindow* ui;
+    UseCase getCurUseCase();
+    vector<DisplayIcon*> getIcons();
 
     //setters or equivalent
     void turnOn();
     void turnOff();
     void setSession(Session*);
+
+    //system events
+    void handleLowBattery();
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
 
-    //getters
-    UseCase getCurUseCase();
-    vector<DisplayIcon*> getIcons();
-
-
-    void handleLowBattery();
-
-//    void editSesLen();
+    //user inputs
+    //void handleUpArrow();
+    //void handleDownArrow();
+    //void handlePowerButton();
+    //void handleSave();
+    //void handleCheck();
     void nextSesLen();
     void prevSesLen();
     void nextSesType();
@@ -55,6 +56,8 @@ public:
 
 
 private:
+    Ui::MainWindow* ui;
+
     vector<DisplayIcon*> icons;
     Battery* battery;
     ConnectionState connection;
@@ -71,9 +74,14 @@ private:
     SessionLength* curSesLength; //list of the currently highlighted / running session length
     SessionType* curSesType; //list of currently highlighted / running session type
 
-    void initButtons();
+
+
+    //initializers
+    void initIcons();
     void initAllLength();
     void initAllTypes();
+
+    //helpers
     int indexOf(SessionLength*);
     int indexOf(SessionType*);
 

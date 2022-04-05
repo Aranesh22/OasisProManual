@@ -11,7 +11,7 @@ using namespace std;
 
 Device::Device(Ui::MainWindow* ui) : ui(ui)
 {
-    initButtons(); //still needs to be implemented
+    initIcons(); //still needs to be implemented
     battery = new Battery();
     connection = disconnected;
     power = off;
@@ -32,12 +32,8 @@ Device::Device(){
     qInfo() << "boring";
 }
 
-//Ui::MainWindow Device::testing(){
 
-//    QIcon x = QIcon(":/res/buttons/powerBtn_lit.png" );
 
-////    ui->pushButton_8->setIcon(x);
-//}
 
 //getters
 PowerState Device::getPower(){return power;}
@@ -48,9 +44,10 @@ Session* Device::getCurSession(){return curSession;}
 UseCase Device::getCurUseCase() {return curUseCase;}
 vector<DisplayIcon*> Device::getIcons(){return icons;}
 
-//vector<SessionLength*> Device::getAllLengths{return allLengths;}
-//vector<SessionType*> Device::getAllTypes{return allTypes;}
 
+
+
+//setters
 void Device::turnOn(){
     curUseCase = displayingBattery;
     power = on;
@@ -61,22 +58,32 @@ void Device::turnOff(){
     curUseCase = blank;
 }
 
-ConnectionState Device::testForConnection(){
-    curUseCase = loadingConnection;
-    connection = connected;
-    return connection;
+void Device::setSession(Session* s){
+    curSession = s;
 }
 
+
+
+
+
+//system events
 void Device::handleLowBattery(){
 //    if(curUseCase == runningSession) curSession->end();
     curUseCase = lowBattery;
 
 }
 
-void Device::setSession(Session* s){
-    curSession = s;
+ConnectionState Device::testForConnection(){
+    curUseCase = loadingConnection;
+    connection = connected;
+    return connection;
 }
 
+
+
+
+
+//user inputs
 void Device::nextSesLen(){
     int i = indexOf(curSesLength)+1;
     if( i == allLengths.size() ) i = 0;
@@ -103,6 +110,13 @@ void Device::nextSesType() {
     curSesType = allTypes[i];
 }
 
+
+
+
+
+
+
+//helpers
 int Device::indexOf(SessionLength* sl){
     for(int i=0; i<allLengths.size(); i++){
         if(allLengths[i] == sl) return i;
@@ -117,6 +131,11 @@ int Device::indexOf(SessionType* st){
     return -1;
 }
 
+
+
+
+
+//initializers
 void Device::initAllLength(){
     //Opens the file called allLengths
     QFile file(":/res/data/allLengths.txt");
@@ -154,7 +173,7 @@ void Device::initAllTypes(){
     file.close();
 }
 
-void Device::initButtons(){
+void Device::initIcons(){
 /*  for file in /res/icons/Lit: initIcon(file)
  *  for file in /res/icons: initIcon(file)
  *  for file in /res/buttons/: initButton(file);
@@ -164,15 +183,3 @@ void Device::initButtons(){
     icons.push_back(new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_unLit.png",  ui->pushButton_8));
 
 }
-
-/*
-void Device::initIcon(litPath){
-    // let dim = find same file but unlit
-        // if not found, display error
-    allButtons.push_back(new DisplayIcon(lit, dim, findUiComponent(litPath) ));
-}
-
-void Device::findUiComponent(path){
-    return ui->path;
-}
-*/
