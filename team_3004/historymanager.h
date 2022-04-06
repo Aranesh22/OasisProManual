@@ -11,6 +11,8 @@ class HistoryManager
 public:
     HistoryManager();
     void SaveSession(Session* );
+    Session* loadSession(Session* );
+    Session* deleteSession(Session* );
 
 private:
     bool isLit;
