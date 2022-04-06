@@ -11,3 +11,5 @@ DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QPushButton* ui)
 //getters
 QString DisplayIcon::getPath(){return iconMap[illum];}
 QPushButton* DisplayIcon::getUiElement(){return uiElement;}
+
+void DisplayIcon::setIllumState(IllumState newIllum)    {illum = newIllum;}

@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -11,15 +12,21 @@ using namespace std;
 
 Device::Device(Ui::MainWindow* ui) : ui(ui)
 {
-    initIcons(); //still needs to be implemented
+
     battery = new Battery();
     connection = disconnected;
     power = off;
     outputtingAudio = false;
 
     history = new HistoryManager();
-    initAllLength();
-    initAllTypes();
+//    initAllLength();
+
+//    initAllTypes();
+
+    initSesssionLengths();
+    initSessionTypes();
+
+    initIcons();
 
     curSesLength = allLengths[0];
     curSesType = allTypes[0];
@@ -44,9 +51,8 @@ bool Device::isOutputtingAudio(){return outputtingAudio;}
 HistoryManager* Device::getHistory(){return history;}
 Session* Device::getCurSession(){return curSession;}
 UseCase Device::getCurUseCase() {return curUseCase;}
+
 vector<DisplayIcon*> Device::getIcons(){return icons;}
-
-
 
 
 //setters
@@ -58,6 +64,7 @@ void Device::turnOn(){
 void Device::turnOff(){
     power = off;
     curUseCase = blank;
+
 }
 
 void Device::setSession(Session* s){
@@ -80,9 +87,6 @@ ConnectionState Device::testForConnection(){
     connection = connected;
     return connection;
 }
-
-
-
 
 
 //user inputs
@@ -161,7 +165,13 @@ int Device::indexOf(SessionType* st){
 
 
 //initializers
+
+
+
+
+
 void Device::initAllLength(){
+    qInfo("init all lenfrg");
     //Opens the file called allLengths
     QFile file(":/res/data/allLengths.txt");
 
@@ -172,7 +182,8 @@ void Device::initAllLength(){
     QTextStream stream(&file);
     while (!stream.atEnd()){
         int len = stream.readLine().toInt();
-        allLengths.push_back(new SessionLength(len, false));
+//        allLengths.push_back(new SessionLength(len, false));
+
     }
 
     file.close();
@@ -198,24 +209,62 @@ void Device::initAllTypes(){
     file.close();
 }
 
+
+
+
+
+
+
+
+void Device::initSesssionLengths(){
+    allLengths.push_back(new SessionLength(25, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_25Min.png" , ":/res/icons/unLit/session_times/icon_25Min.png", ui->session_25min)));
+    allLengths.push_back(new SessionLength(45, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_45Min.png" , ":/res/icons/unLit/session_times/icon_45Min.png", ui->session_45min)));
+    allLengths.push_back(new SessionLength(180, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_3Hour.png" , ":/res/icons/unLit/session_times/icon_3Hour.png", ui->session_3hr)));
+
+}
+
+void Device::initSessionTypes(){
+    allTypes.push_back(new SessionType(0.5, 3, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_alpha.png" , ":/res/icons/unLit/sessions/icon_alpha.png", ui->session_alpha)));
+    allTypes.push_back(new SessionType(0.5, 3, cycle, new DisplayIcon(":/res/icons/Lit/sessions/icon_SMR.png" , ":/res/icons/unLit/sessions/icon_SMR.png", ui->session_SMR)));
+    allTypes.push_back(new SessionType(2.5, 5, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_Beta.png" , ":/res/icons/unLit/sessions/icon_Beta.png", ui->session_Beta)));
+    allTypes.push_back(new SessionType(6, 8, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_100Hz.png" , ":/res/icons/unLit/sessions/icon_100Hz.png", ui->session_100Hz)));
+
+}
 void Device::initIcons(){
-    initClickableIcons();
+    initClickableIcons();           // icons[0]
+    initOtherIcons();               // icons[1] - [8]
     initSessionLengthIcons();
     initSessionTypeIcons();
 }
 
 void Device::initClickableIcons(){
-
+    DisplayIcon* powerButton = new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_Lit.png", ui->pushButton_Power);
+    icons.push_back(powerButton);
 }
 
 void Device::initSessionLengthIcons(){
+    for(int i = 0; i < allLengths.size()-1; i++){
+        icons.push_back(allLengths.at(i)->getIcon());
+    }
 
+    //or create sessionLength objects and pass the new inidividual icons to the class
 }
 
 void Device::initSessionTypeIcons(){
+    for(int i = 0; i < allTypes.size()-1; i++){
+        icons.push_back(allLengths.at(i)->getIcon());
+    }
 
 }
 
 void Device::initOtherIcons(){
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_1.png" , ":/res/icons/unLit/colNumbers/icon_1.png",  ui->col_num_1));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_2.png" , ":/res/icons/unLit/colNumbers/icon_2.png",  ui->col_num_2));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_3.png" , ":/res/icons/unLit/colNumbers/icon_3.png",  ui->col_num_3));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_4.png" , ":/res/icons/unLit/colNumbers/icon_4.png",  ui->col_num_4));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_5.png" , ":/res/icons/unLit/colNumbers/icon_5.png",  ui->col_num_5));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_6.png" , ":/res/icons/unLit/colNumbers/icon_6.png",  ui->col_num_6));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
 
 }

@@ -29,8 +29,8 @@ public:
     bool isOutputtingAudio();
     HistoryManager* getHistory();
     Session* getCurSession();
-    vector<SessionLength*> getAllLengths;
-    vector<SessionType*> getAllTypes;
+    vector<SessionLength*> getAllLengths();
+    vector<SessionType*> getAllTypes();
     UseCase getCurUseCase();
     vector<DisplayIcon*> getIcons();
 
@@ -68,7 +68,7 @@ private:
     SessionType* curSesType; //list of currently highlighted / running session type
 
 
-
+    void initSessionTypes();
     //initializers
     void initAllLength();
     void initAllTypes();
@@ -77,6 +77,14 @@ private:
     void initSessionLengthIcons();
     void initSessionTypeIcons();
     void initOtherIcons();
+
+
+
+
+    void initSesssionLengths();
+
+
+
 
     //user inputs
     void nextSesLen();

@@ -14,6 +14,9 @@ public:
     QString getPath();
     QPushButton* getUiElement();
 
+    void setIllumState(IllumState);
+
+
 private:
     IllumState illum;
     QString iconMap[2];

@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::show_power(){
     qInfo() << "Mainwindow::show_power()";
-//    device->handlePower();
+//    device->turnOn();
 
     update();
 }
@@ -63,12 +63,13 @@ void MainWindow::makeSelection() {
 
 void MainWindow::update(){
 //get all icons
+    qInfo() << "MainWindow::update()";
 
-//iterate through the icons
-     //swapIcon(icon->getPath(), icon->getUiElement());
+    icons = device->getIcons();
+    for(int i = 0; i < icons.size(); i++){
+        swapIcon(icons[i]->getPath() , icons[i]->getUiElement());
+    }
 
-    icon = device->getIcons()[0];
-    swapIcon(icon->getPath() , icon->getUiElement() );
 }
 
 

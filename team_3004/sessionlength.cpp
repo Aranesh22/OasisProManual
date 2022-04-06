@@ -1,6 +1,7 @@
 using namespace std;
 #include "sessionlength.h"
 #include <stdexcept>
+#include <QDebug>
 
 
 SessionLength::SessionLength(int durPass, bool isCustomPass)
@@ -10,12 +11,16 @@ SessionLength::SessionLength(int durPass, bool isCustomPass)
         throw ::invalid_argument("duration invalid");
     }
 
-
     durationMins = durPass;
     isCustom = isCustomPass;
 
 }
 
+SessionLength::SessionLength(int durPass, bool isCustomPass, DisplayIcon* dicon) : icon(dicon) {
+
+}
+
+DisplayIcon* SessionLength::getIcon() {return icon;}
 
 int SessionLength::getDurationMins() {
 

@@ -27,7 +27,7 @@ public:
     ~MainWindow();
 
     Device* device;
-    DisplayIcon* icon;
+    vector<DisplayIcon*> icons;
 
     void swapIcon(QString, QPushButton*);
     void update();
