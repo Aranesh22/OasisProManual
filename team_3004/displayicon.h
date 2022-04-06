@@ -15,7 +15,7 @@ public:
     QPushButton* getUiElement();
 
     void setIllumState(IllumState);
-
+    void toggleIllum();
 
 private:
     IllumState illum;
