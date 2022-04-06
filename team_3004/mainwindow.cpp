@@ -66,7 +66,10 @@ void MainWindow::update(){
     qInfo() << "MainWindow::update()";
 
     icons = device->getIcons();
+
     for(int i = 0; i < icons.size(); i++){
+        qInfo() << icons[i]->getPath();
+
         swapIcon(icons[i]->getPath() , icons[i]->getUiElement());
     }
 
@@ -80,6 +83,7 @@ void MainWindow::update(){
 void MainWindow::swapIcon(QString iconPath, QPushButton* uiIcon){
     QIcon newIcon = QIcon(iconPath);
     uiIcon->setIcon(newIcon);
+
 }
 
 
@@ -140,8 +144,8 @@ void MainWindow::show_battery(){
     }
 }
 void MainWindow::swapIcon(QString iconPath, QLabel* uiLabel){
-    QPixmap newIcon = QPixmap(iconPath);
-    uiLabel->setPixmap(newIcon);
+//    QPixmap newIcon = QPixmap(iconPath);
+//    uiLabel->setPixmap(newIcon);
 }
 void MainWindow::graphDisplay(int curLevel){
     qInfo() << "graph display";
