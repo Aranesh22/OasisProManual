@@ -68,8 +68,6 @@ void MainWindow::update(){
     icons = device->getIcons();
 
     for(int i = 0; i < icons.size(); i++){
-        qInfo() << icons[i]->getPath();
-
         swapIcon(icons[i]->getPath() , icons[i]->getUiElement());
     }
 
