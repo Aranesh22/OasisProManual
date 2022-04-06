@@ -21,11 +21,13 @@ Session* HistoryManager::loadSession(Session * toLoad) {
 }
 
 Session* HistoryManager::deleteSession(Session* toDelete) {
+    int i = 0;
     for (Session* s : sessions) {
         if (toDelete == s) {
             sessions.erase(sessions.begin() + i);
             return s;
         }
+        ++i;
     }
     return NULL;
 }
