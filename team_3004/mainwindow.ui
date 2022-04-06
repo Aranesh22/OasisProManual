@@ -170,7 +170,7 @@
       <pixmap resource="res.qrc">:/res/logos/Logo_oasisPro.png</pixmap>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_8">
+    <widget class="QPushButton" name="pushButton_Power">
      <property name="geometry">
       <rect>
        <x>530</x>
@@ -449,7 +449,7 @@
        <x>140</x>
        <y>180</y>
        <width>59</width>
-       <height>301</height>
+       <height>410</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
