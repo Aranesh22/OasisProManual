@@ -78,11 +78,13 @@ void Device::handleUpArrow(){
     //yes; declare maps to function pointers (might be too complicated, so for the scope of this project, if-else spam might be fine)
     qInfo("handle up arrow");
     if(curUseCase == selectingSession) nextSesType();
+    else if(curUseCase == runningSession) incIntensity();
 }
 
 void Device::handleDownArrow(){
     qInfo("handle down arrow");
     if(curUseCase == selectingSession) prevSesType();
+    else if(curUseCase == runningSession) decIntensity();
 }
 
 void Device::handlePowerButton(){
@@ -151,7 +153,17 @@ void Device::uploadSaveSession() {
 void Device::startSession(){
     curSession = new Session(curSesLength, curSesType);
     curUseCase = runningSession;
+    icons[1]->toggleIllum();
+}
 
+void Device::incIntensity(){
+    curSession->incInten();
+    icons[curSession->getCurIntensity() ] -> setIllumState(lit);
+}
+
+void Device::decIntensity(){
+    if(curSession->getCurIntensity() != MIN_INTENSITY)icons[curSession->getCurIntensity() ] -> setIllumState(dim);
+    curSession->decInten();
 }
 
 
@@ -159,6 +171,7 @@ void Device::startSession(){
 void Device::turnOn(){
     qInfo("turn on");
     power = on;
+    icons[0]->toggleIllum();
     curUseCase = displayingBattery;
 //    batteryLevels();
     curUseCase = selectingSession;

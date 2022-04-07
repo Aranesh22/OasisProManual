@@ -90,6 +90,8 @@ private:
     void nextSesType();
     void prevSesType();
     void startSession();
+    void incIntensity();
+    void decIntensity();
 
     //helpers
     int indexOf(SessionLength*);

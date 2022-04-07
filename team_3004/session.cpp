@@ -24,11 +24,11 @@ bool Session::isRightActive(){return rightActive;}
 int Session::getMinsPassed(){return minsPassed;}
 
 void Session::incInten(){
-    curIntensity == MAX_INTENSITY ? curIntensity = MIN_INTENSITY : curIntensity++;
+    if(curIntensity != MAX_INTENSITY) curIntensity++;
 }
 
 void Session::decInten(){
-    curIntensity == MIN_INTENSITY ? curIntensity = MAX_INTENSITY : curIntensity--;
+    if(curIntensity != MIN_INTENSITY) curIntensity--;
 }
 
 int Session::adjustIntensity(bool connectionTest, bool upArrow, bool downArrow, bool skinIrritation) {
