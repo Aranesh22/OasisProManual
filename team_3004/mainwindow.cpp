@@ -37,17 +37,14 @@ void MainWindow::makeSave() {
 }
 
 void MainWindow::show_power(){
-    qInfo() << "Mainwindow::show_power()";
-//    device->turnOn();
-    device->batteryLevels();
+    device->handlePowerButton();
     update();
 }
 
 
 void MainWindow::moveNext(){
    qInfo() << "MainWindow::moveNext()";
-//   device->
-
+   device->handleUpArrow();
    update();
 }
 
@@ -55,14 +52,13 @@ void MainWindow::moveNext(){
 
 void MainWindow::moveBack(){
     qInfo() << "MainWindow::moveBack()";
-//    device->
-
+    device->handleDownArrow();
     update();
 }
 
 void MainWindow::makeSelection() {
     qInfo() << "MainWindow::makeSelection()";
-//    device->
+    device->handleCheck();
 
     update();
 }

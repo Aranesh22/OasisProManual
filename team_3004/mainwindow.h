@@ -71,6 +71,10 @@ private:
     void initalizeVectors();
     void graphDisplay(int);
     void makeSave();
+<<<<<<< HEAD
+=======
+
+>>>>>>> ad537aba0e3249cab2ba1d27bc123bc7b02b859f
 
 
 

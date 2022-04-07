@@ -71,8 +71,8 @@ private:
     SessionType* curSesType; //list of currently highlighted / running session type
 
 
-    void initSessionTypes();
     //initializers
+    void initSessionTypes();
     void initAllLength();
     void initAllTypes();
     void initIcons();
@@ -80,10 +80,6 @@ private:
     void initSessionLengthIcons();
     void initSessionTypeIcons();
     void initOtherIcons();
-
-
-
-
     void initSesssionLengths();
 
 
@@ -91,9 +87,9 @@ private:
 
     //user inputs
     void nextSesLen();
-    void prevSesLen();
     void nextSesType();
     void prevSesType();
+    void startSession();
 
     //helpers
     int indexOf(SessionLength*);
