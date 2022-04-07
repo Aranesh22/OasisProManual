@@ -79,10 +79,6 @@ private:
     void initSessionLengthIcons();
     void initSessionTypeIcons();
     void initOtherIcons();
-
-
-
-
     void initSesssionLengths();
 
 
@@ -90,7 +86,6 @@ private:
 
     //user inputs
     void nextSesLen();
-    void prevSesLen();
     void nextSesType();
     void prevSesType();
 

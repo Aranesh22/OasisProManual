@@ -30,9 +30,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 void MainWindow::show_power(){
-    qInfo() << "Mainwindow::show_power()";
-    device->turnOn();
-//    device->test();
+//    qInfo() << "Mainwindow::show_power()";
+    device->handlePowerButton();
     update();
 }
 
