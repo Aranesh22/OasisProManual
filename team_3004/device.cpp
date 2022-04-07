@@ -19,9 +19,6 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     outputtingAudio = false;
 
     history = new HistoryManager();
-//    initAllLength();
-
-//    initAllTypes();
 
     initSesssionLengths();
     initSessionTypes();
@@ -32,6 +29,8 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     curSesType = allTypes[0];
     curSession = nullptr;
     curUseCase = blank;
+
+//    test();
 
 
 }
@@ -57,7 +56,9 @@ vector<DisplayIcon*> Device::getIcons(){return icons;}
 
 //setters
 void Device::turnOn(){
-    curUseCase = displayingBattery;
+//    curUseCase = displayingBattery;
+    curUseCase = selectSessionLength;
+    curSesLength->getIcon()->toggleIllum();
     power = on;
 
 }
@@ -90,16 +91,20 @@ ConnectionState Device::testForConnection(){
 }
 
 
+
+
+
 //user inputs
 void Device::handleUpArrow(){
     //check current use case
     //call the right function
     //is there a better approach that avoids if-else spam / switch?
     //yes; declare maps to function pointers (might be too complicated, so for the scope of this project, if-else spam might be fine)
+    if(curUseCase == selectSessionLength) nextSesLen();
 }
 
 void Device::handleDownArrow(){
-
+    if(curUseCase == selectSessionLength) prevSesLen();
 }
 
 void Device::handlePowerButton(){
@@ -116,14 +121,22 @@ void Device::handleCheck(){
 
 void Device::nextSesLen(){
     int i = indexOf(curSesLength)+1;
+    allLengths[i-1]->getIcon()->toggleIllum();
+
     if( i == allLengths.size() ) i = 0;
     curSesLength = allLengths[i];
+
+    curSesLength->getIcon()->toggleIllum();
 }
 
 void Device::prevSesLen(){
     int i = indexOf(curSesLength)-1;
+    allLengths[i+1]->getIcon()->toggleIllum();
+
     if( i < 0 ) i = allLengths.size() - 1;
     curSesLength = allLengths[i];
+
+    curSesLength->getIcon()->toggleIllum();
 }
 
 void Device::prevSesType(){
@@ -260,4 +273,9 @@ void Device::initOtherIcons(){
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
 
+}
+
+
+void Device::test(){
+    curSesLength->getIcon()->toggleIllum();
 }

@@ -50,6 +50,8 @@ public:
     void handleSave();
     void handleCheck();
 
+    void test();
+
 private:
     Ui::MainWindow* ui;
 
@@ -68,8 +70,8 @@ private:
     SessionType* curSesType; //list of currently highlighted / running session type
 
 
-    void initSessionTypes();
     //initializers
+    void initSessionTypes();
     void initAllLength();
     void initAllTypes();
     void initIcons();
@@ -95,7 +97,6 @@ private:
     //helpers
     int indexOf(SessionLength*);
     int indexOf(SessionType*);
-
 };
 
 #endif // DEVICE_H

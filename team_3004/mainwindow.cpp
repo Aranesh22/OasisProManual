@@ -31,25 +31,23 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::show_power(){
     qInfo() << "Mainwindow::show_power()";
-//    device->turnOn();
-
+    device->turnOn();
+//    device->test();
     update();
 }
 
 
 void MainWindow::moveNext(){
-   qInfo() << "MainWindow::moveNext()";
-//   device->
-
+//   qInfo() << "MainWindow::moveNext()";
+   device->handleUpArrow();
    update();
 }
 
 
 
 void MainWindow::moveBack(){
-    qInfo() << "MainWindow::moveBack()";
-//    device->
-
+//    qInfo() << "MainWindow::moveBack()";
+    device->handleDownArrow();
     update();
 }
 
