@@ -139,13 +139,11 @@ void Device::nextSesType() {
 
 void Device::uploadSaveSession() {
 
+    qInfo("Saved Session");
     history->SaveSession(curSession);
+    //history->getSessions();
 
 }
-
-
-
-
 
 //helpers
 int Device::indexOf(SessionLength* sl){
