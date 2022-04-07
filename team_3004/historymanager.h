@@ -13,6 +13,7 @@ public:
     void SaveSession(Session* );
     Session* loadSession(Session* );
     Session* deleteSession(Session* );
+    vector<Session*> getSessions();
 
 private:
     bool isLit;
