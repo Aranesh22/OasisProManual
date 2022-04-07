@@ -12,11 +12,6 @@
 #include <iostream>
 #include <string>
 
-//int divide(int a, int b){
-//    if(b == 0) throw std::invalid_argument( "can not divide by 0" );
-//    return a/b;
-//}
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
