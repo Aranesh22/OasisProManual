@@ -16,6 +16,7 @@ SessionLength::SessionLength(int durPass, bool isCustomPass)
 
 }
 
+
 SessionLength::SessionLength(int durPass, bool isCustomPass, DisplayIcon* dicon) : icon(dicon) {
     durationMins = durPass;
     isCustom - isCustomPass;
