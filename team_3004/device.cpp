@@ -137,7 +137,11 @@ void Device::nextSesType() {
     curSesType = allTypes[i];
 }
 
+void Device::uploadSaveSession() {
 
+    history->SaveSession(curSession);
+
+}
 
 
 

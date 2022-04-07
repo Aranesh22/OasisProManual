@@ -69,7 +69,7 @@ private:
     void initForSelection(QVector<Button*>);
     void initalizeVectors();
     void graphDisplay(int);
-    void decrementUiSelection(QVector<Button*>, int&);
+    void makeSave();
 
 
 

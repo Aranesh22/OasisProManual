@@ -1,4 +1,6 @@
 #include "historymanager.h"
+#include <vector>
+#include "session.h"
 
 HistoryManager::HistoryManager()
 {
@@ -9,6 +11,7 @@ HistoryManager::HistoryManager()
 void HistoryManager::SaveSession(Session *saveSess) {
 
     sessions.push_back(saveSess);
+
 }
 
 Session* HistoryManager::loadSession(Session * toLoad) {
@@ -18,6 +21,8 @@ Session* HistoryManager::loadSession(Session * toLoad) {
         }
     }
     return NULL;
+
+
 }
 
 Session* HistoryManager::deleteSession(Session* toDelete) {
@@ -30,4 +35,8 @@ Session* HistoryManager::deleteSession(Session* toDelete) {
         ++i;
     }
     return NULL;
+}
+
+std::vector<Session*> HistoryManager::getSessions() {
+    return sessions;
 }
