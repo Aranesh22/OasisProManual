@@ -3,6 +3,7 @@ using namespace std;
 #include <stdexcept>
 #include <QDebug>
 
+
 SessionType::SessionType(float minHzPass, float maxHzPass, CEStype csModePass )
 {
 
@@ -22,6 +23,7 @@ SessionType::SessionType(float minHzPass, float maxHzPass, CEStype csModePass )
     csMode = csModePass;
 
 }
+
 
 SessionType::SessionType(float minHzPass, float maxHzPass, CEStype csModePass, DisplayIcon* dicon) : icon(dicon) {
     if (minHzPass < 0 || minHzPass >= maxHzPass) {

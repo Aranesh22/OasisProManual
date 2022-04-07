@@ -146,6 +146,7 @@ void Device::uploadSaveSession() {
     history->SaveSession(curSession);
     history->getSessions();
 
+
 }
 
 void Device::startSession(){
