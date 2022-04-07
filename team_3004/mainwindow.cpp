@@ -20,24 +20,30 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveNext);
     connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveBack);
     connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
+    connect(ui->pushButton_Save, &QPushButton::pressed, this, &MainWindow::makeSave);
 
     sessionTimer = new QTimer(this);
     sessionTimer->setSingleShot(true);
     connect(sessionTimer, &QTimer::timeout, this, &MainWindow::sessionTimeout);
+//    sessionTimer->start(4000);
+}
+
+void MainWindow::makeSave() {
+
+    qInfo()<< "Main Window Save";
+    device->uploadSaveSession();
+    update();
 
 }
 
-
-
 void MainWindow::show_power(){
-//    qInfo() << "Mainwindow::show_power()";
     device->handlePowerButton();
     update();
 }
 
 
 void MainWindow::moveNext(){
-//   qInfo() << "MainWindow::moveNext()";
+   qInfo() << "MainWindow::moveNext()";
    device->handleUpArrow();
    update();
 }
@@ -45,14 +51,14 @@ void MainWindow::moveNext(){
 
 
 void MainWindow::moveBack(){
-//    qInfo() << "MainWindow::moveBack()";
+    qInfo() << "MainWindow::moveBack()";
     device->handleDownArrow();
     update();
 }
 
 void MainWindow::makeSelection() {
     qInfo() << "MainWindow::makeSelection()";
-//    device->
+    device->handleCheck();
 
     update();
 }
@@ -90,6 +96,7 @@ void MainWindow::delayBy(int n)
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
+
 
 
 
@@ -138,10 +145,13 @@ void MainWindow::show_battery(){
         uniformUiChange(false);
     }
 }
+
 void MainWindow::swapIcon(QString iconPath, QLabel* uiLabel){
 //    QPixmap newIcon = QPixmap(iconPath);
 //    uiLabel->setPixmap(newIcon);
 }
+
+
 void MainWindow::graphDisplay(int curLevel){
     qInfo() << "graph display";
     int i=0;

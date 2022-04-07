@@ -24,10 +24,16 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>0</y>
       <width>1211</width>
       <height>491</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
@@ -570,9 +576,9 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>180</y>
+       <y>150</y>
        <width>59</width>
-       <height>410</height>
+       <height>341</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -580,7 +586,7 @@
        <number>0</number>
       </property>
       <property name="sizeConstraint">
-       <enum>QLayout::SetFixedSize</enum>
+       <enum>QLayout::SetMinimumSize</enum>
       </property>
       <item alignment="Qt::AlignLeft">
        <widget class="QPushButton" name="col_num_8">
@@ -606,7 +612,7 @@
         <property name="iconSize">
          <size>
           <width>45</width>
-          <height>45</height>
+          <height>25</height>
          </size>
         </property>
         <property name="autoRepeat">
@@ -620,10 +626,13 @@
         </property>
        </widget>
       </item>
-      <item alignment="Qt::AlignLeft">
+      <item>
        <widget class="QPushButton" name="col_num_7">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -650,7 +659,7 @@
         <property name="iconSize">
          <size>
           <width>45</width>
-          <height>45</height>
+          <height>25</height>
          </size>
         </property>
         <property name="autoRepeat">
@@ -694,7 +703,7 @@
         <property name="iconSize">
          <size>
           <width>45</width>
-          <height>45</height>
+          <height>25</height>
          </size>
         </property>
         <property name="autoRepeat">
@@ -738,7 +747,7 @@
         <property name="iconSize">
          <size>
           <width>45</width>
-          <height>45</height>
+          <height>25</height>
          </size>
         </property>
         <property name="autoRepeat">
@@ -782,7 +791,7 @@
         <property name="iconSize">
          <size>
           <width>45</width>
-          <height>45</height>
+          <height>25</height>
          </size>
         </property>
         <property name="autoRepeat">
@@ -826,7 +835,7 @@
         <property name="iconSize">
          <size>
           <width>45</width>
-          <height>45</height>
+          <height>25</height>
          </size>
         </property>
         <property name="autoRepeat">
@@ -870,7 +879,7 @@
         <property name="iconSize">
          <size>
           <width>45</width>
-          <height>45</height>
+          <height>25</height>
          </size>
         </property>
         <property name="autoRepeat">
@@ -887,7 +896,7 @@
       <item alignment="Qt::AlignLeft">
        <widget class="QPushButton" name="col_num_1">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -895,7 +904,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>51</height>
+          <height>50</height>
          </size>
         </property>
         <property name="autoFillBackground">
@@ -914,7 +923,7 @@
         <property name="iconSize">
          <size>
           <width>45</width>
-          <height>45</height>
+          <height>25</height>
          </size>
         </property>
         <property name="autoRepeat">

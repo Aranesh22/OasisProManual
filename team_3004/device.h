@@ -12,6 +12,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "displayicon.h"
+#include "historymanager.h"
 
 
 
@@ -42,6 +43,7 @@ public:
     //system events
     void handleLowBattery();
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
+    void batteryLevels();
 
     //user inputs
     void handleUpArrow();
@@ -49,8 +51,7 @@ public:
     void handlePowerButton();
     void handleSave();
     void handleCheck();
-
-    void test();
+    void uploadSaveSession();
 
 private:
     Ui::MainWindow* ui;
@@ -88,10 +89,12 @@ private:
     void nextSesLen();
     void nextSesType();
     void prevSesType();
+    void startSession();
 
     //helpers
     int indexOf(SessionLength*);
     int indexOf(SessionType*);
+
 };
 
 #endif // DEVICE_H

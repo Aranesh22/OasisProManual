@@ -19,6 +19,9 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     outputtingAudio = false;
 
     history = new HistoryManager();
+//    initAllLength();
+
+//    initAllTypes();
 
     initSesssionLengths();
     initSessionTypes();
@@ -29,8 +32,6 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     curSesType = allTypes[0];
     curSession = nullptr;
     curUseCase = blank;
-
-//    test();
 
 
 }
@@ -55,27 +56,18 @@ vector<DisplayIcon*> Device::getIcons(){return icons;}
 
 
 
-
-
-
-
-
-
 //system events
 void Device::handleLowBattery(){
 //    if(curUseCase == runningSession) curSession->end();
     curUseCase = lowBattery;
-
 }
+
 
 ConnectionState Device::testForConnection(){
     curUseCase = loadingConnection;
     connection = connected;
     return connection;
 }
-
-
-
 
 
 //user inputs
@@ -97,7 +89,13 @@ void Device::handlePowerButton(){
     qInfo("handel power button");
     if(curUseCase == blank) turnOn();
     else if(curUseCase == selectingSession) nextSesLen();
+}
 
+
+void Device::batteryLevels(){
+    for(int i = 1; i <= battery->getBatteryLevel(); i++){
+        icons[i]->toggleIllum();
+    }
 }
 
 void Device::handleSave(){
@@ -105,11 +103,10 @@ void Device::handleSave(){
 }
 
 void Device::handleCheck(){
-
+    if(curUseCase == selectingSession) startSession();
 }
 
 void Device::nextSesLen(){
-    qInfo("nextSesLen");
     int i = indexOf(curSesLength)+1;
     allLengths[i-1]->getIcon()->toggleIllum();
 
@@ -117,8 +114,8 @@ void Device::nextSesLen(){
     curSesLength = allLengths[i];
 
     curSesLength->getIcon()->toggleIllum();
-
 }
+
 
 void Device::prevSesType(){
     qInfo("prev ses type");
@@ -143,17 +140,30 @@ void Device::nextSesType() {
     allTypes[i]->getIcon()->toggleIllum();
 }
 
+void Device::uploadSaveSession() {
 
+    qInfo("Saved Session");
+    history->SaveSession(curSession);
+    //history->getSessions();
+
+}
+
+void Device::startSession(){
+    curSession = new Session(curSesLength, curSesType);
+    curUseCase = runningSession;
+
+}
 
 
 //setters
 void Device::turnOn(){
-//    curUseCase = displayingBattery;
     qInfo("turn on");
+    power = on;
+    curUseCase = displayingBattery;
+//    batteryLevels();
     curUseCase = selectingSession;
     curSesLength->getIcon()->toggleIllum();
     curSesType->getIcon()->toggleIllum();
-    power = on;
 
 }
 
@@ -166,6 +176,8 @@ void Device::turnOff(){
 void Device::setSession(Session* s){
     curSession = s;
 }
+
+
 
 
 
@@ -188,10 +200,9 @@ int Device::indexOf(SessionType* st){
 
 
 
+
+
 //initializers
-
-
-
 void Device::initAllLength(){
     qInfo("init all lenfrg");
     //Opens the file called allLengths
@@ -205,9 +216,7 @@ void Device::initAllLength(){
     while (!stream.atEnd()){
         int len = stream.readLine().toInt();
 //        allLengths.push_back(new SessionLength(len, false));
-
     }
-
     file.close();
 }
 
@@ -257,7 +266,6 @@ void Device::initIcons(){
 }
 
 void Device::initClickableIcons(){
-//    DisplayIcon* powerButton = new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_Lit.png", ui->pushButton_Power);
     icons.push_back(new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_unLit.png", ui->pushButton_Power));
 }
 
@@ -277,7 +285,6 @@ void Device::initSessionTypeIcons(){
     for(int i = 0; i < allTypes.size()-1; i++){
         icons.push_back(allLengths.at(i)->getIcon());
     }
-
 }
 
 void Device::initOtherIcons(){
@@ -290,9 +297,4 @@ void Device::initOtherIcons(){
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
 
-}
-
-
-void Device::test(){
-    curSesLength->getIcon()->toggleIllum();
 }
