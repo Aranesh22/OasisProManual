@@ -19,6 +19,9 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     outputtingAudio = false;
 
     history = new HistoryManager();
+//    initAllLength();
+
+//    initAllTypes();
 
     initSesssionLengths();
     initSessionTypes();
@@ -29,8 +32,6 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     curSesType = allTypes[0];
     curSession = nullptr;
     curUseCase = blank;
-
-//    test();
 
 
 }
@@ -53,36 +54,29 @@ UseCase Device::getCurUseCase() {return curUseCase;}
 
 vector<DisplayIcon*> Device::getIcons(){return icons;}
 
-
 //setters
 void Device::turnOn(){
-//    curUseCase = displayingBattery;
-    curUseCase = selectSessionLength;
-    curSesLength->getIcon()->toggleIllum();
+    curUseCase = displayingBattery;
     power = on;
-
 }
 
 void Device::turnOff(){
     power = off;
     curUseCase = blank;
-
 }
+
 
 void Device::setSession(Session* s){
     curSession = s;
 }
 
 
-
-
-
 //system events
 void Device::handleLowBattery(){
 //    if(curUseCase == runningSession) curSession->end();
     curUseCase = lowBattery;
-
 }
+
 
 ConnectionState Device::testForConnection(){
     curUseCase = loadingConnection;
@@ -91,24 +85,22 @@ ConnectionState Device::testForConnection(){
 }
 
 
-
-
-
 //user inputs
 void Device::handleUpArrow(){
     //check current use case
     //call the right function
     //is there a better approach that avoids if-else spam / switch?
     //yes; declare maps to function pointers (might be too complicated, so for the scope of this project, if-else spam might be fine)
-    if(curUseCase == selectSessionLength) nextSesLen();
 }
 
 void Device::handleDownArrow(){
-    if(curUseCase == selectSessionLength) prevSesLen();
+
 }
 
-void Device::handlePowerButton(){
-
+void Device::batteryLevels(){
+    for(int i = 1; i <= battery->getBatteryLevel(); i++){
+        icons[i]->toggleIllum();
+    }
 }
 
 void Device::handleSave(){
@@ -121,22 +113,14 @@ void Device::handleCheck(){
 
 void Device::nextSesLen(){
     int i = indexOf(curSesLength)+1;
-    allLengths[i-1]->getIcon()->toggleIllum();
-
     if( i == allLengths.size() ) i = 0;
     curSesLength = allLengths[i];
-
-    curSesLength->getIcon()->toggleIllum();
 }
 
 void Device::prevSesLen(){
     int i = indexOf(curSesLength)-1;
-    allLengths[i+1]->getIcon()->toggleIllum();
-
     if( i < 0 ) i = allLengths.size() - 1;
     curSesLength = allLengths[i];
-
-    curSesLength->getIcon()->toggleIllum();
 }
 
 void Device::prevSesType(){
@@ -195,9 +179,7 @@ void Device::initAllLength(){
     while (!stream.atEnd()){
         int len = stream.readLine().toInt();
 //        allLengths.push_back(new SessionLength(len, false));
-
     }
-
     file.close();
 }
 
@@ -246,7 +228,6 @@ void Device::initIcons(){
 }
 
 void Device::initClickableIcons(){
-//    DisplayIcon* powerButton = new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_Lit.png", ui->pushButton_Power);
     icons.push_back(new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_unLit.png", ui->pushButton_Power));
 }
 
@@ -254,7 +235,6 @@ void Device::initSessionLengthIcons(){
     for(int i = 0; i < allLengths.size()-1; i++){
         icons.push_back(allLengths.at(i)->getIcon());
     }
-
     //or create sessionLength objects and pass the new inidividual icons to the class
 }
 
@@ -262,7 +242,6 @@ void Device::initSessionTypeIcons(){
     for(int i = 0; i < allTypes.size()-1; i++){
         icons.push_back(allLengths.at(i)->getIcon());
     }
-
 }
 
 void Device::initOtherIcons(){
@@ -275,9 +254,4 @@ void Device::initOtherIcons(){
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
 
-}
-
-
-void Device::test(){
-    curSesLength->getIcon()->toggleIllum();
 }

@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     sessionTimer = new QTimer(this);
     sessionTimer->setSingleShot(true);
     connect(sessionTimer, &QTimer::timeout, this, &MainWindow::sessionTimeout);
-
+//    sessionTimer->start(4000);
 }
 
 void MainWindow::makeSave() {
@@ -38,23 +38,25 @@ void MainWindow::makeSave() {
 
 void MainWindow::show_power(){
     qInfo() << "Mainwindow::show_power()";
-    device->turnOn();
-//    device->test();
+//    device->turnOn();
+    device->batteryLevels();
     update();
 }
 
 
 void MainWindow::moveNext(){
-//   qInfo() << "MainWindow::moveNext()";
-   device->handleUpArrow();
+   qInfo() << "MainWindow::moveNext()";
+//   device->
+
    update();
 }
 
 
 
 void MainWindow::moveBack(){
-//    qInfo() << "MainWindow::moveBack()";
-    device->handleDownArrow();
+    qInfo() << "MainWindow::moveBack()";
+//    device->
+
     update();
 }
 

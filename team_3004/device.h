@@ -43,6 +43,7 @@ public:
     //system events
     void handleLowBattery();
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
+    void batteryLevels();
 
     //user inputs
     void handleUpArrow();
@@ -51,8 +52,6 @@ public:
     void handleSave();
     void handleCheck();
     void uploadSaveSession();
-
-    void test();
 
 private:
     Ui::MainWindow* ui;
@@ -72,8 +71,8 @@ private:
     SessionType* curSesType; //list of currently highlighted / running session type
 
 
-    //initializers
     void initSessionTypes();
+    //initializers
     void initAllLength();
     void initAllTypes();
     void initIcons();
@@ -99,6 +98,7 @@ private:
     //helpers
     int indexOf(SessionLength*);
     int indexOf(SessionType*);
+
 };
 
 #endif // DEVICE_H
