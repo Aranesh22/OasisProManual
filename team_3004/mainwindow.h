@@ -65,6 +65,7 @@ private:
     void swapIcon(QString, QLabel*);
     void incrementUiSelection(QVector<Button*>, int&);
     void lit();
+    void decrementUiSelection(QVector<Button*>, int&);
     void uniformUiChange(bool);
     void initForSelection(QVector<Button*>);
     void initalizeVectors();
