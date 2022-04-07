@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::makeSave() {
 
-    qinfo("Main Window Save")
+    qInfo()<< "Main Window Save";
     device->uploadSaveSession();
     update();
 
@@ -149,10 +149,13 @@ void MainWindow::show_battery(){
         uniformUiChange(false);
     }
 }
+
 void MainWindow::swapIcon(QString iconPath, QLabel* uiLabel){
 //    QPixmap newIcon = QPixmap(iconPath);
 //    uiLabel->setPixmap(newIcon);
 }
+
+
 void MainWindow::graphDisplay(int curLevel){
     qInfo() << "graph display";
     int i=0;
