@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     return a.exec();
 
 
-    /*
+
     HistoryManager* history = new HistoryManager();
     SessionLength* sl = new SessionLength(5,false);
     SessionType* st = nullptr;
@@ -38,8 +38,6 @@ int main(int argc, char *argv[])
         qInfo("%d",s->getCurIntensity());
     }
 
-    qInfo("Hello faggots");
-    */
 
     return 0;
 }
