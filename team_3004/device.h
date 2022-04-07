@@ -12,6 +12,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "displayicon.h"
+#include "historymanager.h"
 
 
 
@@ -49,6 +50,7 @@ public:
     void handlePowerButton();
     void handleSave();
     void handleCheck();
+    void uploadSaveSession();
 
 private:
     Ui::MainWindow* ui;

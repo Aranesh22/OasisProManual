@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveNext);
     connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveBack);
     connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
+    connect(ui->pushButton_Save, &QPushButton::pressed, this, &MainWindow::makeSave);
 
     sessionTimer = new QTimer(this);
     sessionTimer->setSingleShot(true);
@@ -27,7 +28,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
+void MainWindow::makeSave() {
 
+    device->uploadSaveSession();
+    update();
+
+}
 
 void MainWindow::show_power(){
     qInfo() << "Mainwindow::show_power()";
@@ -93,6 +99,7 @@ void MainWindow::delayBy(int n)
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
+
 
 
 
