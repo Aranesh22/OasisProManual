@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::makeSave() {
 
+    qinfo("Main Window Save")
     device->uploadSaveSession();
     update();
 
