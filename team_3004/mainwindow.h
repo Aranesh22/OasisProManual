@@ -71,6 +71,7 @@ private:
     void initalizeVectors();
     void graphDisplay(int);
     void makeSave();
+    void sayHello();
 
 
 

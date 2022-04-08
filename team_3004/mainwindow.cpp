@@ -24,13 +24,21 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
     connect(ui->pushButton_Save, &QPushButton::pressed, this, &MainWindow::makeSave);
 
+    connect(ui->tableWidget, &QTableWidget::pressed, this, &MainWindow::sayHello);
+
     sessionTimer = new QTimer(this);
     sessionTimer->setSingleShot(true);
     connect(sessionTimer, &QTimer::timeout, this, &MainWindow::sessionTimeout);
 //    sessionTimer->start(4000);
 }
 
+<<<<<<< HEAD
 
+=======
+void MainWindow::sayHello() {
+    qInfo("Hello");
+}
+>>>>>>> c8061f4334d16ea7d3ef0eccdb94b89674919c03
 
 void MainWindow::makeSave() {
 
