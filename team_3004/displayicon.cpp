@@ -15,3 +15,7 @@ QPushButton* DisplayIcon::getUiElement(){return uiElement;}
 void DisplayIcon::setIllumState(IllumState newIllum)    {illum = newIllum;}
 
 void DisplayIcon::toggleIllum(){illum = (illum == lit) ? dim : lit;}
+
+QString DisplayIcon::getPathAt(IllumState illumS){
+    return iconMap[illumS];
+}
