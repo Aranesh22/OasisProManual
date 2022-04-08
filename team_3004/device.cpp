@@ -7,6 +7,9 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QTableWidget>
+
+
 using namespace std;
 
 
@@ -190,6 +193,8 @@ void Device::turnOn(){
     power = on;
     icons[0]->toggleIllum();
     curUseCase = displayingBattery;
+    //QTableWidget tableWidget = new QTableWidget(4, 3, this);
+    \
 //    batteryLevels();
     curUseCase = selectingSession;
     curSesLength->getIcon()->toggleIllum();
