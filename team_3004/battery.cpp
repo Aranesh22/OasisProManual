@@ -6,21 +6,22 @@ Battery::Battery()
     batteryLevel=0;
 //    qInfo("battery init");
     initMap();
-    if(!initBatteryPercent())
-        batteryPercent = MAX_BATTERY;
+    if(!initBatteryPercent() ) batteryPercent = MAX_BATTERY;
 
 }
 
 int Battery::getBatteryPercent() { return batteryPercent; }
-int Battery::getBatteryLevel()   { determineBatteryLevel();
-                                   return batteryLevel; }
+
+int Battery::getBatteryLevel() {
+    determineBatteryLevel();
+    return batteryLevel;
+}
+
 void Battery::determineBatteryLevel() { batteryLevel = batteryLevelMap.lowerBound(batteryPercent).value();}
 
 void Battery::powerOff(){
     qInfo("powering off");
-
     saveBatteryPercent();
-
 }
 
 
@@ -77,8 +78,10 @@ void Battery::initMap() {
     file.close();
 }
 
-void Battery::drainBattery(){
-
+float Battery::drain(float n){
+    batteryPercent -= n;
+    if(batteryPercent < 0) batteryPercent = 0;
+    return batteryPercent;
 }
 
 

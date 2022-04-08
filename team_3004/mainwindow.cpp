@@ -71,7 +71,7 @@ void MainWindow::makeSelection() {
 
 void MainWindow::update(){
 //get all icons
-    qInfo() << "MainWindow::update()";
+//    qInfo() << "MainWindow::update()";
 
     icons = device->getIcons();
 

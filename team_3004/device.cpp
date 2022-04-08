@@ -61,8 +61,25 @@ vector<DisplayIcon*> Device::getIcons(){return icons;}
 
 //system events
 void Device::handleLowBattery(){
-//    if(curUseCase == runningSession) curSession->end();
     curUseCase = lowBattery;
+    if(curUseCase == runningSession) endSession();
+}
+
+void Device::drainBattery(){
+    //see definitions.h for more info on MAX_DRAIN and MIN_DRAIN
+
+    /*
+     * The step variable determines how every session maps from MAX_DRAIN to MIN_DRAIN
+     * To evenly split every intensity from MAX_DRAIN (4) to MIN_DRAIN 3.33
+     * We need to subtract 3.33 from 4
+     * And divide the output of the above by 8
+     */
+
+    float step = (MAX_DRAIN - MIN_DRAIN) / MAX_INTENSITY;
+    float drained = MIN_DRAIN + step * curSession->getCurIntensity();
+    float remaining = battery->drain(drained);
+
+    if(remaining <= 15) handleLowBattery();
 }
 
 
@@ -84,10 +101,6 @@ void Device::displayConnection(){
         icons[4] -> setIllumState(lit);
         icons[5] -> setIllumState(lit);
         icons[6] -> setIllumState(lit);
-
-        delayBy(2);
-
-        resetGraph();
     }
 
     if(connection == excellent){
@@ -96,8 +109,12 @@ void Device::displayConnection(){
         icons[3] -> setIllumState(lit);
     }
 
-
+    delayBy(2);
+    resetGraph();
 }
+
+
+
 
 //user inputs
 void Device::handleUpArrow(){
@@ -120,13 +137,21 @@ void Device::handlePowerButton(){
     qInfo("handel power button");
     if(curUseCase == blank) turnOn();
     else if(curUseCase == selectingSession) nextSesLen();
+    else if (curUseCase == runningSession) endSession();
 }
 
 
-void Device::batteryLevels(){
+void Device::displayBatteryLevel(){
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
-        icons[i]->toggleIllum();
+        if(battery->getBatteryLevel() > 2) icons[i]->setIllumState(lit);
+//        if(battery->getBatteryLevel() == 2) icons[i]->setIllumState(flashing);
+//        if(battery->getBatteryLevel() == 1) icons[i]->setIllumState(flashing);
     }
+
+    delayBy(2);
+    resetGraph();
+
+
 }
 
 void Device::handleSave(){
@@ -182,10 +207,20 @@ void Device::uploadSaveSession() {
 
 void Device::startSession(){
     testForConnection();
-//    sleep(3);
     curSession = new Session(curSesLength, curSesType);
     curUseCase = runningSession;
     icons[1]->toggleIllum();
+}
+
+void Device::endSession(){
+    //soft off
+    for(int i=curSession->getCurIntensity(); i>=1; i--){
+        icons[i]->setIllumState(dim);
+        delayBy(1);
+    }
+
+    curSession = nullptr;
+    turnOff();
 }
 
 void Device::incIntensity(){
@@ -205,7 +240,7 @@ void Device::turnOn(){
     power = on;
     icons[0]->toggleIllum();
     curUseCase = displayingBattery;
-//    batteryLevels();
+    displayBatteryLevel();
     curUseCase = selectingSession;
     curSesLength->getIcon()->toggleIllum();
     curSesType->getIcon()->toggleIllum();
@@ -214,8 +249,12 @@ void Device::turnOn(){
 
 void Device::turnOff(){
     power = off;
-    curUseCase = blank;
 
+    for(DisplayIcon* di : icons){
+        di->setIllumState(dim);
+    }
+
+    curUseCase = blank;
 }
 
 void Device::setSession(Session* s){
@@ -348,7 +387,7 @@ void Device::initOtherIcons(){
 
 }
 
-void resetGraph(){
+void Device::resetGraph(){
     for(int i=1; i<=8; i++){
         icons[i]->setIllumState(dim);
     }

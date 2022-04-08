@@ -43,7 +43,8 @@ public:
     //system events
     void handleLowBattery();
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
-    void batteryLevels();
+    void displayBatteryLevel();
+    void drainBattery();
 
     //user inputs
     void handleUpArrow();
@@ -88,6 +89,7 @@ private:
     void startSession();
     void incIntensity();
     void decIntensity();
+    void endSession();
 
     //helpers
     int indexOf(SessionLength*);
