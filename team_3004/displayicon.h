@@ -12,6 +12,7 @@ public:
 
     //getters
     QString getPath();
+    QString getPathAt(IllumState);
     QPushButton* getUiElement();
 
     void setIllumState(IllumState);

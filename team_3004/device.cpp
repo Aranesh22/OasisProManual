@@ -146,8 +146,24 @@ void Device::uploadSaveSession() {
 
     qInfo("Saved Session");
     history->SaveSession(curSession);
-    history->getSessions();
 
+    vector<Session*> allSessions = history->getSessions();
+    vector<DisplayIcon*> icons;
+
+    for (Session* s : allSessions) {
+        SessionLength* sl = s->getLength();
+        SessionType* st = s->getType();
+
+        //
+
+        qInfo() << (sl->getIcon())->getPathAt(lit);
+        qInfo() << (st->getIcon())->getPathAt(lit);
+
+        /*
+        icons.push_back(sl->getIcon());
+        icons.push_back(st->getIcon());
+        */
+    }
 
 }
 
