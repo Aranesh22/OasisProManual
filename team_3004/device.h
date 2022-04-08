@@ -16,6 +16,7 @@
 
 
 
+
 class Device : public QObject
 {
    Q_OBJECT

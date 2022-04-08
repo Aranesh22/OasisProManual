@@ -3,6 +3,8 @@
 #include <QTime>
 
 #include "displayicon.h"
+#include <QTableWidget>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(sessionTimer, &QTimer::timeout, this, &MainWindow::sessionTimeout);
 //    sessionTimer->start(4000);
 }
+
+
 
 void MainWindow::makeSave() {
 
