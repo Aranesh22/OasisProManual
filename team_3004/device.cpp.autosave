@@ -150,7 +150,9 @@ void Device::uploadSaveSession() {
     qInfo("Saved Session");
     history->SaveSession(curSession);
     history->getSessions();
-    //PRINT OUT THE VECTORS IMAGES PATHS
+    //PRINT OUT THE VECTORS IMAGES PATHS 
+    //IMAGE PATH FOR THE TYPE ICON,LENGTH ICON, NEED TO KNOW THE INTENSITY VALUE 
+    //GET IMAGE PATH FOR EACH SESSION
 
 
 }

@@ -32,13 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
 //    sessionTimer->start(4000);
 }
 
-<<<<<<< HEAD
 
-=======
 void MainWindow::sayHello() {
     qInfo("Hello");
 }
->>>>>>> c8061f4334d16ea7d3ef0eccdb94b89674919c03
 
 void MainWindow::makeSave() {
 
