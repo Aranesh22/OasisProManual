@@ -46,30 +46,14 @@ private slots:
 
 
     void sessionTimeout();
-    void deadBatteryUI();
 
 private:
     Ui::MainWindow *ui;
 
 //UNUSED  __________________________________________________________________________________
 
-    QVector<Button*> graphIconVector;
-    QVector<Button*> sessionTimeIconVector;
-    QVector<Button*> sessionIconVector;
-    QVector<Button*> connectionIconVector;
     QTimer *sessionTimer;
-    int indexSessionTimeIcon;
-    int indexSessionIcon;
-    int indexIntensityIcon;
 
-    void swapIcon(QString, QLabel*);
-    void incrementUiSelection(QVector<Button*>, int&);
-    void lit();
-    void decrementUiSelection(QVector<Button*>, int&);
-    void uniformUiChange(bool);
-    void initForSelection(QVector<Button*>);
-    void initalizeVectors();
-    void graphDisplay(int);
     void makeSave();
 
 

@@ -26,9 +26,19 @@ DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QPushButton* ui)
 QString DisplayIcon::getPath(){return iconMap[illum];}
 QPushButton* DisplayIcon::getUiElement(){return uiElement;}
 
-void DisplayIcon::setIllumState(IllumState newIllum)    {illum = newIllum;}
+void DisplayIcon::setIllumState(IllumState newIllum)    {illum = newIllum;
+                                                        swapIcon();}
 
-void DisplayIcon::toggleIllum(){illum = (illum == lit) ? dim : lit;}
+void DisplayIcon::toggleIllum(){illum = (illum == lit) ? dim : lit; swapIcon();}
+
+
+void DisplayIcon::swapIcon(){
+    QIcon newIcon = QIcon(getPath());
+    uiElement->setIcon(newIcon);
+}
+
+
+// Not done
 
 int DisplayIcon::flashFor(int n){
     qInfo("DisplayIcon::flashFor(%d)", n);
@@ -40,12 +50,6 @@ int DisplayIcon::flashFor(int n){
     return n--;
 
 }
-
-void DisplayIcon::swapIcon(){
-    QIcon newIcon = QIcon(getPath());
-    uiElement->setIcon(newIcon);
-}
-
 void DisplayIcon::stopFlash(){
     timer->stop();
 }
