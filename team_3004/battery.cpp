@@ -77,7 +77,11 @@ void Battery::initMap() {
     file.close();
 }
 
-void Battery::drainBattery(){}
+void Battery::drainBattery(){
+
+}
+
+
 void Battery::chargeBattery(){}
 
 

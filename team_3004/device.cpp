@@ -4,9 +4,12 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <QTime>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <unistd.h>
+
 using namespace std;
 
 
@@ -14,7 +17,7 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
 {
 
     battery = new Battery();
-    connection = disconnected;
+    connection = none;
     power = off;
     outputtingAudio = false;
 
@@ -65,10 +68,36 @@ void Device::handleLowBattery(){
 
 ConnectionState Device::testForConnection(){
     curUseCase = loadingConnection;
-    connection = connected;
+    connection = CONNECTION_SIM;
+    displayConnection();
     return connection;
 }
 
+void Device::displayConnection(){
+    if(connection == none){
+        icons[7]->setIllumState(lit);
+        icons[8]->setIllumState(lit);
+        return;
+    }
+
+    if(connection == okay){
+        icons[4] -> setIllumState(lit);
+        icons[5] -> setIllumState(lit);
+        icons[6] -> setIllumState(lit);
+
+        delayBy(2);
+
+        resetGraph();
+    }
+
+    if(connection == excellent){
+        icons[1] -> setIllumState(lit);
+        icons[2] -> setIllumState(lit);
+        icons[3] -> setIllumState(lit);
+    }
+
+
+}
 
 //user inputs
 void Device::handleUpArrow(){
@@ -152,6 +181,8 @@ void Device::uploadSaveSession() {
 }
 
 void Device::startSession(){
+    testForConnection();
+//    sleep(3);
     curSession = new Session(curSesLength, curSesType);
     curUseCase = runningSession;
     icons[1]->toggleIllum();
@@ -212,7 +243,11 @@ int Device::indexOf(SessionType* st){
     return -1;
 }
 
-
+void Device::delayBy(int n){
+    QTime dieTime= QTime::currentTime().addSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 
 
 
@@ -311,4 +346,10 @@ void Device::initOtherIcons(){
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
 
+}
+
+void resetGraph(){
+    for(int i=1; i<=8; i++){
+        icons[i]->setIllumState(dim);
+    }
 }

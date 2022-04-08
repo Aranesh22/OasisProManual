@@ -6,8 +6,10 @@
 #define MAX_INTENSITY 8
 #define MIN_INTENSITY 1
 
+#define CONNECTION_SIM okay
+
 enum CEStype {pulse, cycle};
-enum ConnectionState {connected, disconnected};
+enum ConnectionState {none, okay, excellent};
 enum PowerState {on, off};
 enum UseCase {blank, selectingSession, runningSession, loadingConnection, lowBattery, deadBattery, loadingSession, endingSession, displayingBattery};
 enum IllumState {lit, dim};
