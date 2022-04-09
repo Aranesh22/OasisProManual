@@ -1,6 +1,7 @@
 #include "displayicon.h"
 
 #include <QDebug>
+#include <QMovie>
 
 
 DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QPushButton* ui)
@@ -9,16 +10,25 @@ DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QPushButton* ui)
     iconMap[dim] = dimPath;
     uiElement = ui;
     illum = dim;
-    // create a timer
-      timer = new QTimer(this);
-
-      // setup signal and slot
-//      timer->setSingleShot(true);
-      connect(timer, SIGNAL(timeout()),
-            this, SLOT(flashs()));
-    isFlashing = true;
+    movie=NULL;
 
 }
+
+DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QString flashPath, QPushButton* ui) : uiElement(ui){
+    iconMap[lit] = litPath;
+    iconMap[dim] = dimPath;
+    iconMap[flashing] = flashPath;
+    illum = dim;
+
+    movie = new QMovie(this);
+    movie->setFileName(iconMap[flashing]);
+    connect(movie, &QMovie::frameChanged, [=]{
+       uiElement->setIcon(movie->currentPixmap());
+   });
+
+
+}
+
 
 
 
@@ -26,8 +36,20 @@ DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QPushButton* ui)
 QString DisplayIcon::getPath(){return iconMap[illum];}
 QPushButton* DisplayIcon::getUiElement(){return uiElement;}
 
-void DisplayIcon::setIllumState(IllumState newIllum)    {illum = newIllum;
-                                                        swapIcon();}
+void DisplayIcon::setIllumState(IllumState newIllum)    {
+//check if the icon setting to flash is able to flash
+    if(illum == newIllum)
+        return;
+    if(illum==flashing || newIllum==flashing){
+        flash();
+        illum = (hasFlash()) ? newIllum : illum;
+        swapIcon();
+        return;
+    }else{
+        illum = newIllum;
+        swapIcon();
+    }
+}
 
 void DisplayIcon::toggleIllum(){illum = (illum == lit) ? dim : lit; swapIcon();}
 
@@ -37,33 +59,22 @@ void DisplayIcon::swapIcon(){
     uiElement->setIcon(newIcon);
 }
 
-
-// Not done
-
-int DisplayIcon::flashFor(int n){
-    qInfo("DisplayIcon::flashFor(%d)", n);
-    timer->start(1000);
-        qInfo() << timer->remainingTime();
-    if(n==0){
-        timer->stop();
-    }
-    return n--;
-
-}
-void DisplayIcon::stopFlash(){
-    timer->stop();
+bool DisplayIcon::hasFlash(){
+    if(movie)
+        return true;
+    else
+        return false;
 }
 
-//
-void DisplayIcon::flashs(){
-    qInfo("flash");
-    toggleIllum();
 
-    qInfo() << timer->remainingTime();
-    return;
+void DisplayIcon::flash(){
+    if(!hasFlash())
+        return;
 
-//    QTimer *blink = new QTimer(this);
-//    connect(blink, SIGNAL(timeout()), this, SLOT(flashButton()));
-//    blink->start(1000);
+    if (illum!=flashing && movie->state() == QMovie::NotRunning)
+        movie->start();
+
+    else if(illum==flashing && movie->state() == QMovie::Running)
+        movie->stop();
 
 }

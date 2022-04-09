@@ -54,5 +54,20 @@
         <file>res/battery.txt</file>
         <file>res/data/allLengths.txt</file>
         <file>res/data/allTypes.txt</file>
+        <file>res/icons/icon_1.gif</file>
+        <file>res/icons/gifs/icon_1.gif</file>
+        <file>res/icons/gifs/icon_2.gif</file>
+        <file>res/icons/gifs/icon_3.gif</file>
+        <file>res/icons/gifs/icon_4.gif</file>
+        <file>res/icons/gifs/icon_5.gif</file>
+        <file>res/icons/gifs/icon_6.gif</file>
+        <file>res/icons/gifs/icon_7.gif</file>
+        <file>res/icons/gifs/icon_8.gif</file>
+        <file>res/icons/gifs/sessionTypes/icon_alpha.gif</file>
+        <file>res/icons/gifs/sessionTypes/icon_Beta.gif</file>
+        <file>res/icons/gifs/sessionTypes/icon_SMR.gif</file>
+        <file>res/icons/gifs/icon_dutyCycle_CESsession.gif</file>
+        <file>res/icons/gifs/icon_shortPulse_CESsession.gif</file>
+        <file>res/icons/gifs/sessionTypes/icon_100Hz.gif</file>
     </qresource>
 </RCC>
