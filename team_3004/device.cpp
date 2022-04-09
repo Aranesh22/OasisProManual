@@ -71,7 +71,7 @@ void Device::drainBattery(){
 
     /*
      * The step variable determines how every session maps from MAX_DRAIN to MIN_DRAIN
-     * To evenly split every intensity from MAX_DRAIN (4) to MIN_DRAIN 3.33
+     * To evenly split every intensity from MAX_DRAIN (4) to MIN_DRAIN (3.33)
      * We need to subtract 3.33 from 4
      * And divide the output of the above by 8
      *
@@ -219,7 +219,7 @@ void Device::startSession(){
 
     curSession = new Session(curSesLength, curSesType);
     curUseCase = runningSession;
-    icons[1]->toggleIllum();
+    icons[1]->setIllumState(flashing);
 }
 
 void Device::endSession(){
@@ -249,13 +249,15 @@ void Device::displaySoftOn(){
 }
 
 void Device::incIntensity(){
-    curSession->incInten();
     icons[curSession->getCurIntensity() ] -> setIllumState(lit);
+    curSession->incInten();
+    icons[curSession->getCurIntensity() ] -> setIllumState(flashing);
 }
 
 void Device::decIntensity(){
     if(curSession->getCurIntensity() != MIN_INTENSITY)icons[curSession->getCurIntensity() ] -> setIllumState(dim);
     curSession->decInten();
+    icons[curSession->getCurIntensity()] -> setIllumState(flashing);
 }
 
 
