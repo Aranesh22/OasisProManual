@@ -373,10 +373,10 @@
     <widget class="QTableWidget" name="tableWidget">
      <property name="geometry">
       <rect>
-       <x>780</x>
+       <x>830</x>
        <y>30</y>
        <width>351</width>
-       <height>281</height>
+       <height>451</height>
       </rect>
      </property>
      <property name="layoutDirection">
@@ -416,7 +416,7 @@
       <enum>Qt::NoPen</enum>
      </property>
      <property name="rowCount">
-      <number>4</number>
+      <number>1</number>
      </property>
      <property name="columnCount">
       <number>3</number>
@@ -433,9 +433,6 @@
      <attribute name="verticalHeaderDefaultSectionSize">
       <number>45</number>
      </attribute>
-     <row/>
-     <row/>
-     <row/>
      <row/>
      <column>
       <property name="text">
@@ -504,6 +501,10 @@
       <property name="text">
        <string>img</string>
       </property>
+      <property name="icon">
+       <iconset resource="res.qrc">
+        <normaloff>:/res/icons/unLit/sessions/icon_100Hz.png</normaloff>:/res/icons/unLit/sessions/icon_100Hz.png</iconset>
+      </property>
      </item>
      <item row="0" column="1">
       <property name="text">
@@ -519,7 +520,7 @@
       </property>
       <property name="icon">
        <iconset resource="res.qrc">
-        <normaloff>:/res/icons/Lit/sessionTimes/icon_25Min.png</normaloff>:/res/icons/Lit/sessionTimes/icon_25Min.png</iconset>
+        <normaloff>:/res/icons/Lit/sessionTimes/icon_45Min.png</normaloff>:/res/icons/Lit/sessionTimes/icon_45Min.png</iconset>
       </property>
      </item>
      <item row="0" column="2">
@@ -531,28 +532,7 @@
       </property>
       <property name="icon">
        <iconset resource="res.qrc">
-        <normaloff>:/res/icons/Lit/colNumber/icon_5.png</normaloff>:/res/icons/Lit/colNumber/icon_5.png</iconset>
-      </property>
-     </item>
-     <item row="1" column="1">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="textAlignment">
-       <set>AlignTrailing|AlignVCenter</set>
-      </property>
-      <property name="icon">
-       <iconset resource="res.qrc">
-        <normaloff>:/res/icons/unLit/session_times/icon_45Min.png</normaloff>:/res/icons/unLit/session_times/icon_45Min.png</iconset>
-      </property>
-     </item>
-     <item row="1" column="2">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset resource="res.qrc">
-        <normaloff>:/res/icons/unLit/colNumbers/icon_7.png</normaloff>:/res/icons/unLit/colNumbers/icon_7.png</iconset>
+        <normaloff>:/res/data/allLengths.txt</normaloff>:/res/data/allLengths.txt</iconset>
       </property>
      </item>
     </widget>
