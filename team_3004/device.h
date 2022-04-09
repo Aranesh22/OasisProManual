@@ -52,7 +52,7 @@ public:
     void handlePowerButton();
     void handleSave();
     void handleCheck();
-    void uploadSaveSession();
+    vector<QString> uploadSaveSession();
 
 private:
     Ui::MainWindow* ui;

@@ -40,8 +40,11 @@ void MainWindow::sayHello() {
 void MainWindow::makeSave() {
 
     qInfo()<< "Main Window Save";
-    device->uploadSaveSession();
+    vector<QString> toAdd = device->uploadSaveSession();
     update();
+    for (QString s : toAdd) {
+        qInfo() << s;
+    }
 
 }
 
