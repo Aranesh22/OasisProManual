@@ -2,7 +2,7 @@
 #define DEVICE_H
 
 #include <vector>
-
+#include <QTimer>
 #include "definitions.h"
 #include "historymanager.h"
 #include "battery.h"
@@ -44,7 +44,7 @@ public:
     void handleLowBattery();
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
     void displayBatteryLevel();
-    void drainBattery();
+
 
     //user inputs
     void handleUpArrow();
@@ -53,6 +53,9 @@ public:
     void handleSave();
     void handleCheck();
     void uploadSaveSession();
+
+private slots:
+     void drainBattery();
 
 private:
     Ui::MainWindow* ui;
@@ -65,7 +68,7 @@ private:
     HistoryManager* history;
     vector<SessionLength*> allLengths;
     vector<SessionType*> allTypes;
-
+    QTimer *drainBatteryTimer;
     UseCase curUseCase; //the current "use case" of the device; see definitions.h for more detail
     Session* curSession; //if a session is running, this pointer points to its current instance
     SessionLength* curSesLength; //list of the currently highlighted / running session length
