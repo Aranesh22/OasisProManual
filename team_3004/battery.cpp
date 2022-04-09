@@ -20,7 +20,6 @@ int Battery::getBatteryLevel() {
 void Battery::determineBatteryLevel() { batteryLevel = batteryLevelMap.lowerBound(batteryPercent).value();}
 
 void Battery::powerOff(){
-    qInfo("powering off");
     saveBatteryPercent();
 }
 

@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::makeSave() {
-    qInfo()<< "Main Window Save";
     device->uploadSaveSession();
     update();
 
@@ -43,7 +42,6 @@ void MainWindow::show_power(){
 
 
 void MainWindow::moveNext(){
-   qInfo() << "MainWindow::moveNext()";
    device->handleUpArrow();
    update();
 }
@@ -51,13 +49,11 @@ void MainWindow::moveNext(){
 
 
 void MainWindow::moveBack(){
-    qInfo() << "MainWindow::moveBack()";
     device->handleDownArrow();
     update();
 }
 
 void MainWindow::makeSelection() {
-    qInfo() << "MainWindow::makeSelection()";
     device->handleCheck();
 
     update();

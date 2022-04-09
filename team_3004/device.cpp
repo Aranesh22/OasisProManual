@@ -22,9 +22,9 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     outputtingAudio = false;
 
     history = new HistoryManager();
-//    initAllLength();
+//    AllLength();
 
-//    initAllTypes();
+//    AllTypes();
 
     initSesssionLengths();
     initSessionTypes();
@@ -68,13 +68,15 @@ void Device::runSysCycle(){
 
 //system events
 void Device::handleLowBattery(){
-    curUseCase = lowBattery;
+    qInfo("HANDLE LOW BATTERY");
+    if(battery->getBatteryPercent() == 0) turnOff();
     if(curUseCase == runningSession) endSession();
-    curUseCase = blank;
+    curUseCase = blank; //prevents user editing data
+    displayBatteryLevel();
 }
 
 void Device::drainBattery(){
-    //see definitions.h for more info on MAX_DRAIN and MIN_DRAIN
+    //see defions.h for more info on MAX_DRAIN and MIN_DRAIN
 
     /*
      * The step variable determines how every session maps from MAX_DRAIN to MIN_DRAIN
@@ -90,6 +92,8 @@ void Device::drainBattery(){
     float remaining = battery->drain(drained);
 
     if(remaining <= 15) handleLowBattery();
+
+    qInfo("\tDrain battery - drained = %f, remaining = %f", drained, remaining);
 }
 
 
@@ -107,7 +111,6 @@ ConnectionState Device::testForConnection(){
 }
 
 void Device::displayConnection(){
-    qInfo("\tDISPLAY CONNECTION with display = %i", connection);
     if(connection == none){
         icons[7]->setIllumState(flashing);
         icons[8]->setIllumState(flashing);
@@ -138,32 +141,28 @@ void Device::handleUpArrow(){
     //call the right function
     //is there a better approach that avoids if-else spam / switch?
     //yes; declare maps to function pointers (might be too complicated, so for the scope of this project, if-else spam might be fine)
-    qInfo("handle up arrow");
     if(curUseCase == selectingSession) nextSesType();
     else if(curUseCase == runningSession) incIntensity();
-//    else if(curUseCase == softOn) curUseCase == runningSession;
+    else if(curUseCase == softOn) curUseCase == runningSession;
 }
 
 void Device::handleDownArrow(){
-    qInfo("handle down arrow");
     if(curUseCase == selectingSession) prevSesType();
     else if(curUseCase == runningSession) decIntensity();
 }
 
 void Device::handlePowerButton(){
-    qInfo("handel power button");
     if(curUseCase == blank) turnOn();
     else if(curUseCase == selectingSession) nextSesLen();
-    else if (curUseCase == runningSession) endSession();
-//    else if (curUseCase == runningSession) displaySoftOn();
+//    else if (curUseCase == runningSession) endSession();
+    else if (curUseCase == runningSession) displaySoftOn();
 }
 
 
 void Device::displayBatteryLevel(){
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
         if(battery->getBatteryLevel() > 2) icons[i]->setIllumState(lit);
-//        if(battery->getBatteryLevel() == 2) icons[i]->setIllumState(flashing);
-//        if(battery->getBatteryLevel() == 1) icons[i]->setIllumState(flashing);
+        if(battery->getBatteryLevel() <= 2) icons[i]->setIllumState(flashing);
     }
 
     delayBy(2);
@@ -192,7 +191,6 @@ void Device::nextSesLen(){
 
 
 void Device::prevSesType(){
-    qInfo("prev ses type");
     int i = indexOf(curSesType)-1;
     allTypes[i+1]->getIcon()->toggleIllum();
 
@@ -204,7 +202,6 @@ void Device::prevSesType(){
 }
 
 void Device::nextSesType() {
-    qInfo("nextSesType");
     int i = indexOf(curSesType)+1;
     allTypes[i-1]->getIcon()->toggleIllum();
     allTypes[i-1]->getCESIcon()->toggleIllum();
@@ -242,6 +239,8 @@ void Device::startSession(){
 }
 
 void Device::endSession(){
+    qInfo("Ending session");
+
     //soft off
     curUseCase = blank; //prevens user from editing data during soft off
     for(int i=curSession->getCurIntensity(); i>=1; i--){
@@ -250,11 +249,11 @@ void Device::endSession(){
     }
 
     curSession = nullptr;
-    turnOff();
 }
 
 void Device::displaySoftOn(){
-//    resetGraph();
+    qInfo("DISPLAY SOFT ON");
+    resetGraph();
 
     //NEEDS TO HANDLE UP/DOWN ARROW INTERRUPTION
 
@@ -282,7 +281,6 @@ void Device::decIntensity(){
 
 //setters
 void Device::turnOn(){
-    qInfo("turn on");
     power = on;
     //turn on the power button
     icons[0]->toggleIllum();
@@ -303,6 +301,9 @@ void Device::turnOn(){
 }
 
 void Device::turnOff(){
+    sysCycleTimer->stop();
+    //if a session is running, then end it
+    if(curSession != nullptr) endSession();
     power = off;
 
     for(DisplayIcon* di : icons){
@@ -311,7 +312,6 @@ void Device::turnOff(){
 
     curUseCase = blank;
     battery->powerOff();
-    sysCycleTimer->start();
 }
 
 void Device::setSession(Session* s){
@@ -347,15 +347,14 @@ void Device::delayBy(int n){
 
 
 
-//initializers
+//ializers
 void Device::initAllLength(){
-    qInfo("init all lenfrg");
     //Opens the file called allLengths
     QFile file(":/res/data/allLengths.txt");
 
     //checks if the file exists and loads it. Handles errors.
-    if(!file.exists()) qFatal("Device::initAllLength - ERROR: Specified file not found");
-    if(!file.open(QIODevice::ReadOnly)) qFatal("Device::initAllLength - ERROR: Specified file can not be opened");
+    if(!file.exists()) qFatal("Device::AllLength - ERROR: Specified file not found");
+    if(!file.open(QIODevice::ReadOnly)) qFatal("Device::AllLength - ERROR: Specified file can not be opened");
 
     QTextStream stream(&file);
     while (!stream.atEnd()){
@@ -407,7 +406,7 @@ void Device::initIcons(){
     initClickableIcons();           // icons[0]
     initOtherIcons();               // icons[1] - [8]
     initSessionLengthIcons();
-    initSessionTypeIcons();
+    initSessionTypeIcons(); //only init CES stuff
 }
 
 void Device::initClickableIcons(){
@@ -427,9 +426,12 @@ void Device::initSessionLengthIcons(){
 }
 
 void Device::initSessionTypeIcons(){
-    for(int i = 0; i < allTypes.size()-1; i++){
-        icons.push_back(allLengths.at(i)->getIcon());
-    }
+//    for(int i = 0; i < allTypes.size()-1; i++){
+//        icons.push_back(allLengths.at(i)->getIcon());
+//    }
+
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/icon_shortPulse_CESsession.png" , ":/res/icons/unLit/icon_shortPulse_CESsession.png", ":/res/icons/gifs/icon_shortPulse_CESsession.gif", ui->shortPulse_CESsession));
+
 }
 
 void Device::initOtherIcons(){
