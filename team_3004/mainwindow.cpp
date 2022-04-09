@@ -55,6 +55,8 @@ void MainWindow::makeSave() {
     t->setItem(t->rowCount()-5,1,item_1);
     t->setItem(t->rowCount()-5,0,item_2);
     t->setItem(t->rowCount()-5,2,item_3);
+    t->insertRow(t->rowCount());
+    //tableWidget->insertRow( tableWidget->rowCount() );
 
 
     update();
