@@ -76,15 +76,17 @@ private:
     SessionType* curSesType; //list of currently highlighted / running session type
 
     //initializers
+    void initSessionLengths();
     void initSessionTypes();
     void initAllLength();
     void initAllTypes();
     void initIcons();
-    void initClickableIcons();
+    void initPowerIcon();
     void initSessionLengthIcons();
     void initSessionTypeIcons();
+    void initSessionIcons();
+    void initGraphIcons();
     void initOtherIcons();
-    void initSesssionLengths();
 
     //user inputs
     void nextSesLen();

@@ -22,13 +22,9 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     outputtingAudio = false;
 
     history = new HistoryManager();
-//    AllLength();
 
-//    AllTypes();
-
-    initSesssionLengths();
+    initSessionLengths();
     initSessionTypes();
-
     initIcons();
 
     curSesLength = allLengths[0];
@@ -111,6 +107,9 @@ ConnectionState Device::testForConnection(){
 }
 
 void Device::displayConnection(){
+//    icons[ icons.size()-3 ] -> setIllumState(flashing);
+    qInfo() << icons.size();
+
     if(connection == none){
         icons[7]->setIllumState(flashing);
         icons[8]->setIllumState(flashing);
@@ -387,7 +386,7 @@ void Device::initAllTypes(){
 
 
 
-void Device::initSesssionLengths(){
+void Device::initSessionLengths(){
     allLengths.push_back(new SessionLength(25, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_25Min.png" , ":/res/icons/unLit/session_times/icon_25Min.png", ui->session_25min)));
     allLengths.push_back(new SessionLength(45, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_45Min.png" , ":/res/icons/unLit/session_times/icon_45Min.png", ui->session_45min)));
     allLengths.push_back(new SessionLength(180, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_3Hour.png" , ":/res/icons/unLit/session_times/icon_3Hour.png", ui->session_3hr)));
@@ -403,17 +402,17 @@ void Device::initSessionTypes(){
 }
 
 void Device::initIcons(){
-    initClickableIcons();           // icons[0]
-    initOtherIcons();               // icons[1] - [8]
-    initSessionLengthIcons();
-    initSessionTypeIcons(); //only init CES stuff
+    initPowerIcon();           // icons[0]
+    initGraphIcons();          // icons[1] - [8]
+    initSessionIcons();
+    initOtherIcons();
 }
 
-void Device::initClickableIcons(){
+void Device::initPowerIcon(){
     icons.push_back(new DisplayIcon(":/res/buttons/powerBtn_lit.png", ":/res/buttons/power_Btn_unLit.png", ui->pushButton_Power));
 }
 
-void Device::initSessionLengthIcons(){
+void Device::initSessionIcons(){
     for(int i = 0; i < allLengths.size(); i++){
         icons.push_back(allLengths.at(i)->getIcon());
     }
@@ -425,16 +424,12 @@ void Device::initSessionLengthIcons(){
     //or create sessionLength objects and pass the new inidividual icons to the class
 }
 
-void Device::initSessionTypeIcons(){
-//    for(int i = 0; i < allTypes.size()-1; i++){
-//        icons.push_back(allLengths.at(i)->getIcon());
-//    }
-
+void Device::initOtherIcons(){
     icons.push_back(new DisplayIcon(":/res/icons/Lit/icon_shortPulse_CESsession.png" , ":/res/icons/unLit/icon_shortPulse_CESsession.png", ":/res/icons/gifs/icon_shortPulse_CESsession.gif", ui->shortPulse_CESsession));
 
 }
 
-void Device::initOtherIcons(){
+void Device::initGraphIcons(){
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_1.png" , ":/res/icons/unLit/colNumbers/icon_1.png", ":/res/icons/gifs/icon_1.gif", ui->col_num_1));
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_2.png" , ":/res/icons/unLit/colNumbers/icon_2.png", ":/res/icons/gifs/icon_2.gif",   ui->col_num_2));
     icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_3.png" , ":/res/icons/unLit/colNumbers/icon_3.png", ":/res/icons/gifs/icon_3.gif",   ui->col_num_3));
