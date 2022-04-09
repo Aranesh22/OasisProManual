@@ -59,6 +59,7 @@ void MainWindow::makeSave() {
     QTableWidgetItem* item_3 = new QTableWidgetItem;
     item_3->setText(toAdd.at(0));
     item_3->setTextAlignment(Qt::AlignCenter);
+    item_3->setForeground(QBrush(QColor(0,255,0)));
     //text white
 
 
