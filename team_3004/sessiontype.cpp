@@ -42,6 +42,23 @@ SessionType::SessionType(float minHzPass, float maxHzPass, CEStype csModePass, D
     csMode = csModePass;
 }
 
+SessionType::SessionType(float minHzPass, float maxHzPass, CEStype csModePass, DisplayIcon* dicon, DisplayIcon* cicon) : icon(dicon),  CESicon(cicon){
+    if (minHzPass < 0 || minHzPass >= maxHzPass) {
+        throw ::invalid_argument("minimum hz invalid");
+        minHz = 1;
+    }
+
+    minHz = minHzPass;
+
+    if (maxHzPass < 0 || maxHzPass > MAX_HZ) {
+        throw ::invalid_argument("maximum hz invalid");
+        maxHz = 500;
+    }
+
+    maxHz = maxHzPass;
+    csMode = csModePass;
+}
+
 DisplayIcon* SessionType::getIcon() {return icon;}
 
 float SessionType::getMaxHz() {

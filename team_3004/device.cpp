@@ -88,15 +88,22 @@ void Device::drainBattery(){
 
 ConnectionState Device::testForConnection(){
     curUseCase = loadingConnection;
-    connection = CONNECTION_SIM;
-    displayConnection();
+    connection = CONNECTION_SIM; //need to change this to a variable, not a #define
+
+    if(connection == none){
+        //pause current session
+        displayConnection();
+    }
+
+
     return connection;
 }
 
 void Device::displayConnection(){
+    qInfo("\tDISPLAY CONNECTION with display = %i", connection);
     if(connection == none){
-        icons[7]->setIllumState(lit);
-        icons[8]->setIllumState(lit);
+        icons[7]->setIllumState(flashing);
+        icons[8]->setIllumState(flashing);
     }
 
     if(connection == okay){
@@ -210,13 +217,16 @@ void Device::uploadSaveSession() {
 }
 
 void Device::startSession(){
+    //test and display connection
     testForConnection();
-    qInfo() <<"Device::startSession()";
+    displayConnection();
 
+    //flash for 5 seconds
     curSesType->getIcon()->setIllumState(flashing);
     delayBy(5);
     curSesType->getIcon()->setIllumState(lit);
 
+    //session is now running
     curSession = new Session(curSesLength, curSesType);
     curUseCase = runningSession;
     icons[1]->setIllumState(flashing);
@@ -265,10 +275,15 @@ void Device::decIntensity(){
 void Device::turnOn(){
     qInfo("turn on");
     power = on;
+    //turn on the power button
     icons[0]->toggleIllum();
+
+    //display battery
     curUseCase = displayingBattery;
     displayBatteryLevel();
     curUseCase = selectingSession;
+
+    //lights up the first session length, session type
     curSesLength->getIcon()->toggleIllum();
     curSesType->getIcon()->toggleIllum();
 
@@ -367,10 +382,10 @@ void Device::initSesssionLengths(){
 }
 
 void Device::initSessionTypes(){
-    allTypes.push_back(new SessionType(0.5, 3, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_alpha.png" , ":/res/icons/unLit/sessions/icon_alpha.png", ":/res/icons/gifs/sessionTypes/icon_alpha.gif", ui->session_alpha)));
-    allTypes.push_back(new SessionType(0.5, 3, cycle, new DisplayIcon(":/res/icons/Lit/sessions/icon_SMR.png" , ":/res/icons/unLit/sessions/icon_SMR.png", ":/res/icons/gifs/sessionTypes/icon_SMR.gif", ui->session_SMR)));
-    allTypes.push_back(new SessionType(2.5, 5, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_Beta.png" , ":/res/icons/unLit/sessions/icon_Beta.png", ":/res/icons/gifs/sessionTypes/icon_Beta.gif",  ui->session_Beta)));
-    allTypes.push_back(new SessionType(6, 8, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_100Hz.png" , ":/res/icons/unLit/sessions/icon_100Hz.png", ":/res/icons/gifs/sessionTypes/icon_100Hz.gif", ui->session_100Hz)));
+    allTypes.push_back(new SessionType(0.5, 3, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_alpha.png" , ":/res/icons/unLit/sessions/icon_alpha.png", ":/res/icons/gifs/sessionTypes/icon_alpha.gif", ui->session_alpha), new DisplayIcon(":/res/icons/Lit/icon_shortPulse_CESsession.png" , ":/res/icons/unLit/icon_shortPulse_CESsession.png", ":/res/icons/gifs/icon_shortPulse_CESsession.gif", ui->shortPulse_CESsession)));
+    allTypes.push_back(new SessionType(0.5, 3, cycle, new DisplayIcon(":/res/icons/Lit/sessions/icon_SMR.png" , ":/res/icons/unLit/sessions/icon_SMR.png", ":/res/icons/gifs/sessionTypes/icon_SMR.gif", ui->session_SMR), new DisplayIcon(":/res/icons/Lit/icon_shortPulse_CESsession.png" , ":/res/icons/unLit/icon_shortPulse_CESsession.png", ":/res/icons/gifs/icon_shortPulse_CESsession.gif", ui->shortPulse_CESsession)));
+    allTypes.push_back(new SessionType(2.5, 5, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_Beta.png" , ":/res/icons/unLit/sessions/icon_Beta.png", ":/res/icons/gifs/sessionTypes/icon_Beta.gif",  ui->session_Beta), new DisplayIcon(":/res/icons/Lit/icon_shortPulse_CESsession.png" , ":/res/icons/unLit/icon_shortPulse_CESsession.png", ":/res/icons/gifs/icon_shortPulse_CESsession.gif", ui->shortPulse_CESsession)));
+    allTypes.push_back(new SessionType(6, 8, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_100Hz.png" , ":/res/icons/unLit/sessions/icon_100Hz.png", ":/res/icons/gifs/sessionTypes/icon_100Hz.gif", ui->session_100Hz), new DisplayIcon(":/res/icons/Lit/icon_shortPulse_CESsession.png" , ":/res/icons/unLit/icon_shortPulse_CESsession.png", ":/res/icons/gifs/icon_shortPulse_CESsession.gif", ui->shortPulse_CESsession)));
 
 }
 
