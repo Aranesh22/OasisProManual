@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <sstream>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -145,33 +146,41 @@ void Device::nextSesType() {
     allTypes[i]->getIcon()->toggleIllum();
 }
 
-void Device::uploadSaveSession() {
+vector<QString> Device::uploadSaveSession() {
 
     qInfo("Saved Session");
     history->SaveSession(curSession);
-<<<<<<< HEAD
     history->getSessions();
     //PRINT OUT THE VECTORS IMAGES PATHS
-=======
->>>>>>> 78ab259e98382380f07493dabcb5ae7364640f97
 
     vector<Session*> allSessions = history->getSessions();
     vector<DisplayIcon*> icons;
 
+    SessionLength* sl = curSession->getLength();
+    SessionType* st = curSession->getType();
+
+    QString curInt = QString::number(curSession->getCurIntensity());
+
+    vector<QString> data;
+    data.push_back(curInt);
+    data.push_back((sl->getIcon())->getPathAt(dim));
+    data.push_back((st->getIcon())->getPathAt(dim));
+
+    return data;
+
+
+    /*
     for (Session* s : allSessions) {
         SessionLength* sl = s->getLength();
         SessionType* st = s->getType();
+        qInfo() << s->getCurIntensity();
 
         //
 
         qInfo() << (sl->getIcon())->getPathAt(lit);
         qInfo() << (st->getIcon())->getPathAt(lit);
-
-        /*
-        icons.push_back(sl->getIcon());
-        icons.push_back(st->getIcon());
-        */
     }
+    */
 
 }
 
