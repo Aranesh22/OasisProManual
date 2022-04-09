@@ -54,5 +54,6 @@
         <file>res/battery.txt</file>
         <file>res/data/allLengths.txt</file>
         <file>res/data/allTypes.txt</file>
+        <file>res/icons/unLit/black.png</file>
     </qresource>
 </RCC>

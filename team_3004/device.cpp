@@ -217,6 +217,8 @@ void Device::turnOn(){
 void Device::turnOff(){
     power = off;
     curUseCase = blank;
+    clearHmTable();
+
 
 }
 
@@ -224,7 +226,17 @@ void Device::setSession(Session* s){
     curSession = s;
 }
 
+void Device::clearHmTable() {
 
+    for (int i=0;i< ui->tableWidget->rowCount();i++) {
+            for (int j=0;j< ui->tableWidget->columnCount();j++) {
+                QTableWidgetItem *item =  ui->tableWidget->item(i,j);
+                item->setIcon(QIcon(":/res/icons/unLit/black.png"));
+
+            }
+        }
+
+}
 
 
 

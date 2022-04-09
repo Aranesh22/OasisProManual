@@ -82,6 +82,7 @@ private:
     void initSessionTypeIcons();
     void initOtherIcons();
     void initSesssionLengths();
+    void clearHmTable();
 
 
 
