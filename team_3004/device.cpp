@@ -4,20 +4,15 @@
 #include <sstream>
 #include <string>
 #include <vector>
-<<<<<<< HEAD
 #include <QTime>
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include <unistd.h>
-=======
 #include <sstream>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QTableWidget>
 
->>>>>>> shadyToAranesh
 
 using namespace std;
 

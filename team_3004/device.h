@@ -52,17 +52,14 @@ public:
     void handlePowerButton();
     void handleSave();
     void handleCheck();
-<<<<<<< HEAD
-    void uploadSaveSession();
     void drainBattery();
     void chargeBattery();
+
+    vector<QString> uploadSaveSession();
 
 private slots:
     void runSysCycle();
     void displayBatteryLevel();
-=======
-    vector<QString> uploadSaveSession();
->>>>>>> shadyToAranesh
 
 private:
     Ui::MainWindow* ui;
