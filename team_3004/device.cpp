@@ -202,11 +202,13 @@ void Device::nextSesType() {
     qInfo("nextSesType");
     int i = indexOf(curSesType)+1;
     allTypes[i-1]->getIcon()->toggleIllum();
+    allTypes[i-1]->getCESIcon()->toggleIllum();
 
     if( i == allTypes.size() ) i = 0;
 
     curSesType = allTypes[i];
     allTypes[i]->getIcon()->toggleIllum();
+    allTypes[i]->getCESIcon()->toggleIllum();
 }
 
 void Device::uploadSaveSession() {
@@ -285,9 +287,12 @@ void Device::turnOn(){
     displayBatteryLevel();
     curUseCase = selectingSession;
 
-    //lights up the first session length, session type
+    //lights up the first session length, session type, and its respective CEStype
     curSesLength->getIcon()->toggleIllum();
     curSesType->getIcon()->toggleIllum();
+    curSesType->getCESIcon()->toggleIllum();
+
+    //starts the cycle timer
     drainBatteryTimer->start(1000);
 
 }

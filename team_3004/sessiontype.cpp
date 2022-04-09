@@ -60,6 +60,7 @@ SessionType::SessionType(float minHzPass, float maxHzPass, CEStype csModePass, D
 }
 
 DisplayIcon* SessionType::getIcon() {return icon;}
+DisplayIcon* SessionType::getCESIcon() {return CESicon;}
 
 float SessionType::getMaxHz() {
 
