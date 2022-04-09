@@ -44,6 +44,7 @@ void MainWindow::makeSave() {
 
     QTableWidgetItem* item_1 = new QTableWidgetItem;
     item_1->setIcon(QIcon(toAdd.at(1)));
+     item_3->setTextAlignment(Qt::AlignCenter);
 
     QTableWidgetItem* item_2 = new QTableWidgetItem;
     item_2->setIcon(QIcon(toAdd.at(2)));
@@ -51,6 +52,7 @@ void MainWindow::makeSave() {
     QTableWidgetItem* item_3 = new QTableWidgetItem;
     item_3->setText(toAdd.at(0));
     item_3->setTextAlignment(Qt::AlignCenter);
+    //text white
 
 
     t->insertRow( t->rowCount() );
