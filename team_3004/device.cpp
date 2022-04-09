@@ -74,10 +74,12 @@ void Device::drainBattery(){
      * To evenly split every intensity from MAX_DRAIN (4) to MIN_DRAIN 3.33
      * We need to subtract 3.33 from 4
      * And divide the output of the above by 8
+     *
+     * This all assumes there is a session currently running. If there isn't, we just treat the program as if it were on the lowest intensity.
      */
 
     float step = (MAX_DRAIN - MIN_DRAIN) / MAX_INTENSITY;
-    float drained = MIN_DRAIN + step * curSession->getCurIntensity();
+    float drained = curSession != nullptr? MIN_DRAIN + step * curSession->getCurIntensity() : MIN_DRAIN + step * MIN_INTENSITY;
     float remaining = battery->drain(drained);
 
     if(remaining <= 15) handleLowBattery();
@@ -125,6 +127,7 @@ void Device::handleUpArrow(){
     qInfo("handle up arrow");
     if(curUseCase == selectingSession) nextSesType();
     else if(curUseCase == runningSession) incIntensity();
+//    else if(curUseCase == softOn) curUseCase == runningSession;
 }
 
 void Device::handleDownArrow(){
@@ -138,6 +141,7 @@ void Device::handlePowerButton(){
     if(curUseCase == blank) turnOn();
     else if(curUseCase == selectingSession) nextSesLen();
     else if (curUseCase == runningSession) endSession();
+//    else if (curUseCase == runningSession) displaySoftOn();
 }
 
 
@@ -214,6 +218,7 @@ void Device::startSession(){
 
 void Device::endSession(){
     //soft off
+    curUseCase = blank; //prevens user from editing data during soft off
     for(int i=curSession->getCurIntensity(); i>=1; i--){
         icons[i]->setIllumState(dim);
         delayBy(1);
@@ -223,13 +228,18 @@ void Device::endSession(){
     turnOff();
 }
 
-void Device::softOn(){
+void Device::displaySoftOn(){
 //    resetGraph();
 
+    //NEEDS TO HANDLE UP/DOWN ARROW INTERRUPTION
+
+    curUseCase = softOn;
     for(int i=1; i<=curSession->getCurIntensity(); i++){
         icons[i]->setIllumState(lit);
-        delayBy(1);
+        if(curUseCase == softOn) delayBy(1);
     }
+
+    curUseCase = runningSession;
 }
 
 void Device::incIntensity(){

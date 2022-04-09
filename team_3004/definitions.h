@@ -24,7 +24,7 @@
 enum CEStype {pulse, cycle};
 enum ConnectionState {none, okay, excellent};
 enum PowerState {on, off};
-enum UseCase {blank, selectingSession, runningSession, loadingConnection, lowBattery, deadBattery, loadingSession, endingSession, displayingBattery};
+enum UseCase {blank, selectingSession, runningSession, loadingConnection, lowBattery, deadBattery, loadingSession, endingSession, displayingBattery, softOn};
 enum IllumState {lit, dim, flashing};
 
 #endif // DEFINITIONS_H

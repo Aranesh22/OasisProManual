@@ -97,7 +97,7 @@ private:
     void displayConnection();
     void delayBy(int);
     void resetGraph();
-    void softOn();
+    void displaySoftOn();
 
 };
 
