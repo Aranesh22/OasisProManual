@@ -35,14 +35,14 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     sysCycleTimer = new QTimer(this);
     connect(sysCycleTimer, SIGNAL(timeout()), this, SLOT(runSysCycle()));
 
+
+    displayBatteryTimer = new QTimer(this);
+    connect(displayBatteryTimer, SIGNAL(timeout()), this, SLOT(displayBatteryLevel()));
+
+
+
+
 }
-
-Device::Device(){
-    qInfo() << "need to update this";
-}
-
-
-
 
 
 //getters
@@ -58,7 +58,7 @@ vector<DisplayIcon*> Device::getIcons(){return icons;}
 void Device::runSysCycle(){
 
     drainBattery();
-//    testForConnection();
+    testForConnection();
 }
 
 
@@ -93,7 +93,13 @@ void Device::drainBattery(){
 }
 
 
+void Device::chargeBattery(){
+    battery->charge(ui->chargeBy->value());
+
+}
+
 ConnectionState Device::testForConnection(){
+    qInfo() << "Device::testForConnection()";
     curUseCase = loadingConnection;
     connection = CONNECTION_SIM; //need to change this to a variable, not a #define
 
@@ -101,7 +107,6 @@ ConnectionState Device::testForConnection(){
         //pause current session
         displayConnection();
     }
-
 
     return connection;
 }
@@ -130,6 +135,7 @@ void Device::displayConnection(){
     }
 
     delayBy(2);
+//    QTimer::singleShot(2000,this,SLOT(resetGraph()));
     resetGraph();
 }
 
@@ -167,6 +173,7 @@ void Device::displayBatteryLevel(){
     }
 
     delayBy(2);
+//    QTimer::singleShot(2000,this,SLOT(resetGraph()));
     resetGraph();
 
 
@@ -341,9 +348,12 @@ int Device::indexOf(SessionType* st){
 }
 
 void Device::delayBy(int n){
-    QTime dieTime= QTime::currentTime().addSecs(n);
-    while (QTime::currentTime() < dieTime)
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+//    QTime dieTime= QTime::currentTime().addSecs(n);
+//    while (QTime::currentTime() < dieTime)
+//        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+
+
 }
 
 
@@ -392,7 +402,7 @@ void Device::initSessionLengths(){
     allLengths.push_back(new SessionLength(25, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_25Min.png" , ":/res/icons/unLit/session_times/icon_25Min.png", ui->session_25min)));
     allLengths.push_back(new SessionLength(45, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_45Min.png" , ":/res/icons/unLit/session_times/icon_45Min.png", ui->session_45min)));
     allLengths.push_back(new SessionLength(180, false, new DisplayIcon( ":/res/icons/Lit/sessionTimes/icon_3Hour.png" , ":/res/icons/unLit/session_times/icon_3Hour.png", ui->session_3hr)));
-
+    //missing the custom
 }
 
 void Device::initSessionTypes(){

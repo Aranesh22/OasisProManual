@@ -84,7 +84,9 @@ float Battery::drain(float n){
 }
 
 
-void Battery::chargeBattery(){}
+void Battery::charge(float n){
+    batteryPercent = (batteryPercent + n < MAX_BATTERY) ? batteryPercent+n : MAX_BATTERY;
+}
 
 
 

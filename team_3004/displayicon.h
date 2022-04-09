@@ -2,7 +2,7 @@
 #define DISPLAYICON_H
 
 #include "definitions.h"
-#include "ui_mainwindow.h"
+
 
 #include <QPushButton>
 #include <QTimer>
@@ -21,10 +21,10 @@ public:
     //getters
     QString getPath();
     QPushButton* getUiElement();
-
+    //setters
     void setIllumState(IllumState);
     void toggleIllum();
-    void flash();
+
     void swapIcon();
 
 
@@ -36,6 +36,9 @@ private:
     QPushButton* uiElement;
     QMovie* movie;
     bool hasFlash();
+    void flash();
+
+
 };
 
 #endif // DISPLAYICON_H

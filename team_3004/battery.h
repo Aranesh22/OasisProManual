@@ -46,7 +46,7 @@ public:
     QMap <int, int> batteryLevelMap;
 
     float drain(float);
-    void chargeBattery();
+    void charge(float);
     void powerOff();
 
     int getBatteryPercent();

@@ -22,7 +22,6 @@ class Device : public QObject
 
 public:
     Device(Ui::MainWindow*);
-    Device();
 
     //getters
     PowerState getPower();
@@ -43,7 +42,7 @@ public:
     //system events
     void handleLowBattery();
     ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
-    void displayBatteryLevel();
+
 
 
     //user inputs
@@ -54,9 +53,11 @@ public:
     void handleCheck();
     void uploadSaveSession();
     void drainBattery();
+    void chargeBattery();
 
 private slots:
     void runSysCycle();
+    void displayBatteryLevel();
 
 private:
     Ui::MainWindow* ui;
@@ -70,6 +71,7 @@ private:
     vector<SessionLength*> allLengths;
     vector<SessionType*> allTypes;
     QTimer *sysCycleTimer;
+    QTimer *displayBatteryTimer;
     UseCase curUseCase; //the current "use case" of the device; see definitions.h for more detail
     Session* curSession; //if a session is running, this pointer points to its current instance
     SessionLength* curSesLength; //list of the currently highlighted / running session length

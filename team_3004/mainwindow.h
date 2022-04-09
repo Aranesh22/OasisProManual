@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 #include "device.h"
-#include "button.h"
+//#include "button.h"
 #include <QVector>
 #include <QTimer>
 #include <QPushButton>
@@ -34,7 +34,7 @@ public:
 
 
     void delayBy(int);
-    void show_battery();
+
 
 private slots:
 
@@ -43,16 +43,16 @@ private slots:
     void moveBack();
     void makeSelection();
 
+    void handleDisconnection();
+    void handleDeadBattery();
+    void handleCharge();
 
 
-    void sessionTimeout();
 
 private:
     Ui::MainWindow *ui;
 
 //UNUSED  __________________________________________________________________________________
-
-    QTimer *sessionTimer;
 
     void makeSave();
 
