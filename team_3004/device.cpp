@@ -36,8 +36,8 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     curSession = nullptr;
     curUseCase = blank;
 
-    drainBatteryTimer = new QTimer(this);
-    connect(drainBatteryTimer, SIGNAL(timeout()), this, SLOT(drainBattery()));
+    sysCycleTimer = new QTimer(this);
+    connect(sysCycleTimer, SIGNAL(timeout()), this, SLOT(runSysCycle()));
 
 }
 
@@ -59,6 +59,11 @@ UseCase Device::getCurUseCase() {return curUseCase;}
 vector<DisplayIcon*> Device::getIcons(){return icons;}
 
 
+void Device::runSysCycle(){
+
+    drainBattery();
+//    testForConnection();
+}
 
 
 //system events
@@ -293,7 +298,7 @@ void Device::turnOn(){
     curSesType->getCESIcon()->toggleIllum();
 
     //starts the cycle timer
-    drainBatteryTimer->start(1000);
+    sysCycleTimer->start(SYSCYCLE_INTERVAL);
 
 }
 
@@ -306,7 +311,7 @@ void Device::turnOff(){
 
     curUseCase = blank;
     battery->powerOff();
-    drainBatteryTimer->start();
+    sysCycleTimer->start();
 }
 
 void Device::setSession(Session* s){
