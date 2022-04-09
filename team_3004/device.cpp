@@ -255,6 +255,7 @@ void Device::turnOff(){
     }
 
     curUseCase = blank;
+    battery->powerOff();
 }
 
 void Device::setSession(Session* s){
