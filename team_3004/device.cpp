@@ -115,6 +115,8 @@ void Device::displayConnection(){
         icons[8]->setIllumState(flashing);
     }
 
+    icons[icons.size()-1]->setIllumState(lit);
+    icons[icons.size()-2]->setIllumState(lit);
     if(connection == okay){
         icons[4] -> setIllumState(lit);
         icons[5] -> setIllumState(lit);
@@ -404,8 +406,8 @@ void Device::initSessionTypes(){
 void Device::initIcons(){
     initPowerIcon();           // icons[0]
     initGraphIcons();          // icons[1] - [8]
-    initSessionIcons();
-    initOtherIcons();
+    initSessionIcons();        // icons[9] - icons[16]
+    initOtherIcons();          // icons[17] - [20]
 }
 
 void Device::initPowerIcon(){
@@ -426,6 +428,9 @@ void Device::initSessionIcons(){
 
 void Device::initOtherIcons(){
     icons.push_back(new DisplayIcon(":/res/icons/Lit/icon_shortPulse_CESsession.png" , ":/res/icons/unLit/icon_shortPulse_CESsession.png", ":/res/icons/gifs/icon_shortPulse_CESsession.gif", ui->shortPulse_CESsession));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/icon_dutyCycle_CESsession.png" , ":/res/icons/unLit/icon_dutyCycle_CESsession.png", ":/res/icons/gifs/icon_dutyCycle_CESsession.gif", ui->dutyCycle_CESsession));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/icon_LeftCESchannel.png" , ":/res/icons/unLit/icon_LeftCESchannel.png", ui->left_CESchannel));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/icon_RightCESchannel.png" , ":/res/icons/unLit/icon_RightCESchannel.png", ui->right_CESchannel));
 
 }
 
