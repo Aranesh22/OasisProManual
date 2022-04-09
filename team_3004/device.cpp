@@ -4,11 +4,20 @@
 #include <sstream>
 #include <string>
 #include <vector>
+<<<<<<< HEAD
 #include <QTime>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <unistd.h>
+=======
+#include <sstream>
+
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QTableWidget>
+
+>>>>>>> shadyToAranesh
 
 using namespace std;
 
@@ -221,12 +230,43 @@ void Device::nextSesType() {
     allTypes[i]->getCESIcon()->toggleIllum();
 }
 
-void Device::uploadSaveSession() {
+vector<QString> Device::uploadSaveSession() {
+    if(curUseCase != runningSession){
+        vector<QString> x;
+        return x;
+    }
 
     qInfo("Saved Session");
     history->SaveSession(curSession);
     history->getSessions();
+    //PRINT OUT THE VECTORS IMAGES PATHS
 
+    vector<Session*> allSessions = history->getSessions();
+    vector<DisplayIcon*> icons;
+
+    SessionLength* sl = curSession->getLength();
+    SessionType* st = curSession->getType();
+
+    QString curInt = QString::number(curSession->getCurIntensity());
+
+    vector<QString> data;
+    data.push_back(curInt);
+    data.push_back((sl->getIcon())->getPathAt(dim));
+    data.push_back((st->getIcon())->getPathAt(dim));
+
+    return data;
+
+
+    /*
+    for (Session* s : allSessions) {
+        SessionLength* sl = s->getLength();
+        SessionType* st = s->getType();
+        qInfo() << s->getCurIntensity();
+
+        qInfo() << (sl->getIcon())->getPathAt(lit);
+        qInfo() << (st->getIcon())->getPathAt(lit);
+    }
+    */
 
 }
 
@@ -313,6 +353,8 @@ void Device::turnOff(){
     //if a session is running, then end it
     if(curSession != nullptr) endSession();
     power = off;
+    curUseCase = blank;
+    clearHmTable();
 
     for(DisplayIcon* di : icons){
         di->setIllumState(dim);
@@ -326,7 +368,17 @@ void Device::setSession(Session* s){
     curSession = s;
 }
 
+void Device::clearHmTable() {
 
+    for (int i=0;i< ui->tableWidget->rowCount();i++) {
+            for (int j=0;j< ui->tableWidget->columnCount();j++) {
+                QTableWidgetItem *item =  ui->tableWidget->item(i,j);
+                item->setIcon(QIcon(":/res/icons/unLit/black.png"));
+
+            }
+        }
+
+}
 
 
 

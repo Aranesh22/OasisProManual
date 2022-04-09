@@ -16,6 +16,7 @@
 
 
 
+
 class Device : public QObject
 {
    Q_OBJECT
@@ -51,6 +52,7 @@ public:
     void handlePowerButton();
     void handleSave();
     void handleCheck();
+<<<<<<< HEAD
     void uploadSaveSession();
     void drainBattery();
     void chargeBattery();
@@ -58,6 +60,9 @@ public:
 private slots:
     void runSysCycle();
     void displayBatteryLevel();
+=======
+    vector<QString> uploadSaveSession();
+>>>>>>> shadyToAranesh
 
 private:
     Ui::MainWindow* ui;
@@ -89,6 +94,8 @@ private:
     void initSessionIcons();
     void initGraphIcons();
     void initOtherIcons();
+    void clearHmTable();
+
 
     //user inputs
     void nextSesLen();

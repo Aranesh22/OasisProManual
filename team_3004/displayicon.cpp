@@ -76,5 +76,8 @@ void DisplayIcon::flash(){
 
     else if(illum==flashing && movie->state() == QMovie::Running)
         movie->stop();
+}
 
+QString DisplayIcon::getPathAt(IllumState illumS){
+    return iconMap[illumS];
 }

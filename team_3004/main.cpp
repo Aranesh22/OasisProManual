@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 
-
 /*
     HistoryManager* history = new HistoryManager();
     SessionLength* sl = new SessionLength(5,false);
