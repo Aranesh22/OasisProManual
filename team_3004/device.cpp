@@ -348,9 +348,9 @@ int Device::indexOf(SessionType* st){
 }
 
 void Device::delayBy(int n){
-//    QTime dieTime= QTime::currentTime().addSecs(n);
-//    while (QTime::currentTime() < dieTime)
-//        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    QTime dieTime= QTime::currentTime().addSecs(n);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 
 
 
