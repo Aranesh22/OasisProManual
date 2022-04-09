@@ -211,6 +211,7 @@ void Device::uploadSaveSession() {
 
 void Device::startSession(){
     testForConnection();
+    qInfo() <<"Device::startSession()";
 
     curSesType->getIcon()->setIllumState(flashing);
     delayBy(5);
@@ -364,10 +365,10 @@ void Device::initSesssionLengths(){
 }
 
 void Device::initSessionTypes(){
-    allTypes.push_back(new SessionType(0.5, 3, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_alpha.png" , ":/res/icons/unLit/sessions/icon_alpha.png", ui->session_alpha)));
-    allTypes.push_back(new SessionType(0.5, 3, cycle, new DisplayIcon(":/res/icons/Lit/sessions/icon_SMR.png" , ":/res/icons/unLit/sessions/icon_SMR.png", ui->session_SMR)));
-    allTypes.push_back(new SessionType(2.5, 5, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_Beta.png" , ":/res/icons/unLit/sessions/icon_Beta.png", ui->session_Beta)));
-    allTypes.push_back(new SessionType(6, 8, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_100Hz.png" , ":/res/icons/unLit/sessions/icon_100Hz.png", ui->session_100Hz)));
+    allTypes.push_back(new SessionType(0.5, 3, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_alpha.png" , ":/res/icons/unLit/sessions/icon_alpha.png", ":/res/icons/gifs/sessionTypes/icon_alpha.gif", ui->session_alpha)));
+    allTypes.push_back(new SessionType(0.5, 3, cycle, new DisplayIcon(":/res/icons/Lit/sessions/icon_SMR.png" , ":/res/icons/unLit/sessions/icon_SMR.png", ":/res/icons/gifs/sessionTypes/icon_SMR.gif", ui->session_SMR)));
+    allTypes.push_back(new SessionType(2.5, 5, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_Beta.png" , ":/res/icons/unLit/sessions/icon_Beta.png", ":/res/icons/gifs/sessionTypes/icon_Beta.gif",  ui->session_Beta)));
+    allTypes.push_back(new SessionType(6, 8, pulse, new DisplayIcon(":/res/icons/Lit/sessions/icon_100Hz.png" , ":/res/icons/unLit/sessions/icon_100Hz.png", ":/res/icons/gifs/sessionTypes/icon_100Hz.gif", ui->session_100Hz)));
 
 }
 
@@ -401,14 +402,17 @@ void Device::initSessionTypeIcons(){
 }
 
 void Device::initOtherIcons(){
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_1.png" , ":/res/icons/unLit/colNumbers/icon_1.png",  ui->col_num_1));
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_2.png" , ":/res/icons/unLit/colNumbers/icon_2.png",  ui->col_num_2));
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_3.png" , ":/res/icons/unLit/colNumbers/icon_3.png",  ui->col_num_3));
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_4.png" , ":/res/icons/unLit/colNumbers/icon_4.png",  ui->col_num_4));
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_5.png" , ":/res/icons/unLit/colNumbers/icon_5.png",  ui->col_num_5));
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_6.png" , ":/res/icons/unLit/colNumbers/icon_6.png",  ui->col_num_6));
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png",  ui->col_num_7));
-    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png",  ui->col_num_8));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_1.png" , ":/res/icons/unLit/colNumbers/icon_1.png", ":/res/icons/gifs/icon_1.gif", ui->col_num_1));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_2.png" , ":/res/icons/unLit/colNumbers/icon_2.png", ":/res/icons/gifs/icon_2.gif",   ui->col_num_2));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_3.png" , ":/res/icons/unLit/colNumbers/icon_3.png", ":/res/icons/gifs/icon_3.gif",   ui->col_num_3));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_4.png" , ":/res/icons/unLit/colNumbers/icon_4.png", ":/res/icons/gifs/icon_4.gif",   ui->col_num_4));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_5.png" , ":/res/icons/unLit/colNumbers/icon_5.png", ":/res/icons/gifs/icon_5.gif",   ui->col_num_5));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_6.png" , ":/res/icons/unLit/colNumbers/icon_6.png", ":/res/icons/gifs/icon_6.gif",   ui->col_num_6));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_7.png" , ":/res/icons/unLit/colNumbers/icon_7.png", ":/res/icons/gifs/icon_7.gif",   ui->col_num_7));
+    icons.push_back(new DisplayIcon(":/res/icons/Lit/colNumber/icon_8.png" , ":/res/icons/unLit/colNumbers/icon_8.png", ":/res/icons/gifs/icon_8.gif",   ui->col_num_8));
+
+
+
 
 }
 
