@@ -6,6 +6,7 @@
 
 #include <QPushButton>
 #include <QTimer>
+#include <QMovie>
 
 
 
@@ -16,27 +17,25 @@ class DisplayIcon : public QObject
     Q_OBJECT
 public:
     DisplayIcon(QString, QString, QPushButton*);
-
+    DisplayIcon(QString, QString, QString, QPushButton*);
     //getters
     QString getPath();
     QPushButton* getUiElement();
-    QTimer *timer;
+
     void setIllumState(IllumState);
     void toggleIllum();
-    int flashFor(int);
-    void stopFlash();
-
-    bool isFlashing;
+    void flash();
     void swapIcon();
-//    Ui::MainWindow ui;
 
-public slots:
-    void flashs();
+
+
+
 private:
     IllumState illum;
-    QString iconMap[2];
+    QString iconMap[3];
     QPushButton* uiElement;
-
+    QMovie* movie;
+    bool hasFlash();
 };
 
 #endif // DISPLAYICON_H
