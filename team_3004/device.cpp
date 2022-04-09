@@ -211,6 +211,11 @@ void Device::uploadSaveSession() {
 
 void Device::startSession(){
     testForConnection();
+
+    curSesType->getIcon()->setIllumState(flashing);
+    delayBy(5);
+    curSesType->getIcon()->setIllumState(lit);
+
     curSession = new Session(curSesLength, curSesType);
     curUseCase = runningSession;
     icons[1]->toggleIllum();
