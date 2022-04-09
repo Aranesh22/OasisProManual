@@ -53,9 +53,10 @@ public:
     void handleSave();
     void handleCheck();
     void uploadSaveSession();
+    void drainBattery();
 
 private slots:
-     void drainBattery();
+    void runSysCycle();
 
 private:
     Ui::MainWindow* ui;
@@ -68,7 +69,7 @@ private:
     HistoryManager* history;
     vector<SessionLength*> allLengths;
     vector<SessionType*> allTypes;
-    QTimer *drainBatteryTimer;
+    QTimer *sysCycleTimer;
     UseCase curUseCase; //the current "use case" of the device; see definitions.h for more detail
     Session* curSession; //if a session is running, this pointer points to its current instance
     SessionLength* curSesLength; //list of the currently highlighted / running session length
