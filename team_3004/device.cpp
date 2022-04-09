@@ -63,6 +63,7 @@ vector<DisplayIcon*> Device::getIcons(){return icons;}
 void Device::handleLowBattery(){
     curUseCase = lowBattery;
     if(curUseCase == runningSession) endSession();
+    curUseCase = blank;
 }
 
 void Device::drainBattery(){
@@ -94,7 +95,6 @@ void Device::displayConnection(){
     if(connection == none){
         icons[7]->setIllumState(lit);
         icons[8]->setIllumState(lit);
-        return;
     }
 
     if(connection == okay){
