@@ -94,10 +94,10 @@ private:
     //helpers
     int indexOf(SessionLength*);
     int indexOf(SessionType*);
-
     void displayConnection();
     void delayBy(int);
     void resetGraph();
+    void softOn();
 
 };
 

@@ -223,6 +223,15 @@ void Device::endSession(){
     turnOff();
 }
 
+void Device::softOn(){
+//    resetGraph();
+
+    for(int i=1; i<=curSession->getCurIntensity(); i++){
+        icons[i]->setIllumState(lit);
+        delayBy(1);
+    }
+}
+
 void Device::incIntensity(){
     curSession->incInten();
     icons[curSession->getCurIntensity() ] -> setIllumState(lit);
