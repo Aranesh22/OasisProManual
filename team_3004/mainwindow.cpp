@@ -65,9 +65,9 @@ void MainWindow::makeSave() {
 
 
     t->insertRow( t->rowCount() );
-    t->setCellWidget(t->rowCount()-1,1,lbl_item_1);
-    t->setCellWidget(t->rowCount()-1,0,lbl_item_2);
-    t->setItem(t->rowCount()-1,2,item_3);
+    t->setCellWidget(t->rowCount()-2,1,lbl_item_1);
+    t->setCellWidget(t->rowCount()-2,0,lbl_item_2);
+    t->setItem(t->rowCount()-2,2,item_3);
     //tableWidget->insertRow( tableWidget->rowCount() );
 
 
