@@ -36,6 +36,8 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     curSession = nullptr;
     curUseCase = blank;
 
+    drainBatteryTimer = new QTimer(this);
+    connect(drainBatteryTimer, SIGNAL(timeout()), this, SLOT(drainBattery()));
 
 }
 
@@ -271,6 +273,7 @@ void Device::turnOn(){
     curUseCase = selectingSession;
     curSesLength->getIcon()->toggleIllum();
     curSesType->getIcon()->toggleIllum();
+    drainBatteryTimer->start(1000);
 
 }
 
@@ -283,6 +286,7 @@ void Device::turnOff(){
 
     curUseCase = blank;
     battery->powerOff();
+    drainBatteryTimer->start();
 }
 
 void Device::setSession(Session* s){
