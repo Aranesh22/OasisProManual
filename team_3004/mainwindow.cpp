@@ -4,6 +4,7 @@
 
 #include "displayicon.h"
 #include <QTableWidget>
+#include <QTableWidgetItem>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -24,17 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::makeSelection);
     connect(ui->pushButton_Save, &QPushButton::pressed, this, &MainWindow::makeSave);
 
-    connect(ui->tableWidget, &QTableWidget::pressed, this, &MainWindow::sayHello);
-
     sessionTimer = new QTimer(this);
     sessionTimer->setSingleShot(true);
     connect(sessionTimer, &QTimer::timeout, this, &MainWindow::sessionTimeout);
 //    sessionTimer->start(4000);
-}
-
-
-void MainWindow::sayHello() {
-    qInfo("Hello");
 }
 
 void MainWindow::makeSave() {
@@ -43,9 +37,27 @@ void MainWindow::makeSave() {
     vector<QString> toAdd = device->uploadSaveSession();
     update();
     for (QString s : toAdd) {
-        qInfo() << s;
+        //qInfo() << s;
     }
 
+    QTableWidget* t = ui->tableWidget;
+
+    QTableWidgetItem* item_1 = new QTableWidgetItem;
+    item_1->setIcon(QIcon(toAdd.at(1)));
+
+    QTableWidgetItem* item_2 = new QTableWidgetItem;
+    item_2->setIcon(QIcon(toAdd.at(2)));
+
+    QTableWidgetItem* item_3 = new QTableWidgetItem;
+    item_3->setText(toAdd.at(0));
+
+    t->insertRow( t->rowCount() );
+    t->setItem(t->rowCount()-5,1,item_1);
+    t->setItem(t->rowCount()-5,0,item_2);
+    t->setItem(t->rowCount()-5,2,item_3);
+
+
+    update();
 }
 
 void MainWindow::show_power(){
