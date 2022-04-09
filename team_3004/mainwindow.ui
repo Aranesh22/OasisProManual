@@ -499,11 +499,7 @@
      </column>
      <item row="0" column="0">
       <property name="text">
-       <string>img</string>
-      </property>
-      <property name="icon">
-       <iconset resource="res.qrc">
-        <normaloff>:/res/icons/unLit/sessions/icon_100Hz.png</normaloff>:/res/icons/unLit/sessions/icon_100Hz.png</iconset>
+       <string/>
       </property>
      </item>
      <item row="0" column="1">
@@ -517,10 +513,6 @@
       </property>
       <property name="textAlignment">
        <set>AlignCenter</set>
-      </property>
-      <property name="icon">
-       <iconset resource="res.qrc">
-        <normaloff>:/res/icons/Lit/sessionTimes/icon_45Min.png</normaloff>:/res/icons/Lit/sessionTimes/icon_45Min.png</iconset>
       </property>
      </item>
      <item row="0" column="2">

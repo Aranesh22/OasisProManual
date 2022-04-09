@@ -44,13 +44,11 @@ void MainWindow::makeSave() {
 
     QTableWidgetItem* item_1 = new QTableWidgetItem;
     item_1->setIcon(QIcon(toAdd.at(1)));
-<<<<<<< HEAD
-=======
+
 
     QLabel* lbl_item_1 = new QLabel();
     lbl_item_1->setPixmap(QPixmap(toAdd.at(1)));
     lbl_item_1->setAlignment(Qt::AlignCenter);
->>>>>>> 5e0e673ee10aba51d040ab8b41c8feb85bec435f
 
     QTableWidgetItem* item_2 = new QTableWidgetItem;
     item_2->setIcon(QIcon(toAdd.at(2)));
