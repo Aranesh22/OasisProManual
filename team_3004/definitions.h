@@ -8,7 +8,7 @@
 
 #define SYSCYCLE_INTERVAL 5000
 #define DISPLAYBATTERY_INTERVAL 5000
-#define SESSION_INTERVAL 200
+#define SESSION_INTERVAL 2000
 
 
 
@@ -27,7 +27,7 @@
 enum CEStype {pulse, cycle};
 enum ConnectionState {none, okay, excellent};
 enum PowerState {on, off};
-enum UseCase {blank, selectingSession, runningSession, loadingConnection, lowBattery, deadBattery, loadingSession, endingSession, displayingBattery, softOn};
+enum UseCase {blank, selectingSession, runningSession, loadingConnection, lowBattery, deadBattery, loadingSession, endingSession, displayingBattery, softOn, pausedSession};
 enum IllumState {lit, dim, flashing};
 
 #endif // DEFINITIONS_H

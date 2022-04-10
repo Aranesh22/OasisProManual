@@ -128,6 +128,7 @@ void MainWindow::handleCharge(){
 
 void MainWindow::handleConnect(){
     qInfo() << "handleConnect()";
+    device->simReconnect();
 }
 
 
