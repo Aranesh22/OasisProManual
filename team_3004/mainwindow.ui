@@ -1512,7 +1512,7 @@
       <x>1230</x>
       <y>60</y>
       <width>343</width>
-      <height>355</height>
+      <height>386</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1676,6 +1676,16 @@ background: gray;</string>
          <width>16</width>
          <height>16</height>
         </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QProgressBar" name="battery_progressBar">
+       <property name="styleSheet">
+        <string notr="true">color:white;</string>
+       </property>
+       <property name="value">
+        <number>99</number>
        </property>
       </widget>
      </item>

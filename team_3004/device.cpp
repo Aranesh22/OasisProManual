@@ -25,6 +25,9 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     power = off;
     outputtingAudio = false;
 
+    ui->battery_progressBar->setValue(battery->getBatteryPercent());
+
+
     history = new HistoryManager();
 
     initSessionLengths();
@@ -44,9 +47,6 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
 
     sessionTimer = new QTimer(this);
     connect(sessionTimer, SIGNAL(timeout()), this, SLOT(elapseSession()));
-
-
-
 
 }
 
@@ -94,13 +94,15 @@ void Device::drainBattery(){
     float remaining = battery->drain(drained);
 
     if(remaining <= 15) handleLowBattery();
-
+    ui->battery_progressBar->setValue(battery->getBatteryPercent());
     qInfo("\tDrain battery - drained = %f, remaining = %f", drained, remaining);
+
 }
 
 
 void Device::chargeBattery(){
     battery->charge(ui->chargeBy->value());
+      ui->battery_progressBar->setValue(battery->getBatteryPercent());
 
 }
 

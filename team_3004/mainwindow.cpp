@@ -114,8 +114,9 @@ void MainWindow::handleDeadBattery(){
 }
 
 void MainWindow::handleFullCharge(){
-    ui->chargeBy->setValue(100);
+    ui->chargeBy->setValue(99);
     device->chargeBattery();
+//    ui->battery_progressBar->setValue(device->battery->getBatteryPercent());
 
 }
 
