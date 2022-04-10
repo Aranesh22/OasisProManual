@@ -114,6 +114,10 @@ void Device::testForConnection(){
         pauseSession();
         displayConnection();
     }
+
+    else{
+        if(curSession != nullptr && curSession->isPaused() ) unpauseSession();
+    }
 }
 
 void Device::displayConnection(){
@@ -537,5 +541,5 @@ void Device::pauseSession(){
 void Device::unpauseSession(){
     curSession->unpause();
     curUseCase = runningSession;
-    // do other stuff
+    sessionTimer->start(SESSION_INTERVAL);
 }
