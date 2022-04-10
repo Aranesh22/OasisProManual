@@ -69,5 +69,7 @@
         <file>res/icons/gifs/icon_shortPulse_CESsession.gif</file>
         <file>res/icons/gifs/sessionTypes/icon_100Hz.gif</file>
         <file>res/icons/unLit/black.png</file>
+        <file>res/icons/gifs/sessionTypes/icon_100Hz.png</file>
+        <file>res/userData/userData.txt</file>
     </qresource>
 </RCC>
