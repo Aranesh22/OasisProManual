@@ -60,7 +60,7 @@ public:
 private slots:
     void runSysCycle();
     void displayBatteryLevel();
-//    void elapseSession();
+    void elapseSession();
 
 private:
     Ui::MainWindow* ui;

@@ -43,7 +43,7 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     connect(displayBatteryTimer, SIGNAL(timeout()), this, SLOT(displayBatteryLevel()));
 
     sessionTimer = new QTimer(this);
-//    connect(displayBatteryTimer, SIGNAL(timeout()), this, SLOT(elapseSession()));
+    connect(sessionTimer, SIGNAL(timeout()), this, SLOT(elapseSession()));
 
 
 
@@ -274,6 +274,7 @@ void Device::startSession(){
 
     //session is now running
     curSession = new Session(curSesLength, curSesType);
+    sessionTimer->start(SESSION_INTERVAL);
     curUseCase = runningSession;
     icons[1]->setIllumState(flashing);
 }
@@ -288,6 +289,7 @@ void Device::endSession(){
         delayBy(1);
     }
 
+    sessionTimer->stop();
     curSession = nullptr;
 }
 
@@ -511,5 +513,17 @@ void Device::initGraphIcons(){
 void Device::resetGraph(){
     for(int i=1; i<=8; i++){
         icons[i]->setIllumState(dim);
+    }
+}
+
+
+void Device::elapseSession(){
+    int elapsed = curSession->elapseMinute();
+    qInfo("\tElapse session - time elapsed: %i", elapsed);
+
+    if(elapsed == curSession->getLength()->getDurationMins() ){
+        qInfo("\tDuration of the session has ended");
+        endSession();
+        curUseCase = selectingSession;
     }
 }

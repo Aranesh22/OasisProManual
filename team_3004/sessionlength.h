@@ -11,6 +11,7 @@ public:
     friend class Session;
 
     DisplayIcon* getIcon();
+    int getDurationMins();
 
 
 private:
@@ -18,7 +19,6 @@ private:
     bool isCustom;
     DisplayIcon* icon;
 
-    int getDurationMins();
     bool getIsCustom();
 };
 
