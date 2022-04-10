@@ -26,6 +26,9 @@ public:
 
     int elapseMinute();
 
+    void pause();
+    void unpause();
+
 private:
     SessionLength* length;
     SessionType* type;
@@ -34,6 +37,8 @@ private:
     bool rightActive;
     int minsPassed;
     bool softOffState;
+
+    bool paused;
 };
 
 #endif // SESSION_H

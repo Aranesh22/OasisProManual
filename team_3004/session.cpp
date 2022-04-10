@@ -13,6 +13,7 @@ Session::Session(SessionLength* sl, SessionType* st)
     length = sl;
     type = st;
     minsPassed = 0;
+    paused = false;
 }
 
 //getters
@@ -83,4 +84,8 @@ bool Session::endSession(bool pressPower) {
 int Session::elapseMinute(){
     minsPassed++;
     return minsPassed;
+}
+
+void Session::pause(){
+    paused = true;
 }

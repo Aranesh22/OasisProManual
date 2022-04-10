@@ -110,7 +110,7 @@ void Device::testForConnection(){
     if(connection == none){
         qInfo("\tTest connection::No Connection detected!");
         curUseCase = loadingConnection;
-        //pause current session
+        pauseSession();
         displayConnection();
     }
 }
@@ -522,4 +522,9 @@ void Device::elapseSession(){
         endSession();
         curUseCase = selectingSession;
     }
+}
+
+void Device::pauseSession(){
+    curSession->pause();
+    sessionTimer->stop();
 }

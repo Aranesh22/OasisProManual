@@ -104,6 +104,7 @@ private:
     void incIntensity();
     void decIntensity();
     void endSession();
+    void pauseSession();
 
     //helpers
     int indexOf(SessionLength*);
