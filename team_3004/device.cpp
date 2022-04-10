@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <QTime>
+#include <QElapsedTimer>
 
 #include <unistd.h>
 #include <sstream>
@@ -343,6 +344,14 @@ void Device::turnOn(){
 }
 
 void Device::turnOff(){
+
+    /*
+    QElapsedTimer timerTOff;
+    timerTOff.start();
+    qInfo("%"timerTOff.elapsed);
+    */
+
+
     sysCycleTimer->stop();
 
     //if a session is running, then end it
@@ -357,6 +366,7 @@ void Device::turnOff(){
 
     curUseCase = blank;
     battery->powerOff();
+
 }
 
 void Device::setSession(Session* s){
