@@ -244,7 +244,6 @@ vector<QString> Device::uploadSaveSession() {
 
     qInfo("Saved Session");
     history->SaveSession(curSession);
-    history->getSessions();
     //PRINT OUT THE VECTORS IMAGES PATHS
 
     vector<Session*> allSessions = history->getSessions();
@@ -375,27 +374,35 @@ void Device::turnOff(){
     // :/res/userData/userData.txt
 
     /* Try and open a file for output */
-    qInfo("Hello");
-    /*
-    QString outputFilename = ":/res/userData/userData.txt";
-    QFile outputFile(outputFilename);
-    outputFile.open(QIODevice::WriteOnly);
 
-
-    if(!outputFile.isOpen()){
-        qDebug() << "- Error, unable to open" << outputFilename << "for output";
+    QFile file("userData.txt");
+    if (!file.open(QIODevice::Append)) {
+        qInfo() << "Cannot open file for writing: ";
         return;
     }
 
+    QTextStream out(&file);
 
-    QTextStream outStream(&outputFile);
+    //out << "Thomas M. Disch: " << 334 << endl;
+
+    vector<Session*> toDisplay = history->getSessions();
+    int counter = 0;
+    for (Session* s : toDisplay) {
+
+        SessionLength* sl = s->getLength();
+        SessionType* st = s->getType();
+
+        DisplayIcon* di_length = sl->getIcon();
+        DisplayIcon* di_type = st->getIcon();
+
+        QString path_1 = di_length->getPath();
+        QString path_2 = di_type->getPath();
+
+        out << path_1 << " " << path_2 << " " << allIntensities.at(counter) << endl;
 
 
-    outStream << "Victory!\n";
-
-
-    outputFile.close();
-    */
+        ++counter;
+    }
 
 
     sysCycleTimer->stop();

@@ -35,6 +35,8 @@ public:
     UseCase getCurUseCase();
     vector<DisplayIcon*> getIcons();
 
+    vector<QString> allIntensities;
+
     //setters or equivalent
     void turnOn();
     void turnOff();
