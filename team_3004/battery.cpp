@@ -28,7 +28,7 @@ bool Battery::initBatteryPercent(){
     QFile file("battery.txt");
 
     if(!file.exists()){
-//        qCritical() << "file not found";
+        qCritical() << "file not found";
         return false;
     }
     if(!file.open(QIODevice::ReadOnly)){
@@ -37,7 +37,7 @@ bool Battery::initBatteryPercent(){
     }
     QTextStream stream(&file);
     while (!stream.atEnd()){
-        batteryPercent = stream.readLine().toInt();
+        batteryPercent = stream.readLine().toFloat();
     }
 
     file.close();
@@ -51,7 +51,6 @@ bool Battery::saveBatteryPercent(){
         qCritical() << file.errorString();
         return false;
     }
-
     QTextStream stream(&file);
     stream << batteryPercent;
     file.close();
