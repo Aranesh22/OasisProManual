@@ -70,7 +70,7 @@ void Device::runSysCycle(){
 
 //system events
 void Device::handleLowBattery(){
-    qInfo("HANDLE LOW BATTERY");
+    qInfo("Low battery detected");
     if(battery->getBatteryPercent() == 0) turnOff();
     if(curUseCase == runningSession) endSession();
     curUseCase = blank; //prevents user editing data
@@ -111,7 +111,7 @@ void Device::testForConnection(){
     qInfo() << "\tTest connection";
 
     if(connection == none){
-        qInfo("\tTest connection::No Connection detected!");
+        qInfo("No Connection detected!");
         if(curUseCase == runningSession) pauseSession();
         displayConnection();
     }
@@ -183,6 +183,8 @@ void Device::handlePowerButton(){
 
 
 void Device::displayBatteryLevel(){
+    qInfo("Displaying battery");
+
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
         if(battery->getBatteryLevel() > 2) icons[i]->setIllumState(lit);
         if(battery->getBatteryLevel() <= 2) icons[i]->setIllumState(flashing);
@@ -353,8 +355,9 @@ void Device::turnOn(){
     curSesType->getIcon()->toggleIllum();
     curSesType->getCESIcon()->toggleIllum();
 
-    //starts the cycle timer
+    //starts the timers
     sysCycleTimer->start(SYSCYCLE_INTERVAL);
+    displayBatteryTimer->start(DISPLAY_BATTERY_INTERVAL);
 
 }
 
@@ -368,6 +371,7 @@ void Device::turnOff(){
 
 
     sysCycleTimer->stop();
+    displayBatteryTimer->stop();
 
     //if a session is running, then end it
     if(curSession != nullptr) endSession();
@@ -547,7 +551,7 @@ void Device::elapseSession(){
     qInfo("\tElapse session - time elapsed: %i", elapsed);
 
     if(elapsed == curSession->getLength()->getDurationMins() ){
-        qInfo("\tDuration of the session has ended");
+        qInfo("Duration of the session has ended");
         endSession();
         curUseCase = selectingSession;
     }
@@ -574,6 +578,5 @@ void Device::simDisconnection(){
 }
 
 void Device::simReconnect(){
-    qInfo("simReconnect");
     connection = okay;
 }
