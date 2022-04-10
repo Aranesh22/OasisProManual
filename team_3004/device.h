@@ -42,7 +42,7 @@ public:
 
     //system events
     void handleLowBattery();
-    ConnectionState testForConnection(); //always sets connection to true bc we have no way to test for connectivity
+    void testForConnection(); //always sets connection to true bc we have no way to test for connectivity
 
 
 
@@ -60,6 +60,7 @@ public:
 private slots:
     void runSysCycle();
     void displayBatteryLevel();
+//    void elapseSession();
 
 private:
     Ui::MainWindow* ui;
@@ -74,6 +75,7 @@ private:
     vector<SessionType*> allTypes;
     QTimer *sysCycleTimer;
     QTimer *displayBatteryTimer;
+    QTimer *sessionTimer;
     UseCase curUseCase; //the current "use case" of the device; see definitions.h for more detail
     Session* curSession; //if a session is running, this pointer points to its current instance
     SessionLength* curSesLength; //list of the currently highlighted / running session length

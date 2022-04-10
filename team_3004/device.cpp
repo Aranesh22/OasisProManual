@@ -39,9 +39,11 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     sysCycleTimer = new QTimer(this);
     connect(sysCycleTimer, SIGNAL(timeout()), this, SLOT(runSysCycle()));
 
-
     displayBatteryTimer = new QTimer(this);
     connect(displayBatteryTimer, SIGNAL(timeout()), this, SLOT(displayBatteryLevel()));
+
+    sessionTimer = new QTimer(this);
+//    connect(displayBatteryTimer, SIGNAL(timeout()), this, SLOT(elapseSession()));
 
 
 
@@ -60,7 +62,6 @@ vector<DisplayIcon*> Device::getIcons(){return icons;}
 
 
 void Device::runSysCycle(){
-
     drainBattery();
     testForConnection();
 }
@@ -102,30 +103,33 @@ void Device::chargeBattery(){
 
 }
 
-ConnectionState Device::testForConnection(){
-    qInfo() << "Device::testForConnection()";
-    curUseCase = loadingConnection;
+void Device::testForConnection(){
+    qInfo() << "\tTest connection";
     connection = CONNECTION_SIM; //need to change this to a variable, not a #define
 
     if(connection == none){
+        qInfo("\tTest connection::No Connection detected!");
+        curUseCase = loadingConnection;
         //pause current session
         displayConnection();
     }
-
-    return connection;
 }
 
 void Device::displayConnection(){
-//    icons[ icons.size()-3 ] -> setIllumState(flashing);
-    qInfo() << icons.size();
+    qInfo("DisplayConection");
+    icons[ icons.size()-3 ] -> setIllumState(flashing);
+    icons[ icons.size()-4 ] -> setIllumState(flashing);
 
     if(connection == none){
         icons[7]->setIllumState(flashing);
         icons[8]->setIllumState(flashing);
     }
 
-    icons[icons.size()-1]->setIllumState(lit);
-    icons[icons.size()-2]->setIllumState(lit);
+    else{
+        icons[icons.size()-1]->setIllumState(lit);
+        icons[icons.size()-2]->setIllumState(lit);
+    }
+
     if(connection == okay){
         icons[4] -> setIllumState(lit);
         icons[5] -> setIllumState(lit);
@@ -139,7 +143,9 @@ void Device::displayConnection(){
     }
 
     delayBy(2);
-//    QTimer::singleShot(2000,this,SLOT(resetGraph()));
+    icons[ icons.size()-3 ] -> setIllumState(dim);
+    icons[ icons.size()-4 ] -> setIllumState(lit);
+//    curSesType->getCESIcon()->setIllumState(lit);
     resetGraph();
 }
 
@@ -148,13 +154,8 @@ void Device::displayConnection(){
 
 //user inputs
 void Device::handleUpArrow(){
-    //check current use case
-    //call the right function
-    //is there a better approach that avoids if-else spam / switch?
-    //yes; declare maps to function pointers (might be too complicated, so for the scope of this project, if-else spam might be fine)
     if(curUseCase == selectingSession) nextSesType();
     else if(curUseCase == runningSession) incIntensity();
-    else if(curUseCase == softOn) curUseCase == runningSession;
 }
 
 void Device::handleDownArrow(){
@@ -163,10 +164,10 @@ void Device::handleDownArrow(){
 }
 
 void Device::handlePowerButton(){
-    if(curUseCase == blank) turnOn();
+    if(power == off) turnOn();
     else if(curUseCase == selectingSession) nextSesLen();
-//    else if (curUseCase == runningSession) endSession();
-    else if (curUseCase == runningSession) displaySoftOn();
+    else if (curUseCase == runningSession) turnOff();
+//    else if (curUseCase == runningSession) displaySoftOn();
 }
 
 
@@ -177,13 +178,8 @@ void Device::displayBatteryLevel(){
     }
 
     delayBy(2);
-//    QTimer::singleShot(2000,this,SLOT(resetGraph()));
     resetGraph();
 
-
-}
-
-void Device::handleSave(){
 
 }
 
@@ -271,6 +267,7 @@ void Device::startSession(){
     displayConnection();
 
     //flash for 5 seconds
+    curUseCase = blank; //prevents user from editing data while button is flashing
     curSesType->getIcon()->setIllumState(flashing);
     delayBy(5);
     curSesType->getIcon()->setIllumState(lit);
@@ -345,6 +342,7 @@ void Device::turnOn(){
 
 void Device::turnOff(){
     sysCycleTimer->stop();
+
     //if a session is running, then end it
     if(curSession != nullptr) endSession();
     power = off;
