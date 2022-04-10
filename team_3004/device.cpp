@@ -261,7 +261,6 @@ vector<QString> Device::uploadSaveSession() {
 
     return data;
 
-
     /*
     for (Session* s : allSessions) {
         SessionLength* sl = s->getLength();
