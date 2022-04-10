@@ -91,7 +91,7 @@ void Device::drainBattery(){
      */
 
     float step = (MAX_DRAIN - MIN_DRAIN) / MAX_INTENSITY;
-    float drained = (curSession == nullptr || curSession->isPaused()) ? MIN_DRAIN + step * MIN_INTENSITY : MIN_DRAIN + step * curSession->getCurIntensity();
+    float drained = (curSession == nullptr || curSession->isPaused()) ? MIN_DRAIN : MIN_DRAIN + step * (curSession->getCurIntensity() - 1);
     float remaining = battery->drain(drained);
 
     if(remaining <= 15) handleLowBattery();
@@ -109,22 +109,25 @@ void Device::chargeBattery(){
 
 void Device::testForConnection(){
     qInfo() << "\tTest connection";
-    connection = CONNECTION_SIM; //need to change this to a variable, not a #define
 
     if(connection == none){
         qInfo("\tTest connection::No Connection detected!");
-        curUseCase = blank;
-        pauseSession();
+        if(curUseCase == runningSession) pauseSession();
         displayConnection();
     }
 
-    else{
-        if(curSession != nullptr && curSession->isPaused() ) unpauseSession();
+    // equivalent to if(connecion != none && curUseCase == runningSession && curSession->isPaused() )
+    if(curUseCase == pausedSession && connection != none){
+        qInfo("Unpausing session");
+        unpauseSession();
     }
 }
 
 void Device::displayConnection(){
     qInfo("DisplayConection");
+
+    resetGraph();
+
     icons[ icons.size()-3 ] -> setIllumState(flashing);
     icons[ icons.size()-4 ] -> setIllumState(flashing);
 
@@ -273,6 +276,10 @@ void Device::startSession(){
     //test and display connection
     testForConnection();
     displayConnection();
+    if(connection == none){
+        qInfo("Can not start lesson - no ear clip connection");
+        return;
+    }
 
     //flash for 5 seconds
     curUseCase = blank; //prevents user from editing data while button is flashing
@@ -290,6 +297,8 @@ void Device::startSession(){
 void Device::endSession(){
     qInfo("Ending session");
 
+    sessionTimer->stop();
+
     //soft off
     curUseCase = blank; //prevens user from editing data during soft off
     for(int i=curSession->getCurIntensity(); i>=1; i--){
@@ -297,7 +306,6 @@ void Device::endSession(){
         delayBy(1);
     }
 
-    sessionTimer->stop();
     curSession = nullptr;
 }
 
@@ -548,10 +556,24 @@ void Device::elapseSession(){
 void Device::pauseSession(){
     curSession->pause();
     sessionTimer->stop();
+    curUseCase = pausedSession;
 }
 
 void Device::unpauseSession(){
     curSession->unpause();
     curUseCase = runningSession;
+
+    for(int i=1; i<curSession->getCurIntensity(); i++) icons[i]->setIllumState(lit);
+    icons[curSession->getCurIntensity() ] -> setIllumState(flashing);
+
     sessionTimer->start(SESSION_INTERVAL);
+}
+
+void Device::simDisconnection(){
+    connection = none;
+}
+
+void Device::simReconnect(){
+    qInfo("simReconnect");
+    connection = okay;
 }
