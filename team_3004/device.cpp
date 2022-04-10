@@ -371,6 +371,33 @@ void Device::turnOff(){
     qInfo("%"timerTOff.elapsed);
     */
 
+    // /home/student/Desktop/COMP3004/Project/comp3004Project/team_3004/userData.txt
+    // :/res/userData/userData.txt
+
+    /* Try and open a file for output */
+    qInfo("Hello");
+    /*
+    QString outputFilename = ":/res/userData/userData.txt";
+    QFile outputFile(outputFilename);
+    outputFile.open(QIODevice::WriteOnly);
+
+
+    if(!outputFile.isOpen()){
+        qDebug() << "- Error, unable to open" << outputFilename << "for output";
+        return;
+    }
+
+
+    QTextStream outStream(&outputFile);
+
+
+    outStream << "Victory!\n";
+
+
+    outputFile.close();
+    */
+
+
     sysCycleTimer->stop();
     displayBatteryTimer->stop();
 
