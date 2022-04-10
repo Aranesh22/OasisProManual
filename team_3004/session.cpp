@@ -80,3 +80,7 @@ bool Session::endSession(bool pressPower) {
     return softOffState;
 }
 
+int Session::elapseMinute(){
+    minsPassed++;
+    return minsPassed;
+}

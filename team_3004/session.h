@@ -24,6 +24,8 @@ public:
     int adjustIntensity(bool,bool,bool,bool);
     bool endSession(bool);
 
+    int elapseMinute();
+
 private:
     SessionLength* length;
     SessionType* type;
