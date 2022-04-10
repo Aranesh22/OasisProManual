@@ -36,43 +36,41 @@ void MainWindow::makeSave() {
 //        //First we must get all the recorded sessions and display them to the user
 
 
-
 //    }
-
-//    qInfo()<< "Main Window Save";
-//    vector<QString> toAdd = device->uploadSaveSession();
-//    if(toAdd.size() == 0) return;
-
-
-//    QTableWidget* t = ui->tableWidget;
-
-//    QTableWidgetItem* item_1 = new QTableWidgetItem;
-//    item_1->setIcon(QIcon(toAdd.at(1)));
+    qInfo()<< "Main Window Save";
+    vector<QString> toAdd = device->uploadSaveSession();
+    if(toAdd.size() == 0) return;
 
 
-//    QLabel* lbl_item_1 = new QLabel();
-//    lbl_item_1->setPixmap(QPixmap(toAdd.at(1)));
-//    lbl_item_1->setAlignment(Qt::AlignCenter);
+    QTableWidget* t = ui->tableWidget;
 
-//    QTableWidgetItem* item_2 = new QTableWidgetItem;
-//    item_2->setIcon(QIcon(toAdd.at(2)));
-
-//    QLabel* lbl_item_2 = new QLabel();
-//    lbl_item_2->setPixmap(QPixmap(toAdd.at(2)));
-//    lbl_item_2->setAlignment(Qt::AlignCenter);
-
-//    QTableWidgetItem* item_3 = new QTableWidgetItem;
-//    item_3->setText(toAdd.at(0));
-//    item_3->setTextAlignment(Qt::AlignCenter);
-//    item_3->setForeground(QBrush(QColor(0,255,0)));
-//    //text white
+    QTableWidgetItem* item_1 = new QTableWidgetItem;
+    item_1->setIcon(QIcon(toAdd.at(1)));
 
 
-//    t->insertRow( t->rowCount() );
-//    t->setCellWidget(t->rowCount()-2,1,lbl_item_1);
-//    t->setCellWidget(t->rowCount()-2,0,lbl_item_2);
-//    t->setItem(t->rowCount()-2,2,item_3);
-//    //tableWidget->insertRow( tableWidget->rowCount() );
+    QLabel* lbl_item_1 = new QLabel();
+    lbl_item_1->setPixmap(QPixmap(toAdd.at(1)));
+    lbl_item_1->setAlignment(Qt::AlignCenter);
+
+    QTableWidgetItem* item_2 = new QTableWidgetItem;
+    item_2->setIcon(QIcon(toAdd.at(2)));
+
+    QLabel* lbl_item_2 = new QLabel();
+    lbl_item_2->setPixmap(QPixmap(toAdd.at(2)));
+    lbl_item_2->setAlignment(Qt::AlignCenter);
+
+    QTableWidgetItem* item_3 = new QTableWidgetItem;
+    item_3->setText(toAdd.at(0));
+    item_3->setTextAlignment(Qt::AlignCenter);
+    item_3->setForeground(QBrush(QColor(0,255,0)));
+    //text white
+
+
+    t->insertRow( t->rowCount() );
+    t->setCellWidget(t->rowCount()-2,1,lbl_item_1);
+    t->setCellWidget(t->rowCount()-2,0,lbl_item_2);
+    t->setItem(t->rowCount()-2,2,item_3);
+    //tableWidget->insertRow( tableWidget->rowCount() );
 
 
     update();
