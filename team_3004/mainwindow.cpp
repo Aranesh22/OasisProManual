@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::makeSave() {
     qInfo()<< "Main Window Save";
+
+    QString curInt = QString::number((device->getCurSession())->getCurIntensity());
+    (device->allIntensities).push_back(curInt);
+
     vector<QString> toAdd = device->uploadSaveSession();
     if(toAdd.size() == 0) return;
 
