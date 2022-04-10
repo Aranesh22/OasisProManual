@@ -89,3 +89,5 @@ int Session::elapseMinute(){
 void Session::pause(){
     paused = true;
 }
+
+bool Session::isPaused(){ return paused;}

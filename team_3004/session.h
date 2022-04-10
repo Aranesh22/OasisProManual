@@ -28,6 +28,7 @@ public:
 
     void pause();
     void unpause();
+    bool isPaused();
 
 private:
     SessionLength* length;
