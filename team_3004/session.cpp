@@ -86,8 +86,9 @@ int Session::elapseMinute(){
     return minsPassed;
 }
 
-void Session::pause(){
-    paused = true;
-}
+void Session::pause(){ paused = true; }
 
-bool Session::isPaused(){ return paused;}
+void Session::unpause(){ paused = false; }
+
+bool Session::isPaused(){ return paused; }
+

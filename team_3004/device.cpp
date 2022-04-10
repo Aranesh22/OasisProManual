@@ -90,7 +90,7 @@ void Device::drainBattery(){
      */
 
     float step = (MAX_DRAIN - MIN_DRAIN) / MAX_INTENSITY;
-    float drained = (curSession != nullptr || curSession->isPaused() )? MIN_DRAIN + step * curSession->getCurIntensity() : MIN_DRAIN + step * MIN_INTENSITY;
+    float drained = (curSession == nullptr || curSession->isPaused()) ? MIN_DRAIN + step * MIN_INTENSITY : MIN_DRAIN + step * curSession->getCurIntensity();
     float remaining = battery->drain(drained);
 
     if(remaining <= 15) handleLowBattery();
