@@ -21,7 +21,8 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
 {
 
     battery = new Battery();
-    connection = none;
+//    connection = none;
+    connection = okay;
     power = off;
     outputtingAudio = false;
 
@@ -108,7 +109,6 @@ void Device::chargeBattery(){
 
 void Device::testForConnection(){
     qInfo() << "\tTest connection";
-    connection = CONNECTION_SIM; //need to change this to a variable, not a #define
 
     if(connection == none){
         qInfo("\tTest connection::No Connection detected!");
@@ -544,4 +544,8 @@ void Device::unpauseSession(){
     curSession->unpause();
     curUseCase = runningSession;
     sessionTimer->start(SESSION_INTERVAL);
+}
+
+void Device::simDisconnection(){
+    connection = none;
 }

@@ -105,6 +105,7 @@ void MainWindow::makeSelection() {
 
 void MainWindow::handleDisconnection(){
     qInfo() << "MainWindow::handleDisconnection()";
+    device->simDisconnection();
 
 }
 

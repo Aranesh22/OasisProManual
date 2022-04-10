@@ -54,6 +54,7 @@ public:
     void handleCheck();
     void drainBattery();
     void chargeBattery();
+    void simDisconnection();
 
     vector<QString> uploadSaveSession();
 
