@@ -365,6 +365,8 @@ void Device::turnOn(){
 
 void Device::turnOff(){
 
+
+
     /*
     QElapsedTimer timerTOff;
     timerTOff.start();
