@@ -26,6 +26,9 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     power = off;
     outputtingAudio = false;
 
+    ui->battery_progressBar->setValue(battery->getBatteryPercent());
+
+
     history = new HistoryManager();
 
     initSessionLengths();
@@ -45,9 +48,6 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
 
     sessionTimer = new QTimer(this);
     connect(sessionTimer, SIGNAL(timeout()), this, SLOT(elapseSession()));
-
-
-
 
 }
 
@@ -87,20 +87,23 @@ void Device::drainBattery(){
      * And divide the output of the above by 8
      *
      * This all assumes there is a session currently running. If there isn't, we just treat the program as if it were on the lowest intensity.
+     * Likewise, if the current session is paused due to a disconnect, we treat it like it had the lowest intensity.
      */
 
     float step = (MAX_DRAIN - MIN_DRAIN) / MAX_INTENSITY;
-    float drained = curSession != nullptr? MIN_DRAIN + step * curSession->getCurIntensity() : MIN_DRAIN + step * MIN_INTENSITY;
+    float drained = (curSession == nullptr || curSession->isPaused()) ? MIN_DRAIN + step * MIN_INTENSITY : MIN_DRAIN + step * curSession->getCurIntensity();
     float remaining = battery->drain(drained);
 
     if(remaining <= 15) handleLowBattery();
-
+    ui->battery_progressBar->setValue(battery->getBatteryPercent());
     qInfo("\tDrain battery - drained = %f, remaining = %f", drained, remaining);
+
 }
 
 
 void Device::chargeBattery(){
     battery->charge(ui->chargeBy->value());
+      ui->battery_progressBar->setValue(battery->getBatteryPercent());
 
 }
 
@@ -110,9 +113,13 @@ void Device::testForConnection(){
 
     if(connection == none){
         qInfo("\tTest connection::No Connection detected!");
-        curUseCase = loadingConnection;
-        //pause current session
+        curUseCase = blank;
+        pauseSession();
         displayConnection();
+    }
+
+    else{
+        if(curSession != nullptr && curSession->isPaused() ) unpauseSession();
     }
 }
 
@@ -536,4 +543,15 @@ void Device::elapseSession(){
         endSession();
         curUseCase = selectingSession;
     }
+}
+
+void Device::pauseSession(){
+    curSession->pause();
+    sessionTimer->stop();
+}
+
+void Device::unpauseSession(){
+    curSession->unpause();
+    curUseCase = runningSession;
+    sessionTimer->start(SESSION_INTERVAL);
 }

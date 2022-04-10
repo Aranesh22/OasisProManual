@@ -5,6 +5,7 @@
 #include "displayicon.h"
 #include <QTableWidget>
 #include <QTableWidgetItem>
+#include <fstream>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -22,46 +23,56 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Save, &QPushButton::pressed, this, &MainWindow::makeSave);
 
     connect(ui->pushButton_Disconnect, &QPushButton::pressed, this, &MainWindow::handleDisconnection);
+    connect(ui->pushButton_Connect, &QPushButton::pressed, this, &MainWindow::handleConnect);
     connect(ui->pushButton_BatteryDeath, &QPushButton::pressed, this, &MainWindow::handleDeadBattery);
     connect(ui->pushButton_Charge, &QPushButton::pressed, this, &MainWindow::handleCharge);
+    connect(ui->pushButton_FullCharge, &QPushButton::pressed, this, &MainWindow::handleFullCharge);
 
 }
 
 void MainWindow::makeSave() {
-    qInfo()<< "Main Window Save";
-    vector<QString> toAdd = device->uploadSaveSession();
-    if(toAdd.size() == 0) return;
+//    if (device->curSession == nullptr || device ->curSession = NULL) {
+//        //This is where loading a recorded session will take place
+//        //First we must get all the recorded sessions and display them to the user
 
 
-    QTableWidget* t = ui->tableWidget;
 
-    QTableWidgetItem* item_1 = new QTableWidgetItem;
-    item_1->setIcon(QIcon(toAdd.at(1)));
+//    }
 
-
-    QLabel* lbl_item_1 = new QLabel();
-    lbl_item_1->setPixmap(QPixmap(toAdd.at(1)));
-    lbl_item_1->setAlignment(Qt::AlignCenter);
-
-    QTableWidgetItem* item_2 = new QTableWidgetItem;
-    item_2->setIcon(QIcon(toAdd.at(2)));
-
-    QLabel* lbl_item_2 = new QLabel();
-    lbl_item_2->setPixmap(QPixmap(toAdd.at(2)));
-    lbl_item_2->setAlignment(Qt::AlignCenter);
-
-    QTableWidgetItem* item_3 = new QTableWidgetItem;
-    item_3->setText(toAdd.at(0));
-    item_3->setTextAlignment(Qt::AlignCenter);
-    item_3->setForeground(QBrush(QColor(0,255,0)));
-    //text white
+//    qInfo()<< "Main Window Save";
+//    vector<QString> toAdd = device->uploadSaveSession();
+//    if(toAdd.size() == 0) return;
 
 
-    t->insertRow( t->rowCount() );
-    t->setCellWidget(t->rowCount()-2,1,lbl_item_1);
-    t->setCellWidget(t->rowCount()-2,0,lbl_item_2);
-    t->setItem(t->rowCount()-2,2,item_3);
-    //tableWidget->insertRow( tableWidget->rowCount() );
+//    QTableWidget* t = ui->tableWidget;
+
+//    QTableWidgetItem* item_1 = new QTableWidgetItem;
+//    item_1->setIcon(QIcon(toAdd.at(1)));
+
+
+//    QLabel* lbl_item_1 = new QLabel();
+//    lbl_item_1->setPixmap(QPixmap(toAdd.at(1)));
+//    lbl_item_1->setAlignment(Qt::AlignCenter);
+
+//    QTableWidgetItem* item_2 = new QTableWidgetItem;
+//    item_2->setIcon(QIcon(toAdd.at(2)));
+
+//    QLabel* lbl_item_2 = new QLabel();
+//    lbl_item_2->setPixmap(QPixmap(toAdd.at(2)));
+//    lbl_item_2->setAlignment(Qt::AlignCenter);
+
+//    QTableWidgetItem* item_3 = new QTableWidgetItem;
+//    item_3->setText(toAdd.at(0));
+//    item_3->setTextAlignment(Qt::AlignCenter);
+//    item_3->setForeground(QBrush(QColor(0,255,0)));
+//    //text white
+
+
+//    t->insertRow( t->rowCount() );
+//    t->setCellWidget(t->rowCount()-2,1,lbl_item_1);
+//    t->setCellWidget(t->rowCount()-2,0,lbl_item_2);
+//    t->setItem(t->rowCount()-2,2,item_3);
+//    //tableWidget->insertRow( tableWidget->rowCount() );
 
 
     update();
@@ -103,10 +114,19 @@ void MainWindow::handleDeadBattery(){
 
 }
 
+void MainWindow::handleFullCharge(){
+    ui->chargeBy->setValue(99);
+    device->chargeBattery();
+//    ui->battery_progressBar->setValue(device->battery->getBatteryPercent());
 
+}
 
 void MainWindow::handleCharge(){
     device->chargeBattery();
+}
+
+void MainWindow::handleConnect(){
+    qInfo() << "handleConnect()";
 }
 
 
