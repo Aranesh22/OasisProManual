@@ -377,6 +377,10 @@ void Device::turnOff(){
     /* Try and open a file for output */
 
     QFile file("userData.txt");
+    if(!file.exists()){
+        qCritical() << "file not found";
+        return;
+    }
     if (!file.open(QIODevice::Append)) {
         qInfo() << "Cannot open file for writing.";
         return;
