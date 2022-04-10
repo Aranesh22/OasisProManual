@@ -13,6 +13,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QTableWidget>
+#include <QFile>
+#include <QTextStream>
 
 
 using namespace std;
@@ -357,7 +359,6 @@ void Device::turnOff(){
     timerTOff.start();
     qInfo("%"timerTOff.elapsed);
     */
-
 
     sysCycleTimer->stop();
 

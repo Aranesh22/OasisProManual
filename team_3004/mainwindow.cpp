@@ -31,12 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::makeSave() {
-//    if (device->curSession == nullptr || device ->curSession = NULL) {
-//        //This is where loading a recorded session will take place
-//        //First we must get all the recorded sessions and display them to the user
-
-
-//    }
     qInfo()<< "Main Window Save";
     vector<QString> toAdd = device->uploadSaveSession();
     if(toAdd.size() == 0) return;
