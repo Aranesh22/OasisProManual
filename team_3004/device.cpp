@@ -347,7 +347,7 @@ void Device::turnOff(){
     if(curSession != nullptr) endSession();
     power = off;
     curUseCase = blank;
-    clearHmTable();
+    //clearHmTable();
 
     for(DisplayIcon* di : icons){
         di->setIllumState(dim);
@@ -363,13 +363,17 @@ void Device::setSession(Session* s){
 
 void Device::clearHmTable() {
 
-    for (int i=0;i< ui->tableWidget->rowCount();i++) {
-            for (int j=0;j< ui->tableWidget->columnCount();j++) {
+
+    for (int i=0;i< (ui->tableWidget->rowCount());i++) {
+            qInfo("hellooooooooooooooooo");
+            for (int j=0;j< (ui->tableWidget->columnCount()) ;j++) {
                 QTableWidgetItem *item =  ui->tableWidget->item(i,j);
+                qInfo("LINDS JOIN BACKKKKKKKKKKK");
                 item->setIcon(QIcon(":/res/icons/unLit/black.png"));
 
             }
         }
+
 
 }
 
