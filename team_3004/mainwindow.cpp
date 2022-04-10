@@ -98,6 +98,7 @@ void MainWindow::makeSelection() {
 
 void MainWindow::handleDisconnection(){
     qInfo() << "MainWindow::handleDisconnection()";
+    device->simDisconnection();
 
 }
 
@@ -119,6 +120,7 @@ void MainWindow::handleCharge(){
 
 void MainWindow::handleConnect(){
     qInfo() << "handleConnect()";
+    device->simReconnect();
 }
 
 
