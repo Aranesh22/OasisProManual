@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_Save, &QPushButton::pressed, this, &MainWindow::makeSave);
 
     connect(ui->pushButton_Disconnect, &QPushButton::pressed, this, &MainWindow::handleDisconnection);
+    connect(ui->pushButton_Connect, &QPushButton::pressed, this, &MainWindow::handleConnect);
     connect(ui->pushButton_BatteryDeath, &QPushButton::pressed, this, &MainWindow::handleDeadBattery);
     connect(ui->pushButton_Charge, &QPushButton::pressed, this, &MainWindow::handleCharge);
     connect(ui->pushButton_FullCharge, &QPushButton::pressed, this, &MainWindow::handleFullCharge);
@@ -122,6 +123,10 @@ void MainWindow::handleFullCharge(){
 
 void MainWindow::handleCharge(){
     device->chargeBattery();
+}
+
+void MainWindow::handleConnect(){
+    qInfo() << "handleConnect()";
 }
 
 

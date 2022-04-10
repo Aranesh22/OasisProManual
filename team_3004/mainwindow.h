@@ -47,6 +47,7 @@ private slots:
     void handleDeadBattery();
     void handleCharge();
     void handleFullCharge();
+    void handleConnect();
 
 
 
