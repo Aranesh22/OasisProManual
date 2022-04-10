@@ -377,7 +377,7 @@ void Device::turnOff(){
 
     QFile file("userData.txt");
     if (!file.open(QIODevice::Append)) {
-        qInfo() << "Cannot open file for writing: ";
+        qInfo() << "Cannot open file for writing.";
         return;
     }
 
@@ -400,9 +400,10 @@ void Device::turnOff(){
 
         out << path_1 << " " << path_2 << " " << allIntensities.at(counter) << endl;
 
-
         ++counter;
     }
+
+    file.close();
 
 
     sysCycleTimer->stop();
