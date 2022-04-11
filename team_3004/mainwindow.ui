@@ -1512,7 +1512,7 @@
       <x>1230</x>
       <y>0</y>
       <width>343</width>
-      <height>467</height>
+      <height>517</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1527,7 +1527,7 @@
         <string notr="true">color: white;</string>
        </property>
        <property name="text">
-        <string>Simulate Extensions</string>
+        <string>Admin</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1558,7 +1558,8 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background: grey;
+        <string notr="true">border:  5px solid #79ABA6;
+color: #FFFC00;;
 padding: 20px;</string>
        </property>
        <property name="text">
@@ -1596,7 +1597,8 @@ padding: 20px;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background: grey;
+        <string notr="true">border:  5px solid #79ABA6;
+color: #FFFC00;
 padding: 20px;</string>
        </property>
        <property name="text">
@@ -1637,12 +1639,12 @@ padding: 20px;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-padding: 20px;
-background: gray;</string>
+        <string notr="true">padding: 20px;
+border:  5px solid #79ABA6;
+color: #FFFC00;</string>
        </property>
        <property name="text">
-        <string>Battery Death</string>
+        <string>Low Battery</string>
        </property>
       </widget>
      </item>
@@ -1669,8 +1671,9 @@ background: gray;</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">background: grey;
- padding: 20px;</string>
+          <string notr="true">border:  5px solid #79ABA6;
+color: #FFFC00;
+ padding: 10px;</string>
          </property>
          <property name="text">
           <string>Charge By</string>
@@ -1689,7 +1692,8 @@ background: gray;</string>
           <bool>true</bool>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: white; background: grey;</string>
+          <string notr="true">border:  5px solid #79ABA6;
+color: #FFFC00;</string>
          </property>
         </widget>
        </item>
@@ -1702,9 +1706,14 @@ background: gray;</string>
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
        <property name="styleSheet">
-        <string notr="true">background: grey;
- padding: 20px;</string>
+        <string notr="true">border:  5px solid #79ABA6;
+color: #FFFC00;
+padding: 20px;
+</string>
        </property>
        <property name="text">
         <string>Charge to 100%</string>
@@ -1720,7 +1729,8 @@ background: gray;</string>
      <item>
       <widget class="QProgressBar" name="battery_progressBar">
        <property name="styleSheet">
-        <string notr="true">color:white;</string>
+        <string notr="true">color: white;
+background: grey;</string>
        </property>
        <property name="value">
         <number>99</number>
