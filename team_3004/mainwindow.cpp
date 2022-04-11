@@ -84,6 +84,22 @@ void MainWindow::cellInfo(int row, int col) {
     update();
 }
 
+void MainWindow::moveUp() {
+    if (cur_row > 0) {
+        ui->tableWidget->clearSelection();
+        cur_row -= 1;
+        ui->tableWidget->selectRow(cur_row);
+    }
+}
+
+void MainWindow::moveDown() {
+    if (cur_row < lines) {
+        ui->tableWidget->clearSelection();
+        cur_row += 1;
+        ui->tableWidget->selectRow(cur_row);
+    }
+}
+
 void MainWindow::makeSave() {
     qInfo()<< "Main Window Save";
 
@@ -95,8 +111,9 @@ void MainWindow::makeSave() {
         }
 
         QTextStream in(&file);
-
+        lines = 0;
         while(!in.atEnd()) {
+            lines += 1;
             QString line = in.readLine();
             QStringList fields = line.split(" ");
 
@@ -132,7 +149,11 @@ void MainWindow::makeSave() {
 
         //connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(cellInfo(int,int)));
 
-        ui->tableWidget->selectRow(0);
+        cur_row = 0;
+        ui->tableWidget->selectRow(cur_row);
+
+        connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveUp);
+        connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveDown);
 
         update();
         return;

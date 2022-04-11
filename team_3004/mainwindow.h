@@ -41,6 +41,10 @@ private slots:
     void show_power();
     void moveNext();
     void moveBack();
+
+    void moveUp();
+    void moveDown();
+
     void makeSelection();
 
     void handleDisconnection();
@@ -60,6 +64,8 @@ private:
 
     void makeSave();
     void handleSelection();
+    int cur_row;
+    int lines;
 
 
 
