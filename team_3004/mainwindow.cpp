@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <definitions.h>
 #include <QTime>
 
 #include "displayicon.h"
@@ -58,14 +59,29 @@ void MainWindow::cellInfo(int row, int col) {
 
         ++counter;
     }
+
     //Current session info is in fields
-    /*
+
     QString getNumber = fields[0];
     QRegExp rx(QLatin1Literal("[^0-9]+"));
     auto&& parts = getNumber.split(rx, QString::SkipEmptyParts);
-
     int actualLength = parts[0].toInt();
-    */
+
+    QString the_sl = fields[0];
+    QString the_st = fields[1];
+    fields[0].replace("Lit","unLit");
+    fields[1].replace("Lit","unLit");
+
+
+    //Set current session to new one;
+    SessionLength* sl = new SessionLength(actualLength,false,new DisplayIcon(the_sl , fields[0], ui->session_alpha));
+
+    SessionType* st = new SessionType(0.5,3,pulse,new DisplayIcon(the_st , fields[1], ui->session_alpha));
+
+    Session* newSess = new Session(sl,st);
+    device->setSession(newSess);
+
+    update();
 }
 
 void MainWindow::makeSave() {
@@ -155,6 +171,15 @@ void MainWindow::makeSave() {
     t->setCellWidget(t->rowCount()-2,0,lbl_item_2);
     t->setItem(t->rowCount()-2,2,item_3);
     //tableWidget->insertRow( tableWidget->rowCount() );
+
+    /*
+    testing if getpath works
+    vector<Session*> testVector = (device->getHistory())->getSessions();
+    for (Session* s : testVector) {
+        QString qs = ((s->getLength())->getIcon())->getPath();
+        qInfo() << qs;
+    }
+    */
 
 
     update();

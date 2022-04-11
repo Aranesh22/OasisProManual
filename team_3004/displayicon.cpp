@@ -36,6 +36,11 @@ DisplayIcon::DisplayIcon(QString litPath, QString dimPath, QString flashPath, QP
 QString DisplayIcon::getPath(){return iconMap[illum];}
 QPushButton* DisplayIcon::getUiElement(){return uiElement;}
 
+//setters
+void DisplayIcon::setPath(QString newPath) {
+    iconMap[illum] = newPath;
+}
+
 void DisplayIcon::setIllumState(IllumState newIllum)    {
 //check if the icon setting to flash is able to flash
     if(illum == newIllum)
