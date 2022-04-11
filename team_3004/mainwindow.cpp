@@ -129,7 +129,10 @@ void MainWindow::makeSave() {
 
         //Here we must handle changing the current session type, length and intensity
         //connect(ui->tableWidget, &QTableWidget::pressed, this, &MainWindow::handleSelection);
-        connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(cellInfo(int,int)));
+
+        //connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(cellInfo(int,int)));
+
+        ui->tableWidget->selectRow(0);
 
         update();
         return;
