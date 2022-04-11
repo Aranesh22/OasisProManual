@@ -64,6 +64,7 @@ private:
 
     void makeSave();
     void handleSelection();
+    void showRowInfo();
     int cur_row;
     int lines;
 

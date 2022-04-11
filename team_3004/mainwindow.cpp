@@ -100,6 +100,32 @@ void MainWindow::moveDown() {
     }
 }
 
+void MainWindow::showRowInfo() {
+    QFile file("/home/student/3004/comp3004Project/build-team_3004-Desktop-Debug/userData.txt");
+    if(!file.open(QIODevice::ReadOnly)) {
+        qInfo("Error opening file.");
+    }
+
+    QTextStream in(&file);
+
+    int counter = 0;
+    QString line;
+    QStringList fields;
+    while(!in.atEnd()) {
+        line = in.readLine();
+        fields = line.split(" ");
+
+        if (counter == cur_row) {
+            break;
+        }
+
+        ++counter;
+    }
+    qInfo() << fields[0];
+    qInfo() << fields[1];
+    qInfo() << fields[2];
+}
+
 void MainWindow::makeSave() {
     qInfo()<< "Main Window Save";
 
@@ -155,6 +181,7 @@ void MainWindow::makeSave() {
 
         connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveUp);
         connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveDown);
+        connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::showRowInfo);
 
         update();
         return;
