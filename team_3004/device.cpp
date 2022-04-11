@@ -92,6 +92,7 @@ void Device::drainBattery(){
 
     float step = (MAX_DRAIN - MIN_DRAIN) / MAX_INTENSITY;
     float drained = (curSession == nullptr || curSession->isPaused()) ? MIN_DRAIN : MIN_DRAIN + step * (curSession->getCurIntensity() - 1);
+    drained /= 2; //to slow down charging; it's too quick in this sim
     float remaining = battery->drain(drained);
 
     if(remaining <= 15) handleLowBattery();
