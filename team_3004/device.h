@@ -110,9 +110,7 @@ private:
     void decIntensity();
     void endSession();
     void pauseSession();
-    void unpauseSession();
-    void selectUpSession();
-    void selectDownSession();
+
 
     //helpers
     int indexOf(SessionLength*);

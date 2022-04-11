@@ -169,30 +169,15 @@ void Device::displayConnection(){
 void Device::handleUpArrow(){
     if(curUseCase == selectingSession) nextSesType();
     else if(curUseCase == runningSession) incIntensity();
-    else if(curUseCase == loadingSession) selectUpSession();
+
 }
 
 void Device::handleDownArrow(){
     if(curUseCase == selectingSession) prevSesType();
     else if(curUseCase == runningSession) decIntensity();
-    else if(curUseCase == loadingSession) selectDownSession();
 
 }
 
-void Device::selectUpSession() {
-
-
-}
-
-void Device::selectDownSession() {
-
-    int x = 1;
-    qInfo("DOWNNNNN SELECTEDDDDDDDDDDD");
-    ui->tableWidget->selectRow(x);
-
-
-
-}
 
 void Device::handlePowerButton(){
     if(power == off) turnOn();
