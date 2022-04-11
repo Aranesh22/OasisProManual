@@ -24,6 +24,11 @@ bool Session::isLeftActive(){return leftActive;}
 bool Session::isRightActive(){return rightActive;}
 int Session::getMinsPassed(){return minsPassed;}
 
+//setters
+void Session::setCurIntensity(int newIntensity) {
+    curIntensity = newIntensity;
+}
+
 void Session::incInten(){
     if(curIntensity != MAX_INTENSITY) curIntensity++;
 }

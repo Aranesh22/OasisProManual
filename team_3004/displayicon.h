@@ -20,6 +20,7 @@ public:
     DisplayIcon(QString, QString, QString, QPushButton*);
     //getters
     QString getPath();
+    void setPath(QString);
     QString getPathAt(IllumState);
     QPushButton* getUiElement();
     //setters

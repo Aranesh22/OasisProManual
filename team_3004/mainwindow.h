@@ -49,6 +49,8 @@ private slots:
     void handleFullCharge();
     void handleConnect();
 
+    void cellInfo(int,int);
+
 
 
 private:
@@ -57,6 +59,7 @@ private:
 //UNUSED  __________________________________________________________________________________
 
     void makeSave();
+    void handleSelection();
 
 
 

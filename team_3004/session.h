@@ -17,6 +17,7 @@ public:
     bool isLeftActive();
     bool isRightActive();
     int getMinsPassed();
+    void setCurIntensity(int);
 
     void incInten();
     void decInten();
