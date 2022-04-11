@@ -59,6 +59,7 @@ public:
     void simDisconnection();
     void simReconnect();
     void changeToLoadSession();
+    void unpauseSession();
 
     vector<QString> uploadSaveSession();
 
