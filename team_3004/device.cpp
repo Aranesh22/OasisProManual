@@ -186,6 +186,11 @@ void Device::selectUpSession() {
 
 void Device::selectDownSession() {
 
+    int x = 1;
+    qInfo("DOWNNNNN SELECTEDDDDDDDDDDD");
+    ui->tableWidget->selectRow(x);
+
+
 
 }
 
@@ -249,6 +254,11 @@ void Device::nextSesType() {
     allTypes[i]->getCESIcon()->toggleIllum();
 }
 
+void Device:: changeToLoadSession() {
+
+    curUseCase = loadingSession;
+
+}
 vector<QString> Device::uploadSaveSession() {
     if(curUseCase != runningSession){
         vector<QString> x;
@@ -271,7 +281,6 @@ vector<QString> Device::uploadSaveSession() {
     data.push_back(curInt);
     data.push_back((sl->getIcon())->getPathAt(dim));
     data.push_back((st->getIcon())->getPathAt(dim));
-
     return data;
 
     /*

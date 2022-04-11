@@ -110,6 +110,7 @@ void MainWindow::makeSave() {
             qInfo("Error opening file.");
         }
 
+        device->changeToLoadSession();
         QTextStream in(&file);
         lines = 0;
         while(!in.atEnd()) {
