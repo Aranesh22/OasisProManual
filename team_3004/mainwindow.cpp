@@ -94,6 +94,7 @@ void MainWindow::makeSave() {
             qInfo("Error opening file.");
         }
 
+        device->changeToLoadSession();
         QTextStream in(&file);
 
         while(!in.atEnd()) {
