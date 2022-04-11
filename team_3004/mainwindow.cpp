@@ -93,7 +93,7 @@ void MainWindow::moveUp() {
 }
 
 void MainWindow::moveDown() {
-    if (cur_row < lines) {
+    if (cur_row < lines-1) {
         ui->tableWidget->clearSelection();
         cur_row += 1;
         ui->tableWidget->selectRow(cur_row);
@@ -110,7 +110,7 @@ void MainWindow::makeSave() {
             qInfo("Error opening file.");
         }
 
-        device->changeToLoadSession();
+        //device->changeToLoadSession();
         QTextStream in(&file);
         lines = 0;
         while(!in.atEnd()) {
