@@ -157,7 +157,6 @@ void Device::displayConnection(){
     delayBy(2);
     icons[ icons.size()-3 ] -> setIllumState(dim);
     icons[ icons.size()-4 ] -> setIllumState(lit);
-//    curSesType->getCESIcon()->setIllumState(lit);
     resetGraph();
 }
 
@@ -185,6 +184,7 @@ void Device::handlePowerButton(){
 
 void Device::displayBatteryLevel(){
     qInfo("Displaying battery");
+    resetGraph();
 
     for(int i = 1; i <= battery->getBatteryLevel(); i++){
         if(battery->getBatteryLevel() > 2) icons[i]->setIllumState(lit);
@@ -193,7 +193,7 @@ void Device::displayBatteryLevel(){
 
     delayBy(2);
     resetGraph();
-
+    if(curUseCase == runningSession) populateGraphSession();
 
 }
 
@@ -580,4 +580,9 @@ void Device::simDisconnection(){
 
 void Device::simReconnect(){
     connection = okay;
+}
+
+void Device::populateGraphSession(){
+    for(int i=1; i<curSession->getCurIntensity(); i++) icons[i]->setIllumState(lit);
+    icons[curSession->getCurIntensity() ] -> setIllumState(flashing);
 }
