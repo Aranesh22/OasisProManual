@@ -164,19 +164,32 @@ void Device::displayConnection(){
 
 void Device::loadSession(QString litSessTP, QString litSessLP, QString inten) {
 
-    for (SessionType *st:: allTypes) {
+    curSesType->getIcon()->setIllumState(dim);
+    curSesLength->getIcon()->setIllumState(dim);
+
+    for (SessionType* st: allTypes) {
 
         if(st->getIcon()->getPathAt(lit) == litSessTP) {
 
             curSesType = st;
+            QString curStPath = curSesType->getIcon()->getPath();
+            //curStPath.replace("Lit","unLit");
+            curSesType->getIcon()->setPath(curStPath);
+            break;
         }
     }
 
-    for (SessionLength *sl:: allLengths) {
+    for (SessionLength* sl: allLengths) {
 
         if(sl->getIcon()->getPathAt(lit) == litSessLP) {
 
             curSesLength = sl;
+            QString curSLPath = curSesLength->getIcon()->getPath();
+            curSLPath.replace("Lit","unLit");
+            //curSesLength->getIcon()->setPath(curSLPath);
+            curSesLength->getIcon()->setIllumState(lit);
+            break;
+
         }
     }
 
@@ -218,7 +231,6 @@ void Device::displayBatteryLevel(){
         if(battery->getBatteryLevel() > 2) icons[i]->setIllumState(lit);
         if(battery->getBatteryLevel() <= 2) icons[i]->setIllumState(flashing);
     }
-
     delayBy(2);
     resetGraph();
 
@@ -319,6 +331,7 @@ void Device::startSession(){
     curSesType->getIcon()->setIllumState(flashing);
     delayBy(5);
     curSesType->getIcon()->setIllumState(lit);
+
 
     //session is now running
     curSession = new Session(curSesLength, curSesType);
