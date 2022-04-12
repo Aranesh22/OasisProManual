@@ -121,6 +121,8 @@ void MainWindow::showRowInfo() {
 
         ++counter;
     }
+
+    device->loadSession(fields[1],fields[0],fields[2]);
     qInfo() << fields[0];
     qInfo() << fields[1];
     qInfo() << fields[2];
