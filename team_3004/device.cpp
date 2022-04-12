@@ -50,7 +50,6 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
 
     sessionTimer = new QTimer(this);
     connect(sessionTimer, SIGNAL(timeout()), this, SLOT(elapseSession()));
-
 }
 
 
@@ -396,6 +395,9 @@ void Device::turnOn(){
     //turn on the power button
     icons[0]->toggleIllum();
 
+    //display the table
+    ui->tableWidget->setVisible(false);
+
     //display battery
     curUseCase = displayingBattery;
     displayBatteryLevel();
@@ -409,7 +411,6 @@ void Device::turnOn(){
     //starts the timers
     sysCycleTimer->start(SYSCYCLE_INTERVAL);
     displayBatteryTimer->start(DISPLAY_BATTERY_INTERVAL);
-
 }
 
 void Device::turnOff(){
@@ -437,38 +438,7 @@ void Device::setSession(Session* s){
 }
 
 void Device::clearHmTable() {
-
-
-    QFile file("userData.txt");
-
-    if (!file.open(QIODevice::Append)) {
-        qInfo() << "Cannot open file for writing.";
-        return;
-    }
-
-    QTextStream out(&file);
-
-    vector<Session*> toDisplay = history->getSessions();
-    int counter = 0;
-    for (Session* s : toDisplay) {
-
-        SessionLength* sl = s->getLength();
-        SessionType* st = s->getType();
-
-        DisplayIcon* di_length = sl->getIcon();
-        DisplayIcon* di_type = st->getIcon();
-
-        QString path_1 = di_length->getPath();
-        QString path_2 = di_type->getPath();
-
-        out << path_1 << " " << path_2 << " " << allIntensities.at(counter) << endl;
-
-        ++counter;
-    }
-
-    file.close();
-
-
+    ui->tableWidget->setVisible(false);
 }
 
 
