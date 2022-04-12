@@ -31,7 +31,7 @@ Device::Device(Ui::MainWindow* ui) : ui(ui)
     ui->battery_progressBar->setValue(battery->getBatteryPercent());
 
 
-    history = new HistoryManager();
+    history = new HistoryManager(ui->tableWidget);
 
     initSessionLengths();
     initSessionTypes();
@@ -223,6 +223,13 @@ void Device::handlePowerButton(){
 //    else if (curUseCase == runningSession) displaySoftOn();
 }
 
+void Device::handleSave(){
+    if(curUseCase == runningSession) saveSession();
+}
+
+void Device::saveSession(){
+    history->SaveSession(curSession);
+}
 
 void Device::displayBatteryLevel(){
     qInfo("Displaying battery");
@@ -406,33 +413,40 @@ void Device::turnOn(){
 }
 
 void Device::turnOff(){
+    sysCycleTimer->stop();
+    displayBatteryTimer->stop();
 
+    //if a session is running, then end it
+    if(curSession != nullptr) endSession();
+    power = off;
+    curUseCase = blank;
 
+    for(DisplayIcon* di : icons){
+        di->setIllumState(dim);
+    }
 
-    /*
-    QElapsedTimer timerTOff;
-    timerTOff.start();
-    qInfo("%"timerTOff.elapsed);
-    */
+    curUseCase = blank;
+    battery->powerOff();
 
-    // /home/student/Desktop/COMP3004/Project/comp3004Project/team_3004/userData.txt
-    // :/res/userData/userData.txt
+    clearHmTable();
 
-    /* Try and open a file for output */
+}
+
+void Device::setSession(Session* s){
+    curSession = s;
+}
+
+void Device::clearHmTable() {
+
 
     QFile file("userData.txt");
-    if(!file.exists()){
-        qCritical() << "file not found";
-        return;
-    }
+
     if (!file.open(QIODevice::Append)) {
         qInfo() << "Cannot open file for writing.";
         return;
     }
 
     QTextStream out(&file);
-
-    //out << "Thomas M. Disch: " << 334 << endl;
 
     vector<Session*> toDisplay = history->getSessions();
     int counter = 0;
@@ -453,42 +467,6 @@ void Device::turnOff(){
     }
 
     file.close();
-
-
-    sysCycleTimer->stop();
-    displayBatteryTimer->stop();
-
-    //if a session is running, then end it
-    if(curSession != nullptr) endSession();
-    power = off;
-    curUseCase = blank;
-    //clearHmTable();
-
-    for(DisplayIcon* di : icons){
-        di->setIllumState(dim);
-    }
-
-    curUseCase = blank;
-    battery->powerOff();
-
-}
-
-void Device::setSession(Session* s){
-    curSession = s;
-}
-
-void Device::clearHmTable() {
-
-
-    for (int i=0;i< (ui->tableWidget->rowCount());i++) {
-            qInfo("hellooooooooooooooooo");
-            for (int j=0;j< (ui->tableWidget->columnCount()) ;j++) {
-                QTableWidgetItem *item =  ui->tableWidget->item(i,j);
-                qInfo("LINDS JOIN BACKKKKKKKKKKK");
-                item->setIcon(QIcon(":/res/icons/unLit/black.png"));
-
-            }
-        }
 
 
 }

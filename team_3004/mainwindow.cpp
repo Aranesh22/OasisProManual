@@ -122,6 +122,7 @@ void MainWindow::showRowInfo() {
         ++counter;
     }
 
+    if(counter == 0 ) return;
     device->loadSession(fields[1],fields[0],fields[2]);
     qInfo() << fields[0];
     qInfo() << fields[1];
@@ -132,9 +133,11 @@ void MainWindow::showRowInfo() {
 }
 
 void MainWindow::makeSave() {
+    device->handleSave();
+    return;
     qInfo()<< "Main Window Save";
 
-    if (device->getCurSession() == NULL || device->getCurSession() == nullptr) {
+    if (device->getCurUseCase() != runningSession) {
         cur_row = 0;
         QFile file("userData.txt");
         if(!file.open(QIODevice::ReadOnly)) {

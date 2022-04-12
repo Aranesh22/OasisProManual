@@ -3,19 +3,25 @@
 
 #include <vector>
 #include "session.h"
+#include "ui_mainwindow.h"
+
+#include <QTableWidget>
+
 
 using namespace std;
 
-class HistoryManager
+class HistoryManager : public QObject
 {
+    Q_OBJECT
 public:
-    HistoryManager();
+    HistoryManager(QTableWidget* );
     void SaveSession(Session* );
     Session* loadSession(Session* );
     Session* deleteSession(Session* );
     vector<Session*> getSessions();
 
 private:
+    QTableWidget* table;
     bool isLit;
     vector<Session*> sessions;
     int curSessionIndex;

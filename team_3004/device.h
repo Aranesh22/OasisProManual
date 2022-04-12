@@ -123,6 +123,8 @@ private:
     void displaySoftOn();
     void populateGraphSession();
 
+    void saveSession();
+
 };
 
 #endif // DEVICE_H
