@@ -71,3 +71,24 @@ Session* HistoryManager::deleteSession(Session* toDelete) {
 std::vector<Session*> HistoryManager::getSessions() {
     return sessions;
 }
+
+void HistoryManager::activate(){
+    curSessionIndex = 0;
+    table->selectRow(0);
+}
+
+void HistoryManager::selectRow(int i){
+    table->selectRow(i);
+}
+
+void HistoryManager::nextSession(){
+    table->clearSelection();
+    if(curSessionIndex != sessions.size()-1 ) curSessionIndex++;
+    table->selectRow(curSessionIndex);
+}
+
+void HistoryManager::prevSession(){
+    table->clearSelection();
+    if(curSessionIndex != 0 ) curSessionIndex--;
+    table->selectRow(curSessionIndex);
+}

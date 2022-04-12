@@ -205,13 +205,14 @@ void Device::loadSession(QString litSessTP, QString litSessLP, QString inten) {
 void Device::handleUpArrow(){
     if(curUseCase == selectingSession) nextSesType();
     else if(curUseCase == runningSession) incIntensity();
+    else if(curUseCase == loadingSession) upSession();
 
 }
 
 void Device::handleDownArrow(){
     if(curUseCase == selectingSession) prevSesType();
     else if(curUseCase == runningSession) decIntensity();
-
+    else if(curUseCase == loadingSession) downSession();
 }
 
 
@@ -224,6 +225,7 @@ void Device::handlePowerButton(){
 
 void Device::handleSave(){
     if(curUseCase == runningSession) saveSession();
+    else if(curUseCase == selectingSession) activateHistory();
 }
 
 void Device::saveSession(){
@@ -396,7 +398,7 @@ void Device::turnOn(){
     icons[0]->toggleIllum();
 
     //display the table
-    ui->tableWidget->setVisible(false);
+    ui->tableWidget->setVisible(true);
 
     //display battery
     curUseCase = displayingBattery;
@@ -617,4 +619,17 @@ void Device::simReconnect(){
 void Device::populateGraphSession(){
     for(int i=1; i<curSession->getCurIntensity(); i++) icons[i]->setIllumState(lit);
     icons[curSession->getCurIntensity() ] -> setIllumState(flashing);
+}
+
+void Device::activateHistory(){
+    curUseCase = loadingSession;
+    history->activate();
+}
+
+void Device::downSession(){
+    history->nextSession();
+}
+
+void Device::upSession(){
+    history->prevSession();
 }

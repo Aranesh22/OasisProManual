@@ -20,11 +20,19 @@ public:
     Session* deleteSession(Session* );
     vector<Session*> getSessions();
 
+    //ui
+    void activate();
+    void nextSession();
+    void prevSession();
+
 private:
     QTableWidget* table;
     bool isLit;
     vector<Session*> sessions;
     int curSessionIndex;
+
+    //ui
+    void selectRow(int);
 
 
 };

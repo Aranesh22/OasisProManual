@@ -113,6 +113,9 @@ private:
     void endSession();
     void pauseSession();
 
+    void downSession();
+    void upSession();
+
 
     //helpers
     int indexOf(SessionLength*);
@@ -124,6 +127,8 @@ private:
     void populateGraphSession();
 
     void saveSession();
+    void activateHistory();
+    void loadSession();
 
 };
 
