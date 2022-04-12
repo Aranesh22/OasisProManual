@@ -316,8 +316,6 @@ void Device::displaySoftOn(){
     qInfo("DISPLAY SOFT ON");
     resetGraph();
 
-    //NEEDS TO HANDLE UP/DOWN ARROW INTERRUPTION
-
     curUseCase = softOn;
     for(int i=1; i<=curSession->getCurIntensity(); i++){
         icons[i]->setIllumState(lit);
