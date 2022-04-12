@@ -161,44 +161,22 @@ void Device::displayConnection(){
     resetGraph();
 }
 
-void Device::loadSession(QString litSessTP, QString litSessLP, QString inten) {
+void Device::loadSession() {
+    int r = history->clear();
+    QString test = ui->tableWidget->item(r, 2)->text();
+    int inten = test.toInt();
+    curSesType = history->getCurSession()->getType();
+    curSesLength = history->getCurSession()->getLength();
 
-    curSesType->getIcon()->setIllumState(dim);
-    curSesLength->getIcon()->setIllumState(dim);
-
-    for (SessionType* st: allTypes) {
-
-        if(st->getIcon()->getPathAt(lit) == litSessTP) {
-
-            curSesType = st;
-            QString curStPath = curSesType->getIcon()->getPath();
-            //curStPath.replace("Lit","unLit");
-            curSesType->getIcon()->setPath(curStPath);
-            break;
-        }
-    }
-
-    for (SessionLength* sl: allLengths) {
-
-        if(sl->getIcon()->getPathAt(lit) == litSessLP) {
-
-            curSesLength = sl;
-            QString curSLPath = curSesLength->getIcon()->getPath();
-            curSLPath.replace("Lit","unLit");
-            //curSesLength->getIcon()->setPath(curSLPath);
-            curSesLength->getIcon()->setIllumState(lit);
-            break;
-
-        }
-    }
+    //update UI
+    curSesType->getIcon()->setIllumState(lit);
+    curSesLength->getIcon()->setIllumState(lit);
 
     startSession();
 
-    for(int i =1; i < inten.toInt(); i++) {
+    for(int i=1; i<=inten; i++) incIntensity();
+//    icons[history->getCurSession()->getCurIntensity()] -> setIllumState(flashing);
 
-
-        incIntensity();
-    }
 }
 
 //user inputs
@@ -248,6 +226,7 @@ void Device::displayBatteryLevel(){
 
 void Device::handleCheck(){
     if(curUseCase == selectingSession) startSession();
+    else if(curUseCase == loadingSession) loadSession();
 }
 
 void Device::nextSesLen(){
@@ -299,7 +278,7 @@ vector<QString> Device::uploadSaveSession() {
     history->SaveSession(curSession);
     //PRINT OUT THE VECTORS IMAGES PATHS
 
-    vector<Session*> allSessions = history->getSessions();
+//    vector<Session*> allSessions = history->getSessions();
     vector<DisplayIcon*> icons;
 
     SessionLength* sl = curSession->getLength();
@@ -623,6 +602,8 @@ void Device::populateGraphSession(){
 
 void Device::activateHistory(){
     curUseCase = loadingSession;
+    curSesType->getIcon()->setIllumState(dim);
+    curSesLength->getIcon()->setIllumState(dim);
     history->activate();
 }
 

@@ -123,7 +123,7 @@ void MainWindow::showRowInfo() {
     }
 
     if(counter == 0 ) return;
-    device->loadSession(fields[1],fields[0],fields[2]);
+//    device->loadSession(fields[1],fields[0],fields[2]);
     qInfo() << fields[0];
     qInfo() << fields[1];
     qInfo() << fields[2];

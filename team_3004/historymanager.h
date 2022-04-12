@@ -18,12 +18,13 @@ public:
     void SaveSession(Session* );
     Session* loadSession(Session* );
     Session* deleteSession(Session* );
-    vector<Session*> getSessions();
+    Session* getCurSession();
 
     //ui
     void activate();
     void nextSession();
     void prevSession();
+    int clear();
 
 private:
     QTableWidget* table;

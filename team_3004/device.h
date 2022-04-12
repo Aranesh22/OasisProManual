@@ -60,7 +60,7 @@ public:
     void simReconnect();
     void changeToLoadSession();
     void unpauseSession();
-    void loadSession(QString, QString, QString);
+    void loadSession();
 
     vector<QString> uploadSaveSession();
 
@@ -128,7 +128,6 @@ private:
 
     void saveSession();
     void activateHistory();
-    void loadSession();
 
 };
 
