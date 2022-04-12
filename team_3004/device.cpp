@@ -162,8 +162,32 @@ void Device::displayConnection(){
     resetGraph();
 }
 
+void Device::loadSession(QString litSessTP, QString litSessLP, QString inten) {
+
+    for (SessionType *st:: allTypes) {
+
+        if(st->getIcon()->getPathAt(lit) == litSessTP) {
+
+            curSesType = st;
+        }
+    }
+
+    for (SessionLength *sl:: allLengths) {
+
+        if(sl->getIcon()->getPathAt(lit) == litSessLP) {
+
+            curSesLength = sl;
+        }
+    }
+
+    startSession();
+
+    for(int i =1; i < inten.toInt(); i++) {
 
 
+        incIntensity();
+    }
+}
 
 //user inputs
 void Device::handleUpArrow(){

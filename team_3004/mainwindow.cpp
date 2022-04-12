@@ -124,6 +124,9 @@ void MainWindow::showRowInfo() {
     qInfo() << fields[0];
     qInfo() << fields[1];
     qInfo() << fields[2];
+
+    //call device function
+    //Pass into Session
 }
 
 void MainWindow::makeSave() {
