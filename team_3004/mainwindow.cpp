@@ -39,7 +39,7 @@ void MainWindow::handleSelection() {
 
 void MainWindow::cellInfo(int row, int col) {
     //Now that we have row and column we must find info from that row
-    QFile file("/home/student/3004/comp3004Project/build-team_3004-Desktop-Debug/userData.txt");
+    QFile file("userData.txt");
     if(!file.open(QIODevice::ReadOnly)) {
         qInfo("Error opening file.");
     }
@@ -101,9 +101,9 @@ void MainWindow::moveDown() {
 }
 
 void MainWindow::showRowInfo() {
-    QFile file("/home/student/3004/comp3004Project/build-team_3004-Desktop-Debug/userData.txt");
+    QFile file("userData.txt");
     if(!file.open(QIODevice::ReadOnly)) {
-        qInfo("Error opening file.");
+        qInfo("Error opening file. showRowInfo");
     }
 
     QTextStream in(&file);
@@ -136,7 +136,7 @@ void MainWindow::makeSave() {
 
     if (device->getCurSession() == NULL || device->getCurSession() == nullptr) {
         cur_row = 0;
-        QFile file("/home/student/3004/comp3004Project/build-team_3004-Desktop-Debug/userData.txt");
+        QFile file("userData.txt");
         if(!file.open(QIODevice::ReadOnly)) {
             qInfo("Error opening file.");
         }
@@ -287,8 +287,10 @@ void MainWindow::handleDisconnection(){
 }
 
 void MainWindow::handleDeadBattery(){
-    qInfo() << "MainWindow::handleDeadBattery()";
 
+    float drainBy = (device->getBattery()->getBatteryPercent() >= 15) ? device->getBattery()->getBatteryPercent() - 15 : 0 ;
+    device->getBattery()->drain(drainBy);
+    ui->battery_progressBar->setValue(device->getBattery()->getBatteryPercent());
 }
 
 void MainWindow::handleFullCharge(){
