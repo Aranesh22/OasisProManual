@@ -174,8 +174,7 @@ void Device::loadSession() {
 
     startSession();
 
-    for(int i=1; i<=inten; i++) incIntensity();
-//    icons[history->getCurSession()->getCurIntensity()] -> setIllumState(flashing);
+    for(int i=1; i<inten; i++) incIntensity();
 
 }
 
