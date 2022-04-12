@@ -121,6 +121,7 @@ private:
     void delayBy(int);
     void resetGraph();
     void displaySoftOn();
+    void populateGraphSession();
 
 };
 
