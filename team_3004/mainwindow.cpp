@@ -135,7 +135,7 @@ void MainWindow::makeSave() {
     qInfo()<< "Main Window Save";
 
     if (device->getCurSession() == NULL || device->getCurSession() == nullptr) {
-
+        cur_row = 0;
         QFile file("/home/student/3004/comp3004Project/build-team_3004-Desktop-Debug/userData.txt");
         if(!file.open(QIODevice::ReadOnly)) {
             qInfo("Error opening file.");
@@ -144,6 +144,7 @@ void MainWindow::makeSave() {
         //device->changeToLoadSession();
         QTextStream in(&file);
         lines = 0;
+        int counter = 0;
         while(!in.atEnd()) {
             lines += 1;
             QString line = in.readLine();
@@ -154,6 +155,14 @@ void MainWindow::makeSave() {
             QString path_1 = fields[0];
             QString path_2 = fields[1];
             QString intensity = fields[2];
+
+            qInfo() << path_1;
+
+            if (counter != cur_row) {
+                path_1.replace("Lit","unLit");
+                path_1.replace("sessionTimes","session_times");
+                path_2.replace("Lit","unLit");
+            }
 
             QLabel* item_1 = new QLabel();
             item_1->setPixmap(QPixmap(path_1));
@@ -172,6 +181,7 @@ void MainWindow::makeSave() {
             table->setCellWidget(table->rowCount()-2,1,item_1);
             table->setCellWidget(table->rowCount()-2,0,item_2);
             table->setItem(table->rowCount()-2,2,item_3);
+            ++counter;
         }
 
         file.close();
@@ -181,12 +191,14 @@ void MainWindow::makeSave() {
 
         //connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(cellInfo(int,int)));
 
-        cur_row = 0;
+
         ui->tableWidget->selectRow(cur_row);
 
         connect(ui->pushButton_Up, &QPushButton::pressed, this, &MainWindow::moveUp);
         connect(ui->pushButton_Down, &QPushButton::pressed, this, &MainWindow::moveDown);
         connect(ui->pushButton_Select, &QPushButton::pressed, this, &MainWindow::showRowInfo);
+
+        //table->setItem(table->rowCount()-2,2,item_3);
 
         update();
         return;
