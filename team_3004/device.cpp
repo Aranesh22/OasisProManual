@@ -328,11 +328,12 @@ void Device::startSession(){
     }
 
     //flash for 5 seconds
+    displayBatteryTimer->stop();
     curUseCase = blank; //prevents user from editing data while button is flashing
     curSesType->getIcon()->setIllumState(flashing);
     delayBy(5);
     curSesType->getIcon()->setIllumState(lit);
-
+    displayBatteryTimer->start(DISPLAY_BATTERY_INTERVAL);
 
     //session is now running
     curSession = new Session(curSesLength, curSesType);
