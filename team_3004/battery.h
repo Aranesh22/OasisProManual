@@ -9,6 +9,8 @@
 #include <QObject>
 #include <QMap>
 
+#include "definitions.h"
+
 /*
 
 Data Members:
