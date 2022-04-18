@@ -17,7 +17,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     battery.cpp \
-    button.cpp \
     device.cpp \
     displayicon.cpp \
     historymanager.cpp \
@@ -29,7 +28,6 @@ SOURCES += \
 
 HEADERS += \
     battery.h \
-    button.h \
     definitions.h \
     device.h \
     displayicon.h \

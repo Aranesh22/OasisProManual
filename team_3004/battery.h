@@ -1,11 +1,6 @@
 #ifndef BATTERY_H
 #define BATTERY_H
 
-//this is a push INCLUDING the pro file
-#define MAX_BATTERY 100
-#define MIN_BATTERY 0
-
-
 
 #include <QFile>
 #include <QTextStream>
