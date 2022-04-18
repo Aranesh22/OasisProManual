@@ -1,3 +1,16 @@
+/*
+ * This class reprsents the history interface and its respective functionality
+ *
+ * Notable data members:
+ *  table - the element that links an instance of this class to a mainwindow element
+ *  sessions - a list of all saved sessions with their required data (notably: length, type, intensity)
+ *
+ * Notable data functions:
+ *  activate() - highlights the first row
+ *  clear() - removes all highligting in the table
+ */
+
+
 #ifndef HISTORYMANAGER_H
 #define HISTORYMANAGER_H
 

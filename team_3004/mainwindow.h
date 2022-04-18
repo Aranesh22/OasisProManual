@@ -1,3 +1,12 @@
+/*
+ * This class handles all the UI elements and calls the proper deevice funcitions
+ *
+ * The device function then decide what to do based on the current use case, which is stored on the device
+ * In short, this is designed so that mainwindow does not worry at all about the state of device
+ *
+ * The UI updates are also handled in the device, through changes in DisplayIcon
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

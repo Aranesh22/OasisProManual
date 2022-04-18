@@ -1,3 +1,20 @@
+/*
+ * This class represents the device itself
+ * This is where all use cases run
+ *
+ * Notable data members:
+ *  icons - a vector of DisplayIcons that dynamically update the mainwindow (ie without calling any maindow functions)
+ *  curUseCase - the current use case of the device. Essentially, this is the variable that controls how the device handles user input
+ *      for example, the power button cycles the selected session length in the selectingSession use case
+ *      the power button turns off the device in the runningSession use case
+ *      the use cases are manually updated whenever inputs that change the use case
+ *      for example, when the power button is clicked and the device's power is off, then the current use case is set to selectingSession
+ *      then, when the checkmark button is clicked, the device eventually sets cuurentUseCase to runningSession
+ *  sysCycleTimer - this timer calls functions that should realistically be continuous in the device. This includes checking the battery level, draining the battery, and checking for connection
+ *  sessionTimer - this timer calls the function that elapses time for the session. Realisitcally, this would be called every minute
+ *
+ */
+
 #ifndef DEVICE_H
 #define DEVICE_H
 

@@ -1,3 +1,12 @@
+/*
+ * Rrpresents the session type
+ *
+ * Notable data members:
+ *  csMode - Represents whether the session is pulse or cycle
+ *  icon - Represents its icon in the UI
+ *  CS icon - Represents the icon of its CES type
+ */
+
 #ifndef SESSIONTYPE_H
 #define SESSIONTYPE_H
 #include "definitions.h"

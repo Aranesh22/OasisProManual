@@ -119,12 +119,14 @@ void Device::testForConnection(){
     }
 
     // equivalent to if(connecion != none && curUseCase == runningSession && curSession->isPaused() )
+    // essentially, this if statement checks if connection has been detected while the session is currently paused
     if(curUseCase == pausedSession && connection != none){
         qInfo("Unpausing session");
         unpauseSession();
     }
 }
 
+//This function makes the graph display the connection, as per display connection use case
 void Device::displayConnection(){
     qInfo("DisplayConection");
 
@@ -161,10 +163,13 @@ void Device::displayConnection(){
     resetGraph();
 }
 
+
+//this function is called when the user confirms a session to load from the history interface
 void Device::loadSession() {
-    int r = history->clear();
-    QString test = ui->tableWidget->item(r, 2)->text();
-    int inten = test.toInt();
+    //clears any highlighting in the history interface
+    int r = history->clear(); //r is the row number of the session to load
+    QString test = ui->tableWidget->item(r, 2)->text(); //extracts the intesity, but stored as a string
+    int inten = test.toInt(); //converts test to int
     curSesType = history->getCurSession()->getType();
     curSesLength = history->getCurSession()->getLength();
 
@@ -174,6 +179,7 @@ void Device::loadSession() {
 
     startSession();
 
+    //sets the graph to match the intensity of the session
     for(int i=1; i<inten; i++) incIntensity();
 
 }
@@ -197,7 +203,6 @@ void Device::handlePowerButton(){
     if(power == off) turnOn();
     else if(curUseCase == selectingSession) nextSesLen();
     else if (curUseCase == runningSession) turnOff();
-//    else if (curUseCase == runningSession) displaySoftOn();
 }
 
 void Device::handleSave(){
@@ -262,11 +267,17 @@ void Device::nextSesType() {
     allTypes[i]->getCESIcon()->toggleIllum();
 }
 
+
+//Unused; for testing only
 void Device:: changeToLoadSession() {
 
     curUseCase = loadingSession;
 
 }
+
+
+
+//Unused; for testing only
 vector<QString> Device::uploadSaveSession() {
     if(curUseCase != runningSession){
         vector<QString> x;
@@ -277,7 +288,6 @@ vector<QString> Device::uploadSaveSession() {
     history->SaveSession(curSession);
     //PRINT OUT THE VECTORS IMAGES PATHS
 
-//    vector<Session*> allSessions = history->getSessions();
     vector<DisplayIcon*> icons;
 
     SessionLength* sl = curSession->getLength();
@@ -580,6 +590,7 @@ void Device::unpauseSession(){
     curSession->unpause();
     curUseCase = runningSession;
 
+    //reverts graph to how it was before pausing the session (displays the current intensity)
     for(int i=1; i<curSession->getCurIntensity(); i++) icons[i]->setIllumState(lit);
     icons[curSession->getCurIntensity() ] -> setIllumState(flashing);
 
@@ -599,6 +610,8 @@ void Device::populateGraphSession(){
     icons[curSession->getCurIntensity() ] -> setIllumState(flashing);
 }
 
+
+//highlights the first row and changes curUseCase to loadingSession, allowing the up/down/check buttons to do what they're supposed to do
 void Device::activateHistory(){
     curUseCase = loadingSession;
     curSesType->getIcon()->setIllumState(dim);

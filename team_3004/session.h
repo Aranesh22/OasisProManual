@@ -1,3 +1,9 @@
+/*
+ * Represents a session
+ * Which contains a SessionLength and SessionType instances
+ * See SessionLength and SessionType for more info
+ */
+
 #ifndef SESSION_H
 #define SESSION_H
 
@@ -38,7 +44,7 @@ private:
     bool leftActive;
     bool rightActive;
     int minsPassed;
-    bool softOffState;
+    bool softOffState; //unused
 
     bool paused;
 };
