@@ -24,3 +24,6 @@ Note that we also have extra features:
 The following use case diagram provides an excellent summary of this program: https://docs.google.com/document/d/1s9hUwO1D4sARyVloWfA6x9uFLQJ8F48z4Psa8Jytkq8/edit
 
 Note: Bolded steps in the use cases refer to other use cases.
+
+## File Structure
+team_3004 contains the source code; the rest of the folders can safely be ignored. 
