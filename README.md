@@ -1,3 +1,7 @@
-# comp3004Project
+# Oasis Pro Manual 
 
-Refer here for most of the documentation: https://docs.google.com/document/d/1wRfNQu0j_Y3xDFOGiVvy8qzNSXCvTGpuFLKg5K18UUo/edit
+This project aims to simulate the Oasis Pro medical device.
+
+The project closely follows the following manual (unless otherwise stated in the documentation): https://bio-medical.com/media/support/mind-alive-oasis-with-ces-users-manaul.pdf
+
+### Features
