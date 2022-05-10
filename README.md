@@ -17,7 +17,7 @@ The device currently has the following features implemented:
 Note that we also have extra features:
 1. Simulating device disconnection 
 2. Simulating battery death
-3. Simulating chargeing
+3. Simulating charging
 4. Saving session data (this was done differently from how it was stated in the manual)
 
 ### Use Cases
