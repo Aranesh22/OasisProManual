@@ -26,4 +26,6 @@ The following use case diagram provides an excellent summary of this program: ht
 Note: Bolded steps in the use cases refer to other use cases.
 
 ## File Structure
-team_3004 contains the source code; the rest of the folders can safely be ignored. 
+/team_3004 contains the source code
+/Documentation contains the documentation and diagrams for this project
+The rest of the directories can safely be ignored
